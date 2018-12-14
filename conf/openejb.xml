@@ -1,0 +1,12 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!DOCTYPE openejb>
+<openejb>
+    <!-- pour les tests JPA -->
+    <Resource id="AMUBookdb" type="DataSource">
+        JdbcDriver org.hsqldb.jdbcDriver
+        JdbcUrl jdbc:hsqldb:mem:inMemoryDatabase
+        UserName sa
+        Password
+        JtaManaged true
+    </Resource>
+</openejb>
