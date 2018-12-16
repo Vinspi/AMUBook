@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Personne {
@@ -9,12 +10,14 @@ public class Personne {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     private String nom;
     private String prenom;
     private String email;
     private String website;
-    private String birthdate;
-    private String password;
+    private Date birthdate;
+    private byte[] password;
+    private byte[] salt;
 
     @OneToOne
     @JoinColumn(name = "person_id")
@@ -62,11 +65,11 @@ public class Personne {
         this.website = website;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -78,11 +81,33 @@ public class Personne {
         this.cv = cv;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
+
+    @Override
+    public String toString() {
+        return "Personne{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", email='" + email + '\'' +
+                ", website='" + website + '\'' +
+                ", birthdate=" + birthdate +
+                ", password='" + password + '\'' +
+                ", cv=" + cv +
+                '}';
     }
 }
