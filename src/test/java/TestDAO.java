@@ -63,5 +63,11 @@ public class TestDAO {
         Personne p2 = personneDAO.findById(5);
         Assert.assertTrue(p2.getId() == 5);
 
+        /* update */
+
+        p2.setPrenom("michel");
+        Personne p3 = personneDAO.update(p2);
+        Assert.assertTrue(p3.getPrenom() == "michel");
+
     }
 }

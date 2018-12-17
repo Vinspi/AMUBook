@@ -1,6 +1,9 @@
 package services;
 
+import beans.SessionUser;
 import dao.PersonneDAO;
+import models.Activite;
+import models.CV;
 import models.Personne;
 
 import javax.ejb.Stateless;
@@ -9,19 +12,20 @@ import javax.transaction.Transactional;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @Transactional
 @Stateless
 public class PersonneManager {
 
     private PersonneDAO personneDAO;
+    private SessionUser sessionUser;
+
 
     @Inject
-    public PersonneManager(PersonneDAO personneDAO) {
+    public PersonneManager(PersonneDAO personneDAO, SessionUser sessionUser) {
         this.personneDAO = personneDAO;
+        this.sessionUser = sessionUser;
     }
 
     public Personne login(String email, String password){
@@ -45,6 +49,13 @@ public class PersonneManager {
             byte[] hash = md.digest(password.getBytes());
 
             if (Arrays.equals(hash,p.getPassword())){
+
+                /* we set up the session bean */
+
+                sessionUser.setEmail(p.getEmail());
+                sessionUser.setName(p.getNom());
+                sessionUser.setSurname(p.getPrenom());
+
                 return p;
             }
             else return null;
@@ -60,6 +71,12 @@ public class PersonneManager {
     public Personne register(Map<String, String> personData){
 
         try {
+
+            /* the caller must be logged in */
+
+            if (sessionUser.getEmail() == null){
+                return null;
+            }
 
             /* verify if a personne already exists in db */
 
@@ -83,13 +100,20 @@ public class PersonneManager {
 
             /* other settings for the Personne bean */
 
+            CV cv = new CV();
+            cv.setDescription("This the default description");
+            cv.setTitre("My CV");
+
             p.setNom(personData.get("nom"));
             p.setPrenom(personData.get("prenom"));
             p.setBirthdate(new Date());
             p.setWebsite(personData.get("website"));
             p.setEmail(personData.get("email"));
+            p.setCv(cv);
 
             personneDAO.addPersonne(p);
+
+
 
             return p;
 
@@ -98,6 +122,22 @@ public class PersonneManager {
             return null;
         }
 
+    }
+
+    public void addActivity(Activite activite, int personId) {
+
+        Personne p = personneDAO.findById(personId);
+        p.getCv().getActivites().add(activite);
+        personneDAO.update(p);
+
+    }
+
+    public Map<String, List<Object>> search(String query){
+
+
+
+
+        return null;
     }
 
 }

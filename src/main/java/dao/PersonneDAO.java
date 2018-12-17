@@ -14,6 +14,10 @@ public class PersonneDAO {
     @PersistenceContext(unitName = "AMUBookdbUnit")
     private EntityManager em;
 
+    public Personne update(Personne p){
+        return em.merge(p);
+    }
+
     public double addPersonne(Personne p){
         em.persist(p);
         return p.getId();

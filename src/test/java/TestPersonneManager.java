@@ -1,4 +1,7 @@
+import beans.SessionUser;
 import dao.PersonneDAO;
+import models.Activite;
+import models.CV;
 import models.Personne;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -13,6 +16,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class TestPersonneManager {
@@ -20,6 +24,9 @@ public class TestPersonneManager {
 
     @Mock
     PersonneDAO personneDAO;
+
+    @Spy
+    SessionUser sessionUser;
 
     @InjectMocks
     PersonneManager pm;
@@ -40,6 +47,7 @@ public class TestPersonneManager {
         MockitoAnnotations.initMocks(this);
 
         Mockito.when(personneDAO.findByEmail("vinspi13@gmail.com")).thenReturn(new Personne());
+        Mockito.when(sessionUser.getEmail()).thenReturn("vinspi13@gmail.com");
 
         /* register */
 
@@ -50,6 +58,7 @@ public class TestPersonneManager {
         personne.put("website", "VINCENT");
         personne.put("email", "vinspi13@gmail.com");
         personne.put("password", "pantoufle");
+
 
         Personne p = pm.register(personne);
         Assert.assertNull(p);
@@ -62,10 +71,17 @@ public class TestPersonneManager {
         personne.put("password", "pantoufle");
         personne.put("email", "newemail@valid.email");
 
+
         Personne p2 = pm.register(personne);
 
         Assert.assertNotNull(p2);
         Assert.assertTrue(Arrays.equals(p2.getPassword(), hashPassword(p2.getSalt(), "pantoufle".getBytes())));
+
+        Mockito.when(sessionUser.getEmail()).thenReturn(null);
+
+        Personne p3 = pm.register(personne);
+
+        Assert.assertNull(p3);
 
     }
 
@@ -80,12 +96,18 @@ public class TestPersonneManager {
         byte[] salt = "ImAsEcUrEsAlT".getBytes();
         p.setPassword(hashPassword(salt, "pantoufle".getBytes()));
         p.setSalt(salt);
+        p.setNom("VINCENT");
+        p.setEmail("vinspi13@gmail.com");
+        p.setPrenom("Pierre");
 
         Mockito.when(personneDAO.findByEmail("vinspi13@gmail.com")).thenReturn(p);
 
         Personne p2 = pm.login("vinspi13@gmail.com", "pantoufle");
 
         Assert.assertNotNull(p2);
+        Mockito.verify(sessionUser).setEmail("vinspi13@gmail.com");
+        Mockito.verify(sessionUser).setSurname("Pierre");
+        Mockito.verify(sessionUser).setName("VINCENT");
 
         Personne p3 = pm.login("vinspi@notanemail.com", "pantoufle");
 
@@ -94,6 +116,24 @@ public class TestPersonneManager {
         Personne p4 = pm.login("vinspi13@gmail.com", "p@ssword");
 
         Assert.assertNull(p4);
+    }
+
+    @Test
+    public void addActivity(){
+
+        MockitoAnnotations.initMocks(this);
+
+        Personne p = new Personne();
+        CV cv = new CV();
+        cv.setActivites(new LinkedList<>());
+        p.setCv(cv);
+        Mockito.when(personneDAO.findById(5)).thenReturn(p);
+
+        pm.addActivity(new Activite(), 5);
+
+
+        Mockito.verify(personneDAO).update(p);
+
     }
 
 
