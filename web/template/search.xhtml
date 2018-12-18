@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<f:view>
+    <ui:composition>
+        <div class="container">
+            <div class="search-form">
+                <p>
+                    <i class="fas fa-search"></i>
+                    Recherchez un nom, un prénom ou un CV
+                </p>
+                <h:form>
+                    <div class="input-group mb-3">
+                        <h:inputText p:type="text" styleClass="form-control" p:placeholder="nom, prénom ou poste " value="#{controller.query}"/>
+                        <div class="input-group-append">
+                            <h:commandButton styleclass="btn btn-outline-secondary" p:type="button" action="#{controller.search}">Rechercher</h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </ui:composition>
+</f:view>
+</html>

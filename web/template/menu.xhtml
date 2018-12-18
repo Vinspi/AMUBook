@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <ui:composition>
+        <nav class="navbar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="#">AMUBook</a>
+                </li>
+                <li class="nav-item">
+                    <!--<a class="nav-link active" href="#">Active</a>-->
+                    <h:link styleClass="nav-link" outcome="searchPage">Rechercher</h:link>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Consulter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Créer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+            <button class="btn my-2 my-sm-0">Se connecter</button>
+        </nav>
+    </ui:composition>
+</f:view>
+</html>

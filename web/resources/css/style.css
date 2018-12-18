@@ -1,0 +1,92 @@
+/* navbar/menu */
+
+.navbar-brand {
+  font-family: 'Lobster', cursive;
+  padding-right: 2vw;
+  margin-left: 2vw;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+nav {
+    /* background-color: #ffab91; */
+    background-color: #424242;
+}
+
+nav .nav-item a.nav-link:hover {
+  transition: all .2s ease-in;
+  color: #6d6d6d;
+}
+
+nav .nav-item .active {
+  transition: border 1s ease-in;
+  border-bottom: 2px solid white;
+}
+
+nav button.btn {
+  border-color: white !important;
+  background-color: #424242 !important;
+  color: white !important;
+  margin-right: 5vw;
+}
+
+
+nav button.btn:hover {
+  background-color: white !important;
+  color: #424242 !important;
+}
+
+ul.nav li.nav-item a {
+  color: white;
+}
+
+ul.nav {
+  padding: 12px;
+}
+
+/*************************************************************************/
+/* footer */
+
+
+
+footer .footer-container {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #424242;
+  justify-content: space-around;
+}
+
+footer p {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  font-size: small;
+  padding: 15px;
+}
+
+
+
+
+
+/****************************************************************************/
+/* search page */
+
+
+body {
+  /* background-color: #6d6d6d; */
+}
+
+.container .search-form {
+  margin-top: 35vh;
+}
+
+.search-form p {
+  text-align: center;
+}
+
+
+/**************************************************************************/
