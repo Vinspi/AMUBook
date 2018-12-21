@@ -19,7 +19,7 @@
                     <div class="input-group mb-3">
                         <h:inputText p:type="text" styleClass="form-control" p:placeholder="nom, prénom ou poste " value="#{controller.query}"/>
                         <div class="input-group-append">
-                            <h:commandButton styleclass="btn btn-outline-secondary" p:type="button" action="#{controller.search}">Rechercher</h:commandButton>
+                            <h:commandLink styleClass="btn btn-dark" p:type="button" action="#{controller.search}" >Rechercher</h:commandLink>
                         </div>
                     </div>
                 </h:form>

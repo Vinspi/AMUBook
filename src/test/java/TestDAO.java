@@ -31,6 +31,11 @@ public class TestDAO {
 
         PersonneDAO personneDAO = (PersonneDAO) ejbContainer.getContext().lookup("java:global/AMUBook/PersonneDAO");
 
+        /* sélection vide */
+
+        Personne personne = personneDAO.findByEmail("VINCENT");
+        Assert.assertNull(personne);
+
         /* insertions */
         for (int i=0;i<100;i++){
             Personne p = new Personne();
@@ -62,6 +67,11 @@ public class TestDAO {
 
         Personne p2 = personneDAO.findById(5);
         Assert.assertTrue(p2.getId() == 5);
+
+        /* ciblage par email */
+
+        Personne personne2 = personneDAO.findByEmail("vinspi13@gmail.com");
+        Assert.assertNotNull(personne2);
 
         /* update */
 
