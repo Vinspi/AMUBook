@@ -68,7 +68,6 @@ public class TestPersonneManager {
         personne.put("password", "pantoufle");
         personne.put("email", "newemail@valid.email");
 
-
         Personne p2 = pm.register(personne);
 
         Assert.assertNotNull(p2);

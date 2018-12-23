@@ -78,7 +78,6 @@ public class FaceletsController {
             sessionUser.setName(p.getNom());
             sessionUser.setSurname(p.getPrenom());
 
-
             return "index";
         }
 
