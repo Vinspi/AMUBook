@@ -107,7 +107,7 @@ public class FaceletsController {
                 this.password = null;
                 return "accountValidationPage";
             }
-
+            
             return "index";
         }
 
