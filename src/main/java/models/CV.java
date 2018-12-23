@@ -13,10 +13,11 @@ public class CV {
     private String titre;
     private String description;
 
-    @OneToOne(mappedBy = "cv", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "cv_id")
     private Personne personne;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "cv")
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "cv")
     private List<Activite> activites;
 
     public CV() {

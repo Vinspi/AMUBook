@@ -10,7 +10,7 @@ public class Personne {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
+    private Boolean valide;
     private String nom;
     private String prenom;
     private String email;
@@ -19,8 +19,9 @@ public class Personne {
     private byte[] password;
     private byte[] salt;
 
-    @OneToOne
-    @JoinColumn(name = "person_id")
+
+
+    @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     private CV cv;
 
     public Personne() {}
@@ -95,6 +96,14 @@ public class Personne {
 
     public void setSalt(byte[] salt) {
         this.salt = salt;
+    }
+
+    public Boolean getValide() {
+        return valide;
+    }
+
+    public void setValide(Boolean valide) {
+        this.valide = valide;
     }
 
     @Override

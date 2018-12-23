@@ -19,13 +19,12 @@ import java.util.*;
 public class PersonneManager {
 
     private PersonneDAO personneDAO;
-    private SessionUser sessionUser;
+
 
 
     @Inject
-    public PersonneManager(PersonneDAO personneDAO, SessionUser sessionUser) {
+    public PersonneManager(PersonneDAO personneDAO) {
         this.personneDAO = personneDAO;
-        this.sessionUser = sessionUser;
     }
 
     public Personne login(String email, String password){
@@ -50,12 +49,6 @@ public class PersonneManager {
 
             if (Arrays.equals(hash,p.getPassword())){
 
-                /* we set up the session bean */
-
-                sessionUser.setEmail(p.getEmail());
-                sessionUser.setName(p.getNom());
-                sessionUser.setSurname(p.getPrenom());
-
                 return p;
             }
             else return null;
@@ -68,15 +61,24 @@ public class PersonneManager {
 
     }
 
+    public String registerWithTemporaryLog(Map<String, String> personData){
+
+        /* generate random password */
+
+        String randomPass = SecureRandom.getSeed(8).toString();
+
+        personData.put("password", randomPass);
+        personData.put("valid", "false");
+
+        Personne p = register(personData);
+
+        return randomPass;
+
+    }
+
     public Personne register(Map<String, String> personData){
 
         try {
-
-            /* the caller must be logged in */
-
-            if (sessionUser.getEmail() == null){
-                return null;
-            }
 
             /* verify if a personne already exists in db */
 
@@ -94,7 +96,9 @@ public class PersonneManager {
             p.setSalt(salt);
 
             md.update(salt);
+
             byte[] passHash = md.digest((personData.get("password")).getBytes());
+
 
             p.setPassword(passHash);
 
@@ -110,6 +114,7 @@ public class PersonneManager {
             p.setWebsite(personData.get("website"));
             p.setEmail(personData.get("email"));
             p.setCv(cv);
+            p.setValide(Boolean.parseBoolean(personData.get("valid")));
 
             personneDAO.addPersonne(p);
 
@@ -138,6 +143,35 @@ public class PersonneManager {
 
 
         return null;
+    }
+
+    public void changePassword(String email, String newOne) {
+
+        try {
+
+            Personne p = personneDAO.findByEmail(email);
+
+            if (p == null) {
+                return;
+            }
+
+            /* password and salt */
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            byte[] salt = SecureRandom.getSeed(128);
+
+
+
+            md.update(salt);
+            byte[] passHash = md.digest(newOne.getBytes());
+
+            p.setSalt(salt);
+            p.setPassword(passHash);
+
+            personneDAO.update(p);
+
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
     }
 
 }

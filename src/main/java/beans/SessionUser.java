@@ -1,18 +1,20 @@
 package beans;
 
 import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 
 @Stateful
+@ManagedBean(name = "sessionUser")
 @SessionScoped
-@ManagedBean(name = "userSession")
 public class SessionUser implements Serializable {
 
     private String email;
     private String name;
     private String surname;
+
+    private String temporaryPass;
 
     public SessionUser() {}
 
@@ -38,5 +40,22 @@ public class SessionUser implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getTemporaryPass() {
+        return temporaryPass;
+    }
+
+    public void setTemporaryPass(String temporaryPass) {
+        this.temporaryPass = temporaryPass;
+    }
+
+    @Override
+    public String toString() {
+        return "SessionUser{" +
+                "email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }

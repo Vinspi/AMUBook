@@ -41,20 +41,30 @@ public class PersonneDAO {
 
     }
 
-    // TODO: 21/12/2018 exception rise if result not found, fix that.
     public Personne findById(long id){
-        return em.find(Personne.class, id);
+        try {
+            return em.find(Personne.class, id);
+        }catch (NoResultException e){
+            return null;
+        }
     }
 
-    // TODO: 21/12/2018 exception rise if result not found, fix that.
     public List<Personne> findByName(String nom){
-        Query q = em.createQuery("SELECT p FROM Personne p WHERE p.nom LIKE :name").setParameter("name", nom);
-        return q.getResultList();
+        try {
+            Query q = em.createQuery("SELECT p FROM Personne p WHERE p.nom LIKE :name").setParameter("name", nom);
+            return q.getResultList();
+        }catch (NoResultException e){
+            return null;
+        }
     }
-    // TODO: 21/12/2018 exception rise if result not found, fix that.
+
     public List<Personne> findBySurname(String surName){
-        Query q = em.createQuery("SELECT p FROM Personne p WHERE p.prenom LIKE :surName").setParameter("surName", surName);
-        return q.getResultList();
+        try {
+            Query q = em.createQuery("SELECT p FROM Personne p WHERE p.prenom LIKE :surName").setParameter("surName", surName);
+            return q.getResultList();
+        }catch (NoResultException e){
+            return null;
+        }
     }
 
     public List<Personne> findAll(){

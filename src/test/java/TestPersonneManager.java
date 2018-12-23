@@ -20,13 +20,11 @@ import java.util.LinkedList;
 import java.util.Map;
 
 public class TestPersonneManager {
+
     static EJBContainer ejbContainer;
 
     @Mock
     PersonneDAO personneDAO;
-
-    @Spy
-    SessionUser sessionUser;
 
     @InjectMocks
     PersonneManager pm;
@@ -47,7 +45,6 @@ public class TestPersonneManager {
         MockitoAnnotations.initMocks(this);
 
         Mockito.when(personneDAO.findByEmail("vinspi13@gmail.com")).thenReturn(new Personne());
-        Mockito.when(sessionUser.getEmail()).thenReturn("vinspi13@gmail.com");
 
         /* register */
 
@@ -77,11 +74,6 @@ public class TestPersonneManager {
         Assert.assertNotNull(p2);
         Assert.assertTrue(Arrays.equals(p2.getPassword(), hashPassword(p2.getSalt(), "pantoufle".getBytes())));
 
-        Mockito.when(sessionUser.getEmail()).thenReturn(null);
-
-        Personne p3 = pm.register(personne);
-
-        Assert.assertNull(p3);
 
     }
 
@@ -105,9 +97,6 @@ public class TestPersonneManager {
         Personne p2 = pm.login("vinspi13@gmail.com", "pantoufle");
 
         Assert.assertNotNull(p2);
-        Mockito.verify(sessionUser).setEmail("vinspi13@gmail.com");
-        Mockito.verify(sessionUser).setSurname("Pierre");
-        Mockito.verify(sessionUser).setName("VINCENT");
 
         Personne p3 = pm.login("vinspi@notanemail.com", "pantoufle");
 
@@ -133,6 +122,26 @@ public class TestPersonneManager {
 
 
         Mockito.verify(personneDAO).update(p);
+
+    }
+
+    @Test
+    public void changePassword(){
+
+        MockitoAnnotations.initMocks(this);
+
+        Personne p = new Personne();
+        p.setEmail("test");
+        p.setSalt("salt".getBytes());
+        p.setPassword("password".getBytes());
+
+        Mockito.when(personneDAO.findByEmail("test")).thenReturn(p);
+
+        pm.changePassword("test", "newOne");
+
+        byte[] hashPass = hashPassword(p.getSalt(), "newOne".getBytes());
+
+        Assert.assertTrue(Arrays.equals(p.getPassword(), hashPass));
 
     }
 

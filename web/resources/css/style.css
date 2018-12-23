@@ -121,3 +121,23 @@ body {
 
 
 /*************************************************************************/
+/* register form */
+
+#birthdate {
+  margin-top: 25px;;
+}
+
+.account-created {
+  margin-top: 20vh;
+}
+
+.form-created {
+  margin-top: 5vh;
+}
+
+.account-created h1 {
+  text-align: center;
+}
+
+
+/*************************************************************************/

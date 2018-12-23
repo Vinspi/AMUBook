@@ -35,6 +35,14 @@
         <!-- <param-value>Production</param-value> -->
     </context-param>
     <context-param>
+        <param-name>facelets.DEVELOPMENT</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>facelets.REFRESH_PERIOD</param-name>
+        <param-value>0</param-value>
+    </context-param>
+    <context-param>
         <param-name>org.apache.myfaces.annotation.SCAN_PACKAGES</param-name>
         <param-value>monapp</param-value>
     </context-param>

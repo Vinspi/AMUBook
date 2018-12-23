@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<f:view>
+    <ui:composition>
+        <c:if test="#{not empty controller.temporaryPass}">
+            <div class="container ">
+                <div class="account-created">
+                    <h1>Le compte suivant à bien été créé :</h1>
+                    <h:form styleClass="form-created">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <label for="nameC">Nom</label>
+                                    <h:inputText id="nameC" name="name" class="form-control" p:placeholder="#{controller.name}" readonly="true"/>
+                                </div>
+                                <div class="col-sm">
+                                    <label for="surnameC">Prénom</label>
+                                    <h:inputText id="surnameC" name="surname" class="form-control" p:placeholder="#{controller.surname}" readonly="true"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailC">Email</label>
+                            <h:inputText id="emailC" class="form-control" p:placeholder="#{controller.email}" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="temp">Utiliser ce mot de passe temporaire pour votre première connexion : </label>
+                            <div class="input-group">
+                                <h:inputText readonly="true" id="temp" p:id="temp" styleClass="form-control" value="#{controller.temporaryPass}" p:aria-describedby="button-addon1"/>
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon1">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="#{empty controller.temporaryPass}">
+            <div class="container">
+                <div class="connection-form">
+                    <div class="center">
+                        <h2>Créer un compte</h2>
+                    </div>
+                    <h:form>
+                        <div class="form-group">
+                            <h:outputLabel for="email">Email</h:outputLabel>
+                            <h:inputText value="#{controller.email}" p:type="email" styleClass="form-control" id="email" p:placeholder="Email"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="name">Nom</h:outputLabel>
+                            <h:inputText value="#{controller.name}" p:type="text" styleClass="form-control" id="name" p:placeholder="Nom"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="surname">Prénom</h:outputLabel>
+                            <h:inputText value="#{controller.surname}" p:type="text" styleClass="form-control" id="surname" p:placeholder="Prénom"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <p id="birthdate">Date de naissance : </p>
+                                </div>
+                                <div class="col-sm">
+                                    <h:outputLabel for="day">Jour</h:outputLabel>
+                                    <h:selectOneMenu value="#{controller.day}" class="custom-select" id="day">
+                                        <c:forEach begin="1" end="31" step="1" var="day">
+                                            <f:selectItem itemValue="#{day}" itemLabel="#{day}"/>
+                                        </c:forEach>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-sm">
+                                    <h:outputLabel for="month">Mois</h:outputLabel>
+                                    <h:selectOneMenu value="#{controller.month}" class="custom-select" id="month">
+                                        <f:selectItem itemLabel="Janvier" itemValue="01"/>
+                                        <f:selectItem itemLabel="Février" itemValue="02"/>
+                                        <f:selectItem itemLabel="Mars" itemValue="03"/>
+                                        <f:selectItem itemLabel="Avril" itemValue="04"/>
+                                        <f:selectItem itemLabel="Mai" itemValue="05"/>
+                                        <f:selectItem itemLabel="Juin" itemValue="06"/>
+                                        <f:selectItem itemLabel="Juillet" itemValue="07"/>
+                                        <f:selectItem itemLabel="Août" itemValue="08"/>
+                                        <f:selectItem itemLabel="Septembre" itemValue="09"/>
+                                        <f:selectItem itemLabel="Octobre" itemValue="10"/>
+                                        <f:selectItem itemLabel="Novembre" itemValue="11"/>
+                                        <f:selectItem itemLabel="Décembre" itemValue="12"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-sm">
+                                    <h:outputLabel for="year">Année</h:outputLabel>
+                                    <h:selectOneMenu value="#{controller.year}" class="custom-select" id="year">
+                                        <c:forEach begin="1" end="100" step="1" var="year">
+                                            <f:selectItem itemValue="#{year+1918}" itemLabel="#{year+1918}"/>
+                                        </c:forEach>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="button-container">
+                            <h:commandLink action="#{controller.register}" styleClass="btn my-2 my-sm-0 btn-dark">Créer</h:commandLink>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </c:if>
+    </ui:composition>
+</f:view>
+</html>

@@ -6,6 +6,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <f:facet name="first">
+            <meta charset="UTF-8" content=""/>
+        </f:facet>
         <title><ui:insert name="title">My application</ui:insert></title>
 
         <h:outputStylesheet library="css"
@@ -16,6 +19,8 @@
                         name="jquery-3.3.1.min.js" />
         <h:outputScript library="js"
                         name="bootstrap.min.js" />
+
+
 
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"/>
@@ -35,5 +40,14 @@
         <footer>
             <ui:insert name="footer">Footer</ui:insert>
         </footer>
+
+        <h:outputScript>
+            var b1 = document.getElementById("button-addon1");
+            b1.onclick = function() {
+                document.getElementById("temp").select();
+                document.execCommand("copy");
+                console.log("copy !");
+            }
+        </h:outputScript>
     </h:body>
 </html>

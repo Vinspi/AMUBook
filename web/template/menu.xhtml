@@ -20,13 +20,20 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Consulter</a>
                 </li>
-                <c:if test="#{not empty userSession.email}">
+                <c:if test="#{not empty sessionUser.email}">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Créer</a>
+                        <h:link styleClass="nav-link" outcome="registerPage">Créer</h:link>
                     </li>
                 </c:if>
             </ul>
-            <h:link outcome="loginPage" styleClass="btn my-2 my-sm-0">Se connecter</h:link>
+            <c:if test="#{empty sessionUser.email}">
+                <h:link outcome="loginPage" styleClass="btn my-2 my-sm-0">Se connecter</h:link>
+            </c:if>
+            <c:if test="#{not empty sessionUser.email}">
+                <h:form>
+                    <h:commandLink action="#{controller.logout}" styleClass="btn my-2 my-sm-0">Déconnexion</h:commandLink>
+                </h:form>
+            </c:if>
         </nav>
     </ui:composition>
 </f:view>

@@ -47,7 +47,7 @@
     </div> -->
 
 
-    <div class="container">
+    <!-- <div class="container">
       <div class="connection-form">
         <div class="center">
           <h2>Se connecter</h2>
@@ -66,12 +66,12 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
 
     <!-- <div class="container">
       <div class="connection-form">
         <div class="center">
-          <h2>Se connecter</h2>
+          <h2>Créer un compte</h2>
         </div>
         <form>
           <div class="form-group">
@@ -79,15 +79,91 @@
             <input type="email" class="form-control" id="email" name="email" placeholder="Email">
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe">
+            <label for="exampleInputPassword1">Nom</label>
+            <input type="text" class="form-control" id="password" name="password" placeholder="Nom">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Prénom</label>
+            <input type="text" class="form-control" id="password" name="password" placeholder="Prénom">
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm">
+                <p id="birthdate">Date de naissance : </p>
+              </div>
+              <div class="col-sm">
+                <label for="exampleInputPassword1">Jour</label>
+                <select class="custom-select" >
+                  <option selected>Choose...</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="col-sm">
+                <label for="exampleInputPassword1">Mois</label>
+                <select class="custom-select" >
+                  <option selected>Choose...</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+              <div class="col-sm">
+                <label for="exampleInputPassword1">Année</label>
+                <select class="custom-select" >
+                  <option selected>Choose...</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+
           </div>
           <div class="button-container">
-            <button type="submit" class="btn btn-dark">Connexion</button>
+            <a type="submit" class="btn my-2 my-sm-0 btn-dark">Créer</a>
           </div>
         </form>
       </div>
     </div> -->
+
+    <div class="container ">
+      <div class="account-created">
+        <h1>Le compte suivant à bien été créé :</h1>
+        <form "form-created">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm">
+                <label for="name">Nom</label>
+                <input id="name" name="name" class="form-control" placeholder="Vincent" readonly/>
+              </div>
+              <div class="col-sm">
+                <label for="surname">Prénom</label>
+                <input id="surname" name="surname" class="form-control" placeholder="Pierre" readonly/>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" class="form-control" placeholder="vinsî13@gmail.com" readonly/>
+          </div>
+          <div class="form-group">
+            <label for="temp">Utiliser ce mot de passe temporaire pour votre première connexion : </label>
+            <div class="input-group">
+              <input id="temp" name="temp" class="form-control" value="xd5{lo34" aria-describedby="button-addon1" readonly/>
+              <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon1">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
 
     <footer class="footer">
       <div class="footer-container">
@@ -96,7 +172,15 @@
         </p>
       </div>
     </footer>
+    <script type="text/javascript">
+      var b1 = document.getElementById("button-addon1");
+      b1.onclick = function() {
+        document.getElementById("temp").select();
+        document.execCommand("copy");
+        console.log("copy !");
+      }
 
+    </script>
   </body>
 
 </html>
