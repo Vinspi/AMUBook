@@ -20,7 +20,9 @@ import java.util.*;
 public class PersonneManager {
 
     private PersonneDAO personneDAO;
+
     private ActiviteDAO activiteDAO;
+
 
     @Inject
     public PersonneManager(PersonneDAO personneDAO, ActiviteDAO activiteDAO) {

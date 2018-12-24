@@ -54,9 +54,18 @@ ul.nav li.nav-item a {
   color: white;
 }
 
+ul.navWithTabs li.nav-item a {
+  color: #007bff;
+}
+
 ul.nav {
   padding: 12px;
 }
+
+ul.navWithTabs {
+  padding: 0px;
+}
+
 
 /*************************************************************************/
 /* footer */
@@ -160,8 +169,16 @@ body {
   text-align: center;
 }
 
+/*************************************************************************/
+/* SearchResults linked classes */
+.sr-col-3{
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
 
 /*************************************************************************/
+
 /* validation account */
 
 
@@ -398,3 +415,22 @@ body {
 
 
 /***************************************************************************/
+
+/* Useful general classes */
+
+.mgTop2{
+  margin-top: 2vh;
+}
+
+.mgTop5{
+  margin-top: 5vh;
+}
+
+.hidden{
+  display: none;
+}
+
+.nav-text-item{
+  color: black !important;
+}
+

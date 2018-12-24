@@ -32,6 +32,18 @@ public class LifeCycleBean {
         personne.put("email", "vinspi13@gmail.com");
         personne.put("valid", "true");
 
+
+        personneManager.register(personne);
+
+        personne = new HashMap<>();
+
+        personne.put("nom", "LOIGNON");
+        personne.put("prenom", "Lucas");
+        personne.put("website", "www.google.com");
+        personne.put("password", "pantoufle");
+        personne.put("email", "lucasloignon@gmail.com");
+        personne.put("valid", "true");
+
         personneManager.register(personne);
 
 
