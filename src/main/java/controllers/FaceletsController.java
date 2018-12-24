@@ -1,9 +1,11 @@
 package controllers;
 
+import beans.SearchResults;
 import beans.SessionUser;
 import models.Personne;
 import org.jboss.logging.annotations.Pos;
 import services.PersonneManager;
+import services.SearchService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -31,8 +33,14 @@ public class FaceletsController {
     @ManagedProperty(value = "#{sessionUser}")
     private SessionUser sessionUser;
 
+    @ManagedProperty(value ="#{searchResults}")
+    private SearchResults searchResults;
+
     @Inject
     private PersonneManager personneManager;
+
+    @Inject
+    private SearchService searchService;
 
     @PostConstruct
     public void init(){
@@ -48,9 +56,13 @@ public class FaceletsController {
 
     public String search(){
 
-        System.out.println("hi : "+query);
+        searchResults.setFoundByLastname(searchService.findByLastname(query));
+        searchResults.setFoundByFirstname(searchService.findByFirstname(query));
+        searchResults.setFoundByActivity(searchService.findByActivite(query));
 
-        return "searchPage";
+        System.out.println("Test : " + searchResults.getFoundByLastname().size());
+
+        return "searchResultsPage";
     }
 
     public String logout() {
@@ -138,6 +150,12 @@ public class FaceletsController {
 
     public void setSessionUser(SessionUser sessionUser) {
         this.sessionUser = sessionUser;
+    }
+
+    public SearchResults getSearchResults() { return searchResults; }
+
+    public void setSearchResults(SearchResults searchResults) {
+        this.searchResults = searchResults;
     }
 
     public String getName() {

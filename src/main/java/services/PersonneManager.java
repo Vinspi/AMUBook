@@ -20,7 +20,6 @@ public class PersonneManager {
 
     private PersonneDAO personneDAO;
 
-
     @Inject
     public PersonneManager(PersonneDAO personneDAO) {
         this.personneDAO = personneDAO;
