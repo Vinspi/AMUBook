@@ -82,4 +82,16 @@ public class Activite {
     public void setWebsite(String website) {
         this.website = website;
     }
+
+    @Override
+    public String toString() {
+        return "Activite{" +
+                "id=" + id +
+                ", annee=" + annee +
+                ", nature='" + nature + '\'' +
+                ", titre='" + titre + '\'' +
+                ", descritption='" + descritption + '\'' +
+                ", website='" + website + '\'' +
+                "}\n\n";
+    }
 }

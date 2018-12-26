@@ -16,6 +16,17 @@ font-family: 'Roboto', sans-serif; */
 body {
   font-family: 'Roboto', sans-serif;
   background-color: #e2e2e2;
+  min-height: 100%;
+  z-index: 0;
+}
+
+.main {
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+.wrap {
+  min-height: 100%;
 }
 
 nav {
@@ -77,15 +88,20 @@ body {
 
 
 footer .footer-container {
+  z-index: 1;
+  margin-top: -60px;
+  height: 60px;
+  clear: both;
+  position: relative;
   display: flex;
   width: 100%;
-  position: absolute;
-  bottom: 0;
+  position: relative;
   background-color: #424242;
   justify-content: space-around;
 }
 
 footer p {
+
   text-align: center;
   font-family: 'Roboto', sans-serif;
   color: white;

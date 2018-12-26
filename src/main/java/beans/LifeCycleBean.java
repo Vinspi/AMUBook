@@ -2,6 +2,7 @@ package beans;
 
 import models.Activite;
 import models.CV;
+import org.hsqldb.DatabaseManager;
 import services.PersonneManager;
 
 import javax.annotation.PostConstruct;
@@ -38,6 +39,8 @@ public class LifeCycleBean {
 
         Activite activite;
 
+
+
         Random rand = new Random();
         int n;
 
@@ -46,7 +49,8 @@ public class LifeCycleBean {
             activite = new Activite();
             activite.setAnnee(2012+2*i);
             activite.setDescritption("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-            n = rand.nextInt()%3;
+            n = rand.nextInt(3);
+            System.out.println("n "+n);
             switch (n) {
                 case 0:
                     activite.setNature("Experience pro");
@@ -69,6 +73,8 @@ public class LifeCycleBean {
         System.out.println(personneManager.findById(1).getCv().getActivites().size());
 
         System.out.println("app initialized");
+
+
 
 
     }

@@ -64,17 +64,17 @@ public class TestEndToEnd {
     public void addActivite() throws NamingException {
         PersonneManager personneManager = (PersonneManager) ejbContainer.getContext().lookup("java:global/AMUBook/PersonneManager");
 
-//        Activite a = new Activite();
-//        a.setTitre("titre");
-//        a.setDescritption("description");
-//        a.setWebsite("website");
-//        a.setNature("Formation");
-//        a.setAnnee(2018);
-//
-//        personneManager.addActivity(a, 1);
+        Activite a = new Activite();
+        a.setTitre("titre");
+        a.setDescritption("description");
+        a.setWebsite("website");
+        a.setNature("Formation");
+        a.setAnnee(2018);
 
+        personneManager.addActivity(a, 1);
 
         Personne p = personneManager.findById(1);
+
 
         System.out.println(p.getCv().getActivites().size());
 

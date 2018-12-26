@@ -26,6 +26,7 @@ public class FaceletsController {
     private String year;
     private String temporaryPass;
     private String passwordConfirm;
+    private Personne personne;
 
     @ManagedProperty(value = "#{sessionUser}")
     private SessionUser sessionUser;
@@ -129,6 +130,16 @@ public class FaceletsController {
         return "registerPage";
     }
 
+    /* only for testing purpose */
+    public String testUserPage() {
+
+        personne = personneManager.findById(1);
+
+        System.out.println("Activity : "+personne.getCv().getActivites());
+
+        return "userPage";
+    }
+
     public String getEmail() {
         return email;
     }
@@ -215,5 +226,13 @@ public class FaceletsController {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public Personne getPersonne() {
+        return personne;
+    }
+
+    public void setPersonne(Personne personne) {
+        this.personne = personne;
     }
 }

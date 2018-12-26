@@ -140,7 +140,9 @@ public class PersonneManager {
             return;
         }
 
+        activite.setCv(p.getCv());
         p.getCv().getActivites().add(activite);
+
         personneDAO.update(p);
 
     }
