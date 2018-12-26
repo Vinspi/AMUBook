@@ -146,6 +146,13 @@ public class TestPersonneManager {
     }
 
 
+    @Test
+    public void activateAccount() {
+        MockitoAnnotations.initMocks(this);
+
+//        pm.activateAccount("");
+    }
+
     private byte[] hashPassword(byte[] salt, byte[] password){
 
         try {

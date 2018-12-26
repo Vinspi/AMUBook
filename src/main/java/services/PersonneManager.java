@@ -72,6 +72,8 @@ public class PersonneManager {
 
         Personne p = register(personData);
 
+        System.out.println("register : "+p);
+
         return randomPass;
 
     }
@@ -132,6 +134,12 @@ public class PersonneManager {
     public void addActivity(Activite activite, int personId) {
 
         Personne p = personneDAO.findById(personId);
+
+
+        if(p == null){
+            return;
+        }
+
         p.getCv().getActivites().add(activite);
         personneDAO.update(p);
 
@@ -143,6 +151,24 @@ public class PersonneManager {
 
 
         return null;
+    }
+
+    public void activateAccount(String email){
+
+        System.out.println("activate account for : "+email);
+
+        Personne p = personneDAO.findByEmail(email);
+
+        System.out.println(p);
+
+        if(p == null){
+            return;
+        }
+
+        p.setValide(true);
+
+        personneDAO.update(p);
+
     }
 
     public void changePassword(String email, String newOne) {
@@ -172,6 +198,10 @@ public class PersonneManager {
         }catch (NoSuchAlgorithmException e){
             e.printStackTrace();
         }
+    }
+
+    public Personne findById(long id){
+        return personneDAO.findById(id);
     }
 
 }

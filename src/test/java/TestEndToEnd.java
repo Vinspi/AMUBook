@@ -1,4 +1,5 @@
 import beans.SessionUser;
+import models.Activite;
 import models.Personne;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 import javax.naming.NamingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class TestEndToEnd {
 
@@ -49,14 +51,32 @@ public class TestEndToEnd {
     public void testLogin() throws NamingException {
 
         PersonneManager personneManager = (PersonneManager) ejbContainer.getContext().lookup("java:global/AMUBook/PersonneManager");
-        SessionUser sessionUser = (SessionUser) ejbContainer.getContext().lookup("java:global/AMUBook/SessionUser");
 
 
         Personne p = personneManager.login("vinspi13@gmail.com","pantoufle");
 
         Assert.assertNotNull(p);
 
-        System.out.println(sessionUser);
+
+    }
+
+    @Test
+    public void addActivite() throws NamingException {
+        PersonneManager personneManager = (PersonneManager) ejbContainer.getContext().lookup("java:global/AMUBook/PersonneManager");
+
+//        Activite a = new Activite();
+//        a.setTitre("titre");
+//        a.setDescritption("description");
+//        a.setWebsite("website");
+//        a.setNature("Formation");
+//        a.setAnnee(2018);
+//
+//        personneManager.addActivity(a, 1);
+
+
+        Personne p = personneManager.findById(1);
+
+        System.out.println(p.getCv().getActivites().size());
 
     }
 

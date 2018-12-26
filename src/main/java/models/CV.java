@@ -1,6 +1,9 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity()
@@ -13,12 +16,11 @@ public class CV {
     private String titre;
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "cv_id")
+    @OneToOne(mappedBy = "cv")
     private Personne personne;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "cv")
-    private List<Activite> activites;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "cv")
+    private Collection<Activite> activites = new ArrayList<>();
 
     public CV() {
     }
@@ -55,11 +57,12 @@ public class CV {
         this.personne = personne;
     }
 
-    public List<Activite> getActivites() {
+    public Collection<Activite> getActivites() {
         return activites;
     }
 
-    public void setActivites(List<Activite> activites) {
+    public void setActivites(Collection<Activite> activites) {
         this.activites = activites;
     }
+
 }

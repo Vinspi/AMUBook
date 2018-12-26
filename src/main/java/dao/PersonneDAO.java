@@ -26,6 +26,7 @@ public class PersonneDAO {
 
     public Personne findByEmail(String email){
         try {
+
             Query q = em.createQuery("SELECT p FROM Personne p WHERE p.email LIKE :email").setParameter("email", email);
             return (Personne) q.getSingleResult();
 

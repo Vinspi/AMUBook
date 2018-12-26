@@ -15,6 +15,7 @@ font-family: 'Roboto', sans-serif; */
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #e2e2e2;
 }
 
 nav {
@@ -145,4 +146,175 @@ footer p {
 }
 
 
+/*************************************************************************/
+/* validation account */
+
+
+.validation-account {
+    margin-top: 20vh;
+}
+
+.center {
+  text-align: center;
+}
+
+.danger {
+  color: red;
+}
+/*************************************************************************/
+/* CV_view */
+
+.card {
+  margin-bottom: 5px;
+}
+
+.CV-view {
+  margin-top: 10vh;
+}
+
+.card-body p {
+  margin-top: 10px;
+}
+
+.timeline-school-icon {
+  color: #ff7043;
+  background-color: white;
+  border-radius: 100%;
+  padding: 7px;
+  border: 1px solid #ff7043;
+}
+
+.timeline-work-icon {
+  color: #0A8A8A;
+  background-color: white;
+  border-radius: 100%;
+  padding: 7px;
+  border: 1px solid #0A8A8A;
+}
+
+.timeline-project-icon {
+  color: #8171a0;
+  background-color: white;
+  border-radius: 100%;
+  padding: 7px;
+  border: 1px solid #8171a0;
+
+}
+
+/* #8171a0 */
+
+.timeline {
+  position: absolute;
+  top: 13px;
+  left: 18px;
+}
+
+.timeline-element-school::before {
+  content: '';
+  height: 100%;
+  width: 0px;
+  border: 2px solid black;
+  position: absolute;
+  top: 0px;
+  left: 40px;
+  border-color: #ff7043;
+}
+
+.timeline-element-work::before {
+  content: '';
+  height: 100%;
+  width: 0px;
+  border: 2px solid black;
+  position: absolute;
+  top: 0px;
+  left: 40px;
+  border-color: #0A8A8A;
+}
+
+.timeline-element-project::before {
+  content: '';
+  height: 100%;
+  width: 0px;
+  border: 2px solid black;
+  position: absolute;
+  top: 0px;
+  left: 40px;
+  border-color: #8171a0;
+}
+
+
+.year-school {
+  background-color: #ff7043;
+  color: white;
+  position: absolute;
+  top: 70px;
+  left: 21px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.year-work {
+  background-color: #0A8A8A;
+  color: white;
+  position: absolute;
+  top: 70px;
+  left: 21px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.year-project {
+  background-color: #8171a0;
+  color: white;
+  position: absolute;
+  top: 70px;
+  left: 21px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.timeline-element {
+  min-height: 80px;
+}
+
+.activity-title h1 {
+  font-size: 20pt;
+}
+
+.separator {
+  width: 100%;
+  border: 1px solid #e6e8ed;
+  border-top: none;
+}
+
+.user-bg {
+  width: 100%;
+  height: 20vh;
+  background: #606c88; /* Old browsers */
+  background: -moz-linear-gradient(top, #606c88 0%, #3f4c6b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #606c88 0%,#3f4c6b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #606c88 0%,#3f4c6b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+}
+
+.user-picture {
+  background-color: #344449;
+  color: white;
+  border-radius: 50%;
+  /* position: absolute; */
+  padding: 35px;
+  padding-left: 40px;
+  padding-right: 40px;
+  transform: translateY(-35%);
+  /* left: 15%;
+  top: 20vh; */
+}
+
+.user-info h1 {
+  margin-top: 2%;
+}
+
+.user-info {
+  background-color: white;
+}
 /*************************************************************************/

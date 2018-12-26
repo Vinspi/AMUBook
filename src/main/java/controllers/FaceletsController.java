@@ -2,14 +2,12 @@ package controllers;
 
 import beans.SessionUser;
 import models.Personne;
-import org.jboss.logging.annotations.Pos;
 import services.PersonneManager;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +25,7 @@ public class FaceletsController {
     private String day;
     private String year;
     private String temporaryPass;
+    private String passwordConfirm;
 
     @ManagedProperty(value = "#{sessionUser}")
     private SessionUser sessionUser;
@@ -39,14 +38,34 @@ public class FaceletsController {
         this.month = "01";
         this.day = "1";
         this.year = "1990";
+
+
     }
 
+
+    public String changePassword() {
+
+        if(password.equals(passwordConfirm)){
+
+            personneManager.changePassword(sessionUser.getEmail(), this.password);
+            personneManager.activateAccount(sessionUser.getEmail());
+
+            return "index";
+        }
+
+        this.password = null;
+        this.passwordConfirm = null;
+
+        return "accountValidationPage";
+    }
 
     public String toSearch(){
         return "searchPage";
     }
 
     public String search(){
+
+        query = ""+personneManager.findById(1).getCv().getActivites().size();
 
         System.out.println("hi : "+query);
 
@@ -68,16 +87,17 @@ public class FaceletsController {
 
         if(p != null){
 
-            if (!p.getValide()){
-                /* si le compte n'est pas valide on redirige vers la page de validation */
-
-                return "accountValidationPage";
-            }
-
             sessionUser.setEmail(email);
             sessionUser.setName(p.getNom());
             sessionUser.setSurname(p.getPrenom());
+            sessionUser.setValidAccount(p.getValide());
 
+            if (!p.getValide()){
+                /* si le compte n'est pas valide on redirige vers la page de validation */
+
+                this.password = null;
+                return "accountValidationPage";
+            }
 
             return "index";
         }
@@ -187,5 +207,13 @@ public class FaceletsController {
 
     public void setTemporaryPass(String temporaryPass) {
         this.temporaryPass = temporaryPass;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 }

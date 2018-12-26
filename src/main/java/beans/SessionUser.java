@@ -13,6 +13,7 @@ public class SessionUser implements Serializable {
     private String email;
     private String name;
     private String surname;
+    private boolean validAccount;
 
     private String temporaryPass;
 
@@ -48,6 +49,14 @@ public class SessionUser implements Serializable {
 
     public void setTemporaryPass(String temporaryPass) {
         this.temporaryPass = temporaryPass;
+    }
+
+    public boolean isValidAccount() {
+        return validAccount;
+    }
+
+    public void setValidAccount(boolean validAccount) {
+        this.validAccount = validAccount;
     }
 
     @Override
