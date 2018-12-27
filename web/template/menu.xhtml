@@ -25,9 +25,17 @@
                 </li>
                 <c:if test="#{not empty sessionUser.email}">
                     <li class="nav-item">
+                        <h:form>
+                            <h:commandLink styleClass="nav-link" action="#{controller.myCV}">Mon CV</h:commandLink>
+                        </h:form>
+                    </li>
+                </c:if>
+                <c:if test="#{not empty sessionUser.email}">
+                    <li class="nav-item">
                         <h:link styleClass="nav-link" outcome="registerPage">Créer</h:link>
                     </li>
                 </c:if>
+
             </ul>
             <c:if test="#{empty sessionUser.email}">
                 <h:link outcome="loginPage" styleClass="btn my-2 my-sm-0">Se connecter</h:link>

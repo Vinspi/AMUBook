@@ -357,11 +357,11 @@ footer p {
 }
 
 
-.CV-view .button-edit-wrapper:nth-child(2n) {
+.CV-view .button-edit-wrapper:nth-child(2n+1) {
   flex-direction: row-reverse;
 }
 
-.CV-view .button-edit-wrapper:nth-child(2n) .button-edit-container {
+.CV-view .button-edit-wrapper:nth-child(2n+1) .button-edit-container {
   margin-left: 0px !important;
   margin-right: 5px;
 }
@@ -370,10 +370,19 @@ footer p {
   min-height: 15vh;
 }
 
+#input-description-activity {
+  min-height: 15vh;
+}
 
+.hide {
+  display: none;
+}
 
-
-
+#card-add-activity:hover {
+  background-color: #424242;
+  color: white;
+  cursor: pointer;
+}
 
 
 

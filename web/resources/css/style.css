@@ -332,3 +332,67 @@ body {
 .user-info {
   background-color: white;
 }
+/* my-CV */
+
+.icon-hover:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.edit-profile {
+  transform: translateY(50% );
+}
+
+.button-edit-container {
+  font-size: 15pt;
+  /* margin-left: 5px; */
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #37aed6;
+  margin-bottom: 5px;
+}
+
+
+.CV-view .button-edit-wrapper:nth-child(2n+1) {
+  flex-direction: row-reverse;
+}
+
+.CV-view .button-edit-wrapper:nth-child(2n+1) .button-edit-container {
+  margin-left: 0px !important;
+  margin-right: 5px;
+}
+
+#input-description-cv {
+  min-height: 15vh;
+}
+
+#input-description-activity {
+  min-height: 15vh;
+}
+
+.hide {
+  display: none;
+}
+
+#card-add-activity:hover {
+  background-color: #424242;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************************************/

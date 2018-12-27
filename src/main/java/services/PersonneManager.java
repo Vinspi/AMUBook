@@ -206,4 +206,9 @@ public class PersonneManager {
         return personneDAO.findById(id);
     }
 
+    public Personne findByEmail(String email){
+        return personneDAO.findByEmail(email);
+    }
+
+
 }

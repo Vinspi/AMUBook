@@ -44,6 +44,31 @@
                 document.execCommand("copy");
                 console.log("copy !");
             }
+
+            function popupTitle() {
+                $('#input-description-cv').val($('#cv-description').text());
+                $('#input-title-cv').val($('#cv-title').text());
+                $('#modal-edit-title').modal('toggle');
+            }
+
+            function popupActivity(id){
+
+                console.log("id : "+id);
+
+                $('#input-date-activity').val($('#year-'+id).text());
+                $('#input-description-activity').val($('#description-'+id).text());
+                $('#input-title-activity').val($('#title-'+id).text());
+                $('#input-id-activity').val(id);
+                $('#modal-edit-activity').modal('toggle');
+            }
+
+            function popupNewActivity() {
+                $('#input-date-activity').val('');
+                $('#input-description-activity').val('');
+                $('#input-title-activity').val('');
+                $('#input-id-activity').val('new');
+                $('#modal-edit-activity').modal('toggle');
+            }
         </h:outputScript>
     </h:body>
 </html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<f:view>
+    <ui:composition>
+        <div class="container">
+            <div class="validation-account">
+                <p class="danger center">Votre compte utilise un mot de passe provisoire, vous devez changer votre mot de passe à l'aide de ce formulaire avant de pouvoir utiliser votre compte.</p>
+                <h:form>
+                    <div class="form-group">
+                        <h:outputLabel for="mdp">Mot de passe</h:outputLabel>
+                        <h:inputText value="#{controller.password}" styleClass="form-control" id="mdp" p:aria-describedby="emailHelp" p:placeholder="Mot de passe"/>
+                        <small id="emailHelp" class="form-text text-muted">Pour des raisons de sécurité, ne communiquer jamais votre mot de passe</small>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel for="mdpconfirm">Confirmation</h:outputLabel>
+                        <h:inputText value="#{controller.passwordConfirm}" type="password" class="form-control" id="mdpconfirm" p:placeholder="Confirmation"/>
+                    </div>
+                    <div class="button-container">
+                        <h:commandLink action="#{controller.changePassword}" styleClass="btn btn-dark">Valider</h:commandLink>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+    </ui:composition>
+</f:view>
+</html>

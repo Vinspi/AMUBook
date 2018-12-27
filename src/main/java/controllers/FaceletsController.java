@@ -130,6 +130,14 @@ public class FaceletsController {
         return "registerPage";
     }
 
+    public String myCV() {
+
+        personne = personneManager.findByEmail(this.sessionUser.getEmail());
+
+        return "userEditPage";
+
+    }
+
     /* only for testing purpose */
     public String testUserPage() {
 
