@@ -13,8 +13,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @ManagedBean(name = "controller")
 @RequestScoped
@@ -29,6 +28,8 @@ public class FaceletsController {
     private String day;
     private String year;
     private String temporaryPass;
+
+    private boolean sr_perfectmatching;
 
     @ManagedProperty(value = "#{sessionUser}")
     private SessionUser sessionUser;
@@ -56,11 +57,12 @@ public class FaceletsController {
 
     public String search(){
 
-        searchResults.setFoundByLastname(searchService.findByLastname(query));
-        searchResults.setFoundByFirstname(searchService.findByFirstname(query));
-        searchResults.setFoundByActivity(searchService.findByActivite(query));
+        System.out.println("Perfect matching = " + sr_perfectmatching);
 
-        System.out.println("Test : " + searchResults.getFoundByLastname().size());
+        searchResults.setFoundByLastname(searchService.findByLastname(query, sr_perfectmatching));
+        searchResults.setFoundByFirstname(searchService.findByFirstname(query, sr_perfectmatching));
+        searchResults.setFoundByActivity(searchService.findByActivity(query, sr_perfectmatching));
+        searchResults.setFoundAll(searchService.findByAllUnique(query, sr_perfectmatching));
 
         return "searchResultsPage";
     }
@@ -204,5 +206,13 @@ public class FaceletsController {
 
     public void setTemporaryPass(String temporaryPass) {
         this.temporaryPass = temporaryPass;
+    }
+
+    public boolean isSr_perfectmatching() {
+        return sr_perfectmatching;
+    }
+
+    public void setSr_perfectmatching(boolean sr_perfectmatching) {
+        this.sr_perfectmatching = sr_perfectmatching;
     }
 }

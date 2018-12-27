@@ -17,6 +17,12 @@
                 </p>
                 <h:form>
                     <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                Correspondance exacte
+                                <h:selectBooleanCheckbox value="#{controller.sr_perfectmatching}" styleClass="perfectmatching"/>
+                            </div>
+                        </div>
                         <h:inputText p:type="text" styleClass="form-control" p:placeholder="nom, prénom ou poste " value="#{controller.query}"/>
                         <div class="input-group-append">
                             <h:commandLink styleClass="btn btn-dark" p:type="button" action="#{controller.search}" >Rechercher</h:commandLink>
