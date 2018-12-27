@@ -62,7 +62,7 @@ public class PersonneDAO {
 
     public List<Personne> findByNameStrict(String nom){
         try {
-            Query q = em.createQuery("SELECT p FROM Personne p WHERE p.nom LIKE :name").setParameter("name", nom);
+            Query q = em.createQuery("SELECT p FROM Personne p WHERE lower(p.nom) LIKE lower(:name)").setParameter("name", nom);
             return q.getResultList();
         }catch (NoResultException e){
             return null;
@@ -80,7 +80,7 @@ public class PersonneDAO {
 
     public List<Personne> findBySurnameStrict(String surName){
         try {
-            Query q = em.createQuery("SELECT p FROM Personne p WHERE p.prenom LIKE :surName").setParameter("surName", surName);
+            Query q = em.createQuery("SELECT p FROM Personne p WHERE lower(p.prenom) LIKE lower(:surName)").setParameter("surName", surName);
             return q.getResultList();
         }catch (NoResultException e){
             return null;
