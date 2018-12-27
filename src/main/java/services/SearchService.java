@@ -42,6 +42,7 @@ public class SearchService {
     public ArrayList<Personne> findByActivity(String activite, boolean exact){return new ArrayList<>();}
 
 
+    // EN COURS DE MODIF (pas tres beau)
     public ArrayList<Personne> findByAllUnique(String query, boolean exact){
 
         ArrayList<Personne> result = new ArrayList<>();
