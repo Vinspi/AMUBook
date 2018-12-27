@@ -118,6 +118,11 @@ body {
   text-align: center;
 }
 
+.perfectmatching{
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+}
 
 /**************************************************************************/
 /* connection Form */

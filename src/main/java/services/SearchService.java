@@ -25,13 +25,41 @@ public class SearchService {
         this.personneDAO = personneDAO;
     }
 
-    public ArrayList<Personne> findByLastname(String lname){
-        return new ArrayList<Personne>(personneDAO.findByName(lname.toUpperCase()));
+    public ArrayList<Personne> findByLastname(String lname, boolean exact){
+        if(exact)
+            return new ArrayList<>(personneDAO.findByNameStrict(lname));
+        else
+            return new ArrayList<>(personneDAO.findByName(lname));
     }
 
-    public ArrayList<Personne> findByFirstname(String fname){
-        return new ArrayList<Personne>(personneDAO.findBySurname(fname));
+    public ArrayList<Personne> findByFirstname(String fname, boolean exact){
+        if(exact)
+            return new ArrayList<>(personneDAO.findBySurnameStrict(fname));
+        else
+            return new ArrayList<>(personneDAO.findBySurname(fname));
     }
 
-    public ArrayList<Personne> findByActivite(String activite){return null;}
+    public ArrayList<Personne> findByActivity(String activite, boolean exact){return new ArrayList<>();}
+
+
+    public ArrayList<Personne> findByAllUnique(String query, boolean exact){
+
+        ArrayList<Personne> result = new ArrayList<>();
+        for(Personne p : findByLastname(query, exact)){
+            if(!result.contains(p)) {
+                result.add(p);
+            }
+        }
+        for(Personne p : findByFirstname(query, exact)){
+            if(!result.contains(p)) {
+                result.add(p);
+            }
+        }
+        for(Personne p : findByActivity(query, exact)){
+            if(!result.contains(p)) {
+                result.add(p);
+            }
+        }
+        return result;
+    }
 }

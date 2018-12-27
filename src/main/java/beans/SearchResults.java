@@ -15,6 +15,7 @@ public class SearchResults implements Serializable {
 
     public SearchResults(){}
 
+    private ArrayList<Personne> foundAll;
     private ArrayList<Personne> foundByLastname;
     private ArrayList<Personne> foundByFirstname;
     private ArrayList<Personne> foundByActivity;
@@ -44,6 +45,15 @@ public class SearchResults implements Serializable {
     public void setFoundByActivity(ArrayList<Personne> foundByActivity) {
         this.foundByActivity = foundByActivity;
     }
+
+    public ArrayList<Personne> getFoundAll() {
+        return foundAll;
+    }
+
+    public void setFoundAll(ArrayList<Personne> foundAll) {
+        this.foundAll = foundAll;
+    }
+
 
     @Override
     public String toString() {
