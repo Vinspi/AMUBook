@@ -334,3 +334,59 @@ footer p {
   background-color: white;
 }
 /*************************************************************************/
+/*************************************************************************/
+/* my-CV */
+
+.icon-hover:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.edit-profile {
+  transform: translateY(50% );
+}
+
+.button-edit-container {
+  font-size: 15pt;
+  /* margin-left: 5px; */
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #37aed6;
+  margin-bottom: 5px;
+}
+
+
+.CV-view .button-edit-wrapper:nth-child(2n) {
+  flex-direction: row-reverse;
+}
+
+.CV-view .button-edit-wrapper:nth-child(2n) .button-edit-container {
+  margin-left: 0px !important;
+  margin-right: 5px;
+}
+
+#input-description-cv {
+  min-height: 15vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***************************************************************************/
