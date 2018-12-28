@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity()
@@ -13,12 +15,11 @@ public class CV {
     private String titre;
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "cv_id")
+    @OneToOne(mappedBy = "cv")
     private Personne personne;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "cv")
-    private List<Activite> activites;
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "cv", orphanRemoval = true)
+    private List<Activite> activites = new ArrayList<>();
 
     public CV() {
     }
@@ -56,6 +57,11 @@ public class CV {
     }
 
     public List<Activite> getActivites() {
+
+        Collections.sort(activites, (Activite activite1, Activite activite2) -> {
+            return activite2.getAnnee()-activite1.getAnnee();
+        });
+
         return activites;
     }
 

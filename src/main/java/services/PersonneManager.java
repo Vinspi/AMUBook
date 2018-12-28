@@ -1,6 +1,7 @@
 package services;
 
 import beans.SessionUser;
+import dao.ActiviteDAO;
 import dao.PersonneDAO;
 import models.Activite;
 import models.CV;
@@ -19,10 +20,13 @@ import java.util.*;
 public class PersonneManager {
 
     private PersonneDAO personneDAO;
+    private ActiviteDAO activiteDAO;
+
 
     @Inject
-    public PersonneManager(PersonneDAO personneDAO) {
+    public PersonneManager(PersonneDAO personneDAO, ActiviteDAO activiteDAO) {
         this.personneDAO = personneDAO;
+        this.activiteDAO = activiteDAO;
     }
 
     public Personne login(String email, String password){
@@ -70,6 +74,8 @@ public class PersonneManager {
 
         Personne p = register(personData);
 
+        System.out.println("register : "+p);
+
         return randomPass;
 
     }
@@ -105,6 +111,7 @@ public class PersonneManager {
             CV cv = new CV();
             cv.setDescription("This the default description");
             cv.setTitre("My CV");
+            cv.setPersonne(p);
 
             p.setNom(personData.get("nom"));
             p.setPrenom(personData.get("prenom"));
@@ -127,12 +134,44 @@ public class PersonneManager {
 
     }
 
-    public void addActivity(Activite activite, int personId) {
+    public void addActivity(Activite activite, long personId) {
 
         Personne p = personneDAO.findById(personId);
+
+
+        if(p == null){
+            return;
+        }
+
+        activite.setCv(p.getCv());
         p.getCv().getActivites().add(activite);
+
         personneDAO.update(p);
 
+    }
+
+    public Personne removeActivity(long id, long userId) {
+
+        Personne p = personneDAO.findById(userId);
+
+        List<Activite> activites = p.getCv().getActivites();
+
+        int idToRemove = -1;
+
+        for(int i=0;i<activites.size();i++){
+            if(activites.get(i).getId() == id){
+                idToRemove = i;
+                break;
+            }
+        }
+
+        if(idToRemove > -1)
+            p.getCv().getActivites().remove(idToRemove);
+
+        personneDAO.update(p);
+
+
+        return p;
     }
 
     public Map<String, List<Object>> search(String query){
@@ -141,6 +180,24 @@ public class PersonneManager {
 
 
         return null;
+    }
+
+    public void activateAccount(String email){
+
+        System.out.println("activate account for : "+email);
+
+        Personne p = personneDAO.findByEmail(email);
+
+        System.out.println(p);
+
+        if(p == null){
+            return;
+        }
+
+        p.setValide(true);
+
+        personneDAO.update(p);
+
     }
 
     public void changePassword(String email, String newOne) {
@@ -171,5 +228,45 @@ public class PersonneManager {
             e.printStackTrace();
         }
     }
+
+    public Personne findById(long id){
+        return personneDAO.findById(id);
+    }
+
+    public Personne findByEmail(String email){
+        return personneDAO.findByEmail(email);
+    }
+
+    public Personne changeCVInfo(String newTitle, String newDescription, String email) {
+
+        Personne p = personneDAO.findByEmail(email);
+        p.getCv().setTitre(newTitle);
+        p.getCv().setDescription(newDescription);
+
+        personneDAO.update(p);
+
+        return p;
+
+    }
+
+    public Personne updateActivity(String title, String description, int year, String type, long id, long personId) {
+
+        Personne p = personneDAO.findById(personId);
+
+        for(Activite activite: p.getCv().getActivites()){
+            if (activite.getId() == id){
+                activite.setTitre(title);
+                activite.setDescritption(description);
+                activite.setAnnee(year);
+                activite.setNature(type);
+            }
+        }
+
+        personneDAO.update(p);
+
+        return p;
+
+    }
+
 
 }

@@ -21,7 +21,7 @@ public class Personne {
 
 
 
-    @OneToOne(mappedBy = "personne", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private CV cv;
 
     public Personne() {}
