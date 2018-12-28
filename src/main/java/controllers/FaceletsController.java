@@ -82,37 +82,13 @@ public class FaceletsController {
     }
 
 
-    // EN COURS DE MODIF (pas tres beau)
     public String search(){
 
 
-        System.out.println("Perfect matching = " + sr_perfectmatching);
-
-        ArrayList<Personne> bylastname = new ArrayList<>();
-        ArrayList<Personne> byfirstname = new ArrayList<>();
-        ArrayList<Personne> byactivity = new ArrayList<>();
-        ArrayList<Personne> byall = new ArrayList<>();
-
-        String[] words = query.split(" ");
-        for(String n : words){
-            bylastname.addAll(searchService.findByLastname(n, sr_perfectmatching));
-            byfirstname.addAll(searchService.findByFirstname(n, sr_perfectmatching));
-            byactivity.addAll(searchService.findByActivity(n, sr_perfectmatching));
-            byall.addAll(searchService.findByAllUnique(n, sr_perfectmatching));
-        }
-
-        ArrayList<Personne> list = new ArrayList<>();
-        HashSet<Long> set = new HashSet<>();
-        for(Personne p : byall)
-            if(!set.contains(p.getId())) {
-                set.add(p.getId());
-                list.add(p);
-            }
-
-        searchResults.setFoundByLastname(bylastname);
-        searchResults.setFoundByFirstname(byfirstname);
-        searchResults.setFoundByActivity(byactivity);
-        searchResults.setFoundAll(list);
+        searchResults.cleanFoundByAll();
+        searchResults.setFoundByLastname(searchService.findByLastname(query, sr_perfectmatching));
+        searchResults.setFoundByFirstname(searchService.findByFirstname(query, sr_perfectmatching));
+        searchResults.setFoundByActivity(searchService.findByActivity(query, sr_perfectmatching));
 
         return "searchResultsPage";
     }

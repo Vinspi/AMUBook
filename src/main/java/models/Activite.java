@@ -94,4 +94,5 @@ public class Activite {
                 ", website='" + website + '\'' +
                 "}\n\n";
     }
+
 }

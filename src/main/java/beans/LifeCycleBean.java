@@ -1,8 +1,7 @@
 package beans;
 
 import models.Activite;
-import models.CV;
-import org.hsqldb.DatabaseManager;
+
 import services.PersonneManager;
 
 import javax.annotation.PostConstruct;
@@ -58,8 +57,6 @@ public class LifeCycleBean {
         personneManager.register(personne);
 
 
-
-
         Activite activite;
 
 
@@ -85,7 +82,8 @@ public class LifeCycleBean {
                     activite.setNature("Projet");
                     break;
             }
-            activite.setTitre("Lorem Ipsum");
+
+            activite.setTitre("Developpeur web");
             activite.setWebsite("website");
 
             personneManager.addActivity(activite, 1);
@@ -93,10 +91,9 @@ public class LifeCycleBean {
         }
 
 
-        System.out.println(personneManager.findById(1).getCv().getActivites().size());
+        //System.out.println(personneManager.findById(1).getCv().getActivites().size());
 
         System.out.println("app initialized");
-
 
 
 

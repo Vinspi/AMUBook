@@ -7,6 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 @Stateless
 public class ActiviteDAO {
@@ -19,6 +21,22 @@ public class ActiviteDAO {
             return em.find(Activite.class, id);
         }
         catch (NoResultException e){
+            return null;
+        }
+    }
+
+    public List<Activite> findByTitleStrict(String title){try {
+        Query q = em.createQuery("SELECT a FROM Activite a WHERE lower(a.titre) LIKE lower(:title)").setParameter("title", title);
+            return q.getResultList();
+        }catch (NoResultException e){
+            return null;
+        }
+    }
+
+    public List<Activite> findByTitle(String title){  try {
+        Query q = em.createQuery("SELECT a FROM Activite a WHERE lower(a.titre) LIKE lower(:title)").setParameter("title", "%"+title+"%");
+            return q.getResultList();
+        }catch (NoResultException e){
             return null;
         }
     }

@@ -3,6 +3,7 @@ package models;
 import javax.persistence.*;
 import java.util.*;
 
+
 @Entity()
 public class CV {
 
