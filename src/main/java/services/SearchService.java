@@ -30,42 +30,71 @@ public class SearchService {
 
     private String[] parsebySpace(String toBeParsed){return toBeParsed.split(" ");}
 
-    public ArrayList<Personne> findByLastname(String query, boolean exact){
-        ArrayList<Personne> results = new ArrayList<>();
+    public HashMap<Personne, Activite> findByLastname(String query, boolean exact){
+        HashMap<Personne, Activite> results = new HashMap<>();
+        ArrayList<Personne> resultsP = new ArrayList<>();
         String[] words = parsebySpace(query);
-        for(String n : words)
-            if(exact)
-                results.addAll(new ArrayList<>(personneDAO.findByNameStrict(n)));
+        for(String n : words) {
+            if (exact)
+                resultsP.addAll(new ArrayList<>(personneDAO.findByNameStrict(n)));
             else
-                results.addAll(new ArrayList<>(personneDAO.findByName(n)));
+                resultsP.addAll(new ArrayList<>(personneDAO.findByName(n)));
+        }
+
+        Activite a = new Activite();
+        a.setTitre("-Non renseigné-");
+
+        for(Personne p : resultsP){
+            if(p.getCv().getActivites().size() == 0)
+                results.put(p, a);
+            else
+                results.put(p, p.getCv().getActivites().get(0));
+        }
 
         return results;
     }
 
-    public ArrayList<Personne> findByFirstname(String query, boolean exact){
-        ArrayList<Personne> results = new ArrayList<>();
+    public HashMap<Personne, Activite> findByFirstname(String query, boolean exact){
+        HashMap<Personne, Activite> results = new HashMap<>();
+        ArrayList<Personne> resultsP = new ArrayList<>();
         String[] words = parsebySpace(query);
-        for(String n : words)
-            if(exact)
-                results.addAll(new ArrayList<>(personneDAO.findBySurnameStrict(n)));
+        for(String n : words) {
+            if (exact)
+                resultsP.addAll(new ArrayList<>(personneDAO.findBySurnameStrict(n)));
             else
-                results.addAll(new ArrayList<>(personneDAO.findBySurname(n)));
+                resultsP.addAll(new ArrayList<>(personneDAO.findBySurname(n)));
+        }
+
+        Activite a = new Activite();
+        a.setTitre("-Non renseigné-");
+
+        for(Personne p : resultsP){
+            if(p.getCv().getActivites().size() == 0)
+                results.put(p, a);
+            else
+                results.put(p, p.getCv().getActivites().get(0));
+        }
 
         return results;
     }
 
-    public ArrayList<Personne> findByActivity(String activite, boolean exact){
+    public HashMap<Personne, Activite> findByActivity(String activite, boolean exact){
+        HashMap<Personne, Activite> results = new HashMap<>();
         ArrayList<Activite> results_tmp = new ArrayList<>();
         String[] words = parsebySpace(activite);
-        for(String n : words)
-            if(exact)
+        for(String n : words) {
+            if (exact)
                 results_tmp.addAll(new ArrayList<>(activiteDAO.findByTitleStrict(n)));
             else
                 results_tmp.addAll(new ArrayList<>(activiteDAO.findByTitle(n)));
+        }
 
-        ArrayList<Personne> results = new ArrayList<>();
+        if(exact)
+            results_tmp.addAll(new ArrayList<>(activiteDAO.findByTitleStrict(activite)));
+
         for(Activite a : results_tmp)
-            results.add(a.getCv().getPersonne());
+            results.put(a.getCv().getPersonne(), a);
+
         return results;
     }
 

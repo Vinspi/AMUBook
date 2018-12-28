@@ -83,10 +83,17 @@ public class LifeCycleBean {
                     break;
             }
 
-            activite.setTitre("Developpeur web");
+            activite.setTitre("Developpeur web ("+i+") chez Sopra Steria");
+            if(i==6)
+                activite.setTitre("Graphiste chez Sopra Steria");
+            
             activite.setWebsite("website");
 
             personneManager.addActivity(activite, 1);
+
+            Activite actb = new Activite();
+            actb.setTitre("Graphiste chez Freelance");
+            personneManager.addActivity(actb, 2);
 
         }
 

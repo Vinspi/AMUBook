@@ -10,6 +10,9 @@
 <f:view>
     <ui:composition>
         <div class="container-fluid mgTop5">
+            <div class="alert alert-secondary" role="alert">
+                Resultats pour la recherche : <mark>#{controller.query}</mark>
+            </div>
             <div class="card text-center">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs navWithTabs">
@@ -36,10 +39,13 @@
                             <div class="col-2">
                                 <div class="card bg-light mb-3" style="max-width: 18rem;">
                                     <div class="card-header bg-primary text-white">
-                                        <i class="fas fa-user-circle"></i>&nbsp;<span class="text-uppercase">#{current.nom}</span>&nbsp;#{current.prenom}
+                                        <i class="fas fa-user-circle"></i>&nbsp;<span class="text-uppercase">#{current.key.nom}</span>&nbsp;#{current.key.prenom}
                                     </div>
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-secondary">Voir le profil</button>
+                                        <small> Poste : </small><p>#{current.value.titre}</p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <button type="button" class="btn btn-primary">Voir le profil</button>
                                     </div>
                                 </div>
                             </div>
@@ -52,10 +58,13 @@
                         <div class="col-2">
                             <div class="card bg-light mb-3" style="max-width: 18rem;">
                                 <div class="card-header bg-primary text-white">
-                                    <i class="fas fa-user-circle"></i>&nbsp;<span class="text-uppercase"><mark>#{current.nom}</mark></span>&nbsp;#{current.prenom}
+                                    <i class="fas fa-user-circle"></i>&nbsp;<span class="text-uppercase"><mark>#{current.key.nom}</mark></span>&nbsp;#{current.key.prenom}
                                 </div>
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-secondary">Voir le profil</button>
+                                   <small> Poste : </small><p>#{current.value.titre}</p>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <button type="button" class="btn btn-primary">Voir le profil</button>
                                 </div>
                             </div>
                         </div>
@@ -68,11 +77,13 @@
                             <div class="col-2">
                                 <div class="card bg-light mb-3" style="max-width: 18rem;">
                                     <div class="card-header bg-primary text-white">
-                                        <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-user-circle"></i>&nbsp;<span class="text-uppercase">#{current.key.nom}</span>&nbsp;<mark>#{current.key.prenom}</mark>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><span class="text-uppercase">#{current.nom}</span>&nbsp;<mark>#{current.prenom}</mark></h5>
-                                        <button type="button" class="btn btn-secondary">Voir le profil</button>
+                                        <small> Poste : </small><p>#{current.value.titre}</p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <button type="button" class="btn btn-primary">Voir le profil</button>
                                     </div>
                                 </div>
                             </div>
@@ -85,11 +96,13 @@
                             <div class="col-2">
                                 <div class="card bg-light mb-3" style="max-width: 18rem;">
                                     <div class="card-header bg-primary text-white">
-                                        <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-user-circle"></i>&nbsp;<span class="text-uppercase">#{current.key.nom}</span>&nbsp;#{current.key.prenom}
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title"><span class="text-uppercase">#{current.nom}</span>&nbsp;#{current.prenom}</h5>
-                                        <button type="button" class="btn btn-secondary">Voir le profil</button>
+                                        <small> Poste : </small><p>#{current.value.titre}</p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <button type="button" class="btn btn-primary">Voir le profil</button>
                                     </div>
                                 </div>
                             </div>
