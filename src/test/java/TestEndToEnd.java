@@ -76,7 +76,7 @@ public class TestEndToEnd {
         Personne p = personneManager.findById(1);
 
 
-        System.out.println(p.getCv().getActivites().size());
+        Assert.assertTrue(p.getCv().getActivites().size() == 9);
 
     }
 

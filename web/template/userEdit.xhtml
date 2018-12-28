@@ -9,7 +9,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <f:view>
     <ui:composition>
-                <!-- Modal edit title -->
+        <!-- Modal edit title -->
                 <div class="modal fade" id="modal-edit-title" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -19,23 +19,28 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <h:form>
-                                    <div class="form-group">
-                                        <h:outputLabel for="input-title-cv">Titre</h:outputLabel>
-                                        <h:inputText type="text" id="input-title-cv" p:id="input-title-cv" styleClass="form-control" p:aria-describedby="input-title-cv-small"/>
-                                        <small id="input-title-cv-small" class="form-text text-muted">Ce titre sera celui qui apparaîtra sur votre page perso.</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel for="input-description-cv">Description</h:outputLabel>
-                                        <h:inputTextarea id="input-description-cv" p:id="input-description-cv" styleClass="form-control" p:aria-describedby="input-description-cv-small"></h:inputTextarea>
-                                        <small id="input-description-cv-small" class="form-text text-muted">Cette description apparîtra sur votre page perso, en dessous de votre titre.</small>
-                                    </div>
-                                </h:form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-dark" data-dismiss="modal">Sauvegarder</button>
-                            </div>
+                            <h:form>
+                                <div class="modal-body">
+
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-title-cv">Titre</h:outputLabel>
+                                            <h:inputText value="#{controller.newCVTitle}" type="text" id="input-title-cv" p:id="input-title-cv" styleClass="form-control" p:aria-describedby="input-title-cv-small"/>
+                                            <small id="input-title-cv-small" class="form-text text-muted">Ce titre sera celui qui apparaîtra sur votre page perso.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-description-cv">Description</h:outputLabel>
+                                            <h:inputTextarea value="#{controller.newDescription}" id="input-description-cv" p:id="input-description-cv" styleClass="form-control" p:aria-describedby="input-description-cv-small"></h:inputTextarea>
+                                            <small id="input-description-cv-small" class="form-text text-muted">Cette description apparîtra sur votre page perso, en dessous de votre titre.</small>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                        <h:commandLink p:type="button" styleClass="btn btn-dark" p:data-dismiss="modal" action="#{controller.changeCVInfo}">
+                                            <f:ajax execute="input-title-cv input-description-cv" render=":user-info-block"></f:ajax>
+                                            Sauvegarder
+                                        </h:commandLink>
+
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
@@ -50,56 +55,97 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <h:form>
-                                    <div class="form-group">
-                                        <h:inputText type="text" id="input-id-activity" p:id="input-id-activity" class="form-control hide"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel for="input-date-activity">Date</h:outputLabel>
-                                        <h:inputText type="text" id="input-date-activity" p:id="input-date-activity" class="form-control"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel for="input-title-activity">Titre</h:outputLabel>
-                                        <h:inputText type="text" id="input-title-activity" p:id="input-title-activity" class="form-control"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <h:outputLabel for="input-description-activity">Description</h:outputLabel>
-                                        <h:inputTextarea id="input-description-activity" p:id="input-description-activity" class="form-control"></h:inputTextarea>
-                                    </div>
-                                </h:form>
+                            <h:form>
+                                <div class="modal-body">
+                                        <div class="form-group">
+                                            <h:inputText value="#{controller.activityId}" type="text" id="input-id-activity" p:id="input-id-activity" styleClass="form-control hide"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-date-activity">Date</h:outputLabel>
+                                            <h:inputText value="#{controller.activityDate}" type="text" id="input-date-activity" p:id="input-date-activity" styleClass="form-control"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-type-activity">Type</h:outputLabel>
+                                            <h:selectOneMenu value="#{controller.activityType}" id="input-type-activity" p:id="input-type-activity" styleClass="form-control">
+                                                <f:selectItem itemLabel="Experience professionnelle" itemValue="Experience pro"/>
+                                                <f:selectItem itemLabel="Projet" itemValue="Projet"/>
+                                                <f:selectItem itemLabel="Formation" itemValue="Formation"/>
+                                                <f:selectItem itemLabel="Autre" itemValue="Autre"/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-title-activity">Titre</h:outputLabel>
+                                            <h:inputText value="#{controller.activityTitle}" type="text" id="input-title-activity" p:id="input-title-activity" class="form-control"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-description-activity">Description</h:outputLabel>
+                                            <h:inputTextarea value="#{controller.activityDescription}" id="input-description-activity" p:id="input-description-activity" class="form-control"></h:inputTextarea>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandLink action="#{controller.updateActivityList}" styleClass="btn btn-dark" p:data-dismiss="modal" p:type="button">
+                                        <f:ajax execute="input-id-activity input-date-activity input-title-activity input-description-activity input-type-activity" render=":activity-block"/>
+                                        Sauvegarder
+                                    </h:commandLink>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal remove activity -->
+                <div class="modal fade" id="modal-remove-activity" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Supprimmer une activité</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-dark" data-dismiss="modal">Sauvegarder</button>
-                            </div>
+                            <h:form>
+                                <div class="modal-body">
+                                    <h:inputText p:id="activity-remove-input" id="activity-remove-input" value="#{controller.activityId}" p:style="display: none"/>
+                                    <p>
+                                        supprimer l'activité <span id="activity-remove-name"></span> ?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-dark" data-dismiss="modal" type="button">non</button>
+                                    <h:commandLink action="#{controller.removeActivity}" styleClass="btn btn-dark" p:data-dismiss="modal" p:type="button">
+                                        <f:ajax execute="activity-remove-input" render=":activity-block"/>
+                                        oui
+                                    </h:commandLink>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
 
                 <div class="d-flex user-bg" style="width: 100%;">
                 </div>
-
-                <div class="d-flex user-info" style="width: 100%">
-                    <div class="container">
-                        <div class="d-flex" style="width: 100%;">
-                            <div style="width: 20%;">
-                                <i class="fas fa-user-tie user-picture fa-5x"></i>
-                            </div>
-                            <div class="d-flex flex-row justify-content-around" style="width: 100%;">
-                                <div class="d-flex flex-column" style="width: 80%;">
-                                    <h1>#{controller.personne.prenom} #{controller.personne.nom}</h1>
-                                    <h2 id="cv-title">#{controller.personne.cv.titre}</h2>
-                                    <p id="cv-description">#{controller.personne.cv.description}</p>
+                <h:panelGroup layout="block" id="user-info-block">
+                    <div class="d-flex user-info" style="width: 100%">
+                        <div class="container">
+                            <div class="d-flex" style="width: 100%;">
+                                <div style="width: 20%;">
+                                    <i class="fas fa-user-tie user-picture fa-5x"></i>
                                 </div>
-                                <div onclick="popupTitle()">
-                                    <i class="fas fa-edit fa-3x edit-profile icon-hover"></i>
+                                <div class="d-flex flex-row justify-content-around" style="width: 100%;">
+                                    <div class="d-flex flex-column" style="width: 80%;">
+                                        <h1><h:outputText value="#{controller.personne.prenom} #{controller.personne.nom}"/></h1>
+                                        <h2 id="cv-title"><h:outputText id="title-cv" value="#{controller.personne.cv.titre}"/></h2>
+                                        <p id="cv-description">#{controller.personne.cv.description}</p>
+                                    </div>
+                                    <div onclick="popupTitle()">
+                                        <i class="fas fa-edit fa-3x edit-profile icon-hover"></i>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                </h:panelGroup>
                 <div class="container">
 
 
@@ -113,92 +159,95 @@
                     </div>
                 </div>
 
-                <!-- activities -->
-                <c:forEach items="#{controller.personne.cv.activites}" var="activite">
-                    <c:if test="#{activite.nature == 'Projet'}">
-                        <div class="d-flex button-edit-wrapper">
-                            <div class="card" id="activity-#{activite.id}">
-                                <div class="card-body timeline-element timeline-element-project">
-                                    <div class="d-flex">
-                                        <div class="d-flex" style="width: 10%;">
-                                            <i class="fas fa-pencil-ruler fa-2x timeline timeline-project-icon"></i>
-                                            <div class="year-project" id="year-activity-#{activite.id}">#{activite.annee}</div>
-                                        </div>
-                                        <div class="d-flex flex-column" style="width: 90%;">
-                                            <div class="activity-title">
-                                                <h1 class="activity-title" id="title-activity-#{activite.id}">#{activite.titre}</h1>
-                                            </div>
-                                            <div class="separator"></div>
-                                            <div class="">
-                                                <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-column justify-content-around button-edit-container">
-                                <i class="fas fa-times icon-hover" style="padding-left: 4px;"></i>
-                                <i class="fas fa-edit icon-hover" onclick="popupActivity('activity-#{activite.id}')"></i>
-                            </div>
-                        </div>
-                    </c:if>
+                    <!-- activities -->
+                <h:panelGroup layout="block" id="activity-block">
 
-                    <c:if test="#{activite.nature == 'Experience pro'}">
-                        <div class="d-flex button-edit-wrapper">
-                            <div class="card" id="activity-#{activite.id}">
-                                <div class="card-body timeline-element timeline-element-work">
-                                    <div class="d-flex">
-                                        <div class="d-flex" style="width: 10%;">
-                                            <i class="fas fa-briefcase fa-2x timeline timeline-work-icon"></i>
-                                            <div class="year-work" id="year-activity-#{activite.id}">#{activite.annee}</div>
-                                        </div>
-                                        <div class="d-flex flex-column" style="width: 90%;">
-                                            <div class="activity-title">
-                                                <h1 class="activity-title" id="title-activity-#{activite.id}">#{activite.titre}</h1>
+                    <c:forEach items="#{controller.personne.cv.activites}" var="activite">
+                        <c:if test="#{activite.nature == 'Projet'}">
+                            <div class="d-flex button-edit-wrapper">
+                                <div class="card card-activity" id="activity-#{activite.id}">
+                                    <div class="card-body timeline-element timeline-element-project">
+                                        <div class="d-flex">
+                                            <div class="d-flex" style="width: 10%;">
+                                                <i class="fas fa-pencil-ruler fa-2x timeline timeline-project-icon"></i>
+                                                <div class="year-project" id="year-activity-#{activite.id}">#{activite.annee}</div>
                                             </div>
-                                            <div class="separator"></div>
-                                            <div class="">
-                                                <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
+                                            <div class="d-flex flex-column" style="width: 90%;">
+                                                <div class="activity-title">
+                                                    <h1 class="activity-title" id="title-activity-#{activite.id}">#{activite.titre}</h1>
+                                                </div>
+                                                <div class="separator"></div>
+                                                <div class="">
+                                                    <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="d-flex flex-column justify-content-around button-edit-container">
+                                    <i class="fas fa-times icon-hover" onclick="popupRemoveActivity('activity-#{activite.id}')" style="padding-left: 4px;"></i>
+                                    <i class="fas fa-edit icon-hover" onclick="popupActivity('activity-#{activite.id}')"></i>
+                                </div>
                             </div>
-                            <div class="d-flex flex-column justify-content-around button-edit-container">
-                                <i class="fas fa-times icon-hover" style="padding-left: 4px;"></i>
-                                <i class="fas fa-edit icon-hover" onclick="popupActivity('activity-#{activite.id}')"></i>
-                            </div>
-                        </div>
-                    </c:if>
+                        </c:if>
 
-                    <c:if test="#{activite.nature == 'Formation'}">
-                        <div class="d-flex button-edit-wrapper">
-                            <div class="card" id="activity-#{activite.id}">
-                                <div class="card-body timeline-element timeline-element-school">
-                                    <div class="d-flex">
-                                        <div class="d-flex" style="width: 10%;">
-                                            <i class="fas fa-university fa-2x timeline timeline-school-icon"></i>
-                                            <div class="year-school" id="year-activity-#{activite.id}">#{activite.annee}</div>
-                                        </div>
-                                        <div class="d-flex flex-column" style="width: 90%;">
-                                            <div class="activity-title">
-                                                <h1 class="activity-title" id="title-activity-#{activite.id}">#{activite.titre}</h1>
+                        <c:if test="#{activite.nature == 'Experience pro'}">
+                            <div class="d-flex button-edit-wrapper">
+                                <div class="card card-activity" id="activity-#{activite.id}">
+                                    <div class="card-body timeline-element timeline-element-work">
+                                        <div class="d-flex">
+                                            <div class="d-flex" style="width: 10%;">
+                                                <i class="fas fa-briefcase fa-2x timeline timeline-work-icon"></i>
+                                                <div class="year-work" id="year-activity-#{activite.id}">#{activite.annee}</div>
                                             </div>
-                                            <div class="separator"></div>
-                                            <div class="">
-                                                <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
+                                            <div class="d-flex flex-column" style="width: 90%;">
+                                                <div class="activity-title">
+                                                    <h1 class="activity-title" id="title-activity-#{activite.id}">#{activite.titre}</h1>
+                                                </div>
+                                                <div class="separator"></div>
+                                                <div class="">
+                                                    <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="d-flex flex-column justify-content-around button-edit-container">
+                                    <i class="fas fa-times icon-hover" onclick="popupRemoveActivity('activity-#{activite.id}')" style="padding-left: 4px;"></i>
+                                    <i class="fas fa-edit icon-hover" onclick="popupActivity('activity-#{activite.id}')"></i>
+                                </div>
                             </div>
-                            <div class="d-flex flex-column justify-content-around button-edit-container">
-                                <i class="fas fa-times icon-hover" style="padding-left: 4px;"></i>
-                                <i class="fas fa-edit icon-hover" onclick="popupActivity('activity-#{activite.id}')"></i>
+                        </c:if>
+
+                        <c:if test="#{activite.nature == 'Formation'}">
+                            <div class="d-flex button-edit-wrapper">
+                                <div class="card card-activity" id="activity-#{activite.id}">
+                                    <div class="card-body timeline-element timeline-element-school">
+                                        <div class="d-flex">
+                                            <div class="d-flex" style="width: 10%;">
+                                                <i class="fas fa-university fa-2x timeline timeline-school-icon"></i>
+                                                <div class="year-school" id="year-activity-#{activite.id}">#{activite.annee}</div>
+                                            </div>
+                                            <div class="d-flex flex-column" style="width: 90%;">
+                                                <div class="activity-title">
+                                                    <h1 class="activity-title" id="title-activity-#{activite.id}">#{activite.titre}</h1>
+                                                </div>
+                                                <div class="separator"></div>
+                                                <div class="">
+                                                    <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column justify-content-around button-edit-container">
+                                    <i class="fas fa-times icon-hover" onclick="popupRemoveActivity('activity-#{activite.id}')" style="padding-left: 4px;"></i>
+                                    <i class="fas fa-edit icon-hover" onclick="popupActivity('activity-#{activite.id}')"></i>
+                                </div>
                             </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
+                        </c:if>
+                    </c:forEach>
+                </h:panelGroup>
             </div>
         </div>
     </ui:composition>

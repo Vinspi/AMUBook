@@ -69,6 +69,14 @@
                 $('#input-id-activity').val('new');
                 $('#modal-edit-activity').modal('toggle');
             }
+
+            function popupRemoveActivity(id) {
+                console.log(id);
+
+                $('#activity-remove-name').text($('#title-'+id).text());
+                $('#activity-remove-input').val(id);
+                $('#modal-remove-activity').modal('toggle');
+            }
         </h:outputScript>
     </h:body>
 </html>

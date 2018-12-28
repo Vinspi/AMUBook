@@ -14,6 +14,7 @@ public class SessionUser implements Serializable {
     private String name;
     private String surname;
     private boolean validAccount;
+    private long id;
 
     private String temporaryPass;
 
@@ -59,12 +60,23 @@ public class SessionUser implements Serializable {
         this.validAccount = validAccount;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "SessionUser{" +
                 "email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
+                ", validAccount=" + validAccount +
+                ", id=" + id +
+                ", temporaryPass='" + temporaryPass + '\'' +
                 '}';
     }
 }

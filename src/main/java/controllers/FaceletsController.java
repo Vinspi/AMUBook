@@ -1,6 +1,7 @@
 package controllers;
 
 import beans.SessionUser;
+import models.Activite;
 import models.Personne;
 import services.PersonneManager;
 
@@ -9,8 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @ManagedBean(name = "controller")
 @RequestScoped
@@ -27,6 +27,13 @@ public class FaceletsController {
     private String temporaryPass;
     private String passwordConfirm;
     private Personne personne;
+    private String newCVTitle;
+    private String newDescription;
+    private String activityType;
+    private String activityId;
+    private String activityDescription;
+    private String activityTitle;
+    private int activityDate;
 
     @ManagedProperty(value = "#{sessionUser}")
     private SessionUser sessionUser;
@@ -92,6 +99,7 @@ public class FaceletsController {
             sessionUser.setName(p.getNom());
             sessionUser.setSurname(p.getPrenom());
             sessionUser.setValidAccount(p.getValide());
+            sessionUser.setId(p.getId());
 
             if (!p.getValide()){
                 /* si le compte n'est pas valide on redirige vers la page de validation */
@@ -138,15 +146,66 @@ public class FaceletsController {
 
     }
 
+    public void changeCVInfo() {
+
+        personne = personneManager.changeCVInfo(newCVTitle, newDescription,this.sessionUser.getEmail());
+
+    }
+
+    public void updateActivityList() {
+
+        System.out.println(activityId);
+
+
+
+        if(activityId.equals("new")) {
+
+            Activite activite = new Activite();
+            activite.setNature(activityType);
+            activite.setAnnee(activityDate);
+            activite.setDescritption(activityDescription);
+            activite.setTitre(activityTitle);
+
+
+            personneManager.addActivity(activite, sessionUser.getId());
+
+        }
+        else {
+            System.out.println("update");
+            String[] parts = activityId.split("-");
+            long id = Long.parseLong(parts[parts.length-1]);
+            personneManager.updateActivity(activityTitle, activityDescription, activityDate, activityType, id, sessionUser.getId());
+
+        }
+
+        personne = personneManager.findById(sessionUser.getId());
+
+
+    }
+
+    public void removeActivity(){
+
+
+        String[] parts = activityId.split("-");
+        long id = Long.parseLong(parts[parts.length-1]);
+
+        personne = personneManager.removeActivity(id, sessionUser.getId());
+
+        System.out.println("size : "+personne.getCv().getActivites().size());
+    }
+
     /* only for testing purpose */
     public String testUserPage() {
 
         personne = personneManager.findById(1);
 
+
         System.out.println("Activity : "+personne.getCv().getActivites());
 
         return "userPage";
     }
+
+
 
     public String getEmail() {
         return email;
@@ -242,5 +301,61 @@ public class FaceletsController {
 
     public void setPersonne(Personne personne) {
         this.personne = personne;
+    }
+
+    public String getNewCVTitle() {
+        return newCVTitle;
+    }
+
+    public void setNewCVTitle(String newCVTitle) {
+        this.newCVTitle = newCVTitle;
+    }
+
+    public String getNewDescription() {
+        return newDescription;
+    }
+
+    public void setNewDescription(String newDescription) {
+        this.newDescription = newDescription;
+    }
+
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
+    public String getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(String activityId) {
+        this.activityId = activityId;
+    }
+
+    public String getActivityDescription() {
+        return activityDescription;
+    }
+
+    public void setActivityDescription(String activityDescription) {
+        this.activityDescription = activityDescription;
+    }
+
+    public String getActivityTitle() {
+        return activityTitle;
+    }
+
+    public void setActivityTitle(String activityTitle) {
+        this.activityTitle = activityTitle;
+    }
+
+    public int getActivityDate() {
+        return activityDate;
+    }
+
+    public void setActivityDate(int activityDate) {
+        this.activityDate = activityDate;
     }
 }
