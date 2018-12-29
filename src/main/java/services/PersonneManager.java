@@ -24,7 +24,6 @@ public class PersonneManager {
 
 
 
-
     @Inject
     public PersonneManager(PersonneDAO personneDAO, ActiviteDAO activiteDAO) {
         this.personneDAO = personneDAO;
@@ -148,9 +147,11 @@ public class PersonneManager {
         activite.setCv(p.getCv());
         p.getCv().getActivites().add(activite);
 
+
         personneDAO.update(p);
 
     }
+
 
     public Personne removeActivity(long id, long userId) {
 
@@ -271,5 +272,7 @@ public class PersonneManager {
     }
 
 
+
 }
+
 

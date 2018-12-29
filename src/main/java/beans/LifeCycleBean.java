@@ -31,6 +31,16 @@ public class LifeCycleBean {
         personne.put("email", "vinspi13@gmail.com");
         personne.put("valid", "true");
 
+        personneManager.register(personne);
+
+        personne = new HashMap<>();
+
+        personne.put("nom", "LOIGNON");
+        personne.put("prenom", "Lucas");
+        personne.put("website", "www.google.com");
+        personne.put("password", "pantoufle");
+        personne.put("email", "lucasl@gmail.com");
+        personne.put("valid", "true");
 
         personneManager.register(personne);
 
@@ -46,6 +56,7 @@ public class LifeCycleBean {
         personneManager.register(personne);
 
         personne = new HashMap<>();
+
 
         personne.put("nom", "NONAME");
         personne.put("prenom", "Jean-pierre");
@@ -101,6 +112,11 @@ public class LifeCycleBean {
         //System.out.println(personneManager.findById(1).getCv().getActivites().size());
 
         System.out.println("app initialized");
+
+
+
+
+
 
 
 

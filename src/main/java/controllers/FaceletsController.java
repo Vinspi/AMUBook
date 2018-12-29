@@ -39,6 +39,8 @@ public class FaceletsController {
 
     private boolean sr_perfectmatching;
 
+
+
     @ManagedProperty(value = "#{sessionUser}")
     private SessionUser sessionUser;
 
@@ -90,6 +92,7 @@ public class FaceletsController {
         searchResults.setFoundByFirstname(searchService.findByFirstname(query, sr_perfectmatching));
         searchResults.setFoundByActivity(searchService.findByActivity(query, sr_perfectmatching));
 
+
         return "searchResultsPage";
     }
 
@@ -114,6 +117,7 @@ public class FaceletsController {
             sessionUser.setValidAccount(p.getValide());
             sessionUser.setId(p.getId());
 
+
             if (!p.getValide()){
                 /* si le compte n'est pas valide on redirige vers la page de validation */
 
@@ -121,6 +125,7 @@ public class FaceletsController {
                 return "accountValidationPage";
             }
             
+
             return "index";
         }
 
@@ -306,6 +311,7 @@ public class FaceletsController {
         this.temporaryPass = temporaryPass;
     }
 
+
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
@@ -377,6 +383,7 @@ public class FaceletsController {
     public void setActivityDate(int activityDate) {
         this.activityDate = activityDate;
     }
+
 
     public boolean isSr_perfectmatching() {
         return sr_perfectmatching;
