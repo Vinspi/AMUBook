@@ -86,7 +86,7 @@ public class LifeCycleBean {
             activite.setTitre("Developpeur web ("+i+") chez Sopra Steria");
             if(i==6)
                 activite.setTitre("Graphiste chez Sopra Steria");
-            
+
             activite.setWebsite("website");
 
             personneManager.addActivity(activite, 1);
