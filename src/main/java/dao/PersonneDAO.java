@@ -19,11 +19,13 @@ public class PersonneDAO {
         return em.merge(p);
     }
 
+    /* tested */
     public double addPersonne(Personne p){
         em.persist(p);
         return p.getId();
     }
 
+    /* tested */
     public Personne findByEmail(String email){
         try {
 
@@ -36,12 +38,13 @@ public class PersonneDAO {
         }
     }
 
-    public void removePersonne(Personne p){
-        Personne p1 = em.find(Personne.class, p);
+    public void removePersonne(Long id){
+        Personne p1 = em.find(Personne.class, id);
         em.remove(p1);
 
     }
 
+    /* tested */
     public Personne findById(long id){
         try {
             return em.find(Personne.class, id);
@@ -50,6 +53,7 @@ public class PersonneDAO {
         }
     }
 
+    /* tested */
     public List<Personne> findByName(String nom){
         try {
             Query q = em.createQuery("SELECT p FROM Personne p WHERE lower(p.nom) LIKE lower(:name)").setParameter("name", "%"+nom+"%");
@@ -69,6 +73,7 @@ public class PersonneDAO {
         }
     }
 
+    /* tested */
     public List<Personne> findBySurname(String surName){
         try {
             Query q = em.createQuery("SELECT p FROM Personne p WHERE lower(p.prenom) LIKE lower(:surname)").setParameter("surname", "%"+surName+"%");
@@ -87,7 +92,7 @@ public class PersonneDAO {
         }
     }
 
-
+    /* tested */
     public List<Personne> findAll(){
         Query q = em.createQuery("SELECT p FROM Personne p");
         return q.getResultList();
