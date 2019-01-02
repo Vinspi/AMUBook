@@ -10,6 +10,7 @@ import models.Personne;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -30,6 +31,8 @@ public class PersonneManager {
         this.activiteDAO = activiteDAO;
     }
 
+
+    /* tested */
     public Personne login(String email, String password){
 
 
@@ -64,11 +67,30 @@ public class PersonneManager {
 
     }
 
-    public String registerWithTemporaryLog(Map<String, String> personData){
+    /* tested */
+    public TemporaryLogs registerWithTemporaryLog(Map<String, String> personData){
 
         /* generate random password */
 
-        String randomPass = SecureRandom.getSeed(8).toString();
+        int lowerBound = 48;
+        int higherBound = 122;
+
+        Random rand = new Random(System.currentTimeMillis());
+        StringBuilder sb = new StringBuilder();
+        int randChar;
+
+        for (int i=0;i<10;i++){
+            randChar = rand.nextInt(higherBound-lowerBound) + lowerBound;
+            sb.append(Character.toChars(randChar));
+        }
+
+
+
+
+         /***************************************/
+
+        String randomPass = sb.toString();
+
 
         personData.put("password", randomPass);
         personData.put("valid", "false");
@@ -77,10 +99,11 @@ public class PersonneManager {
 
         System.out.println("register : "+p);
 
-        return randomPass;
+        return new TemporaryLogs(randomPass, p);
 
     }
 
+    /* tested */
     public Personne register(Map<String, String> personData){
 
         try {
@@ -135,6 +158,7 @@ public class PersonneManager {
 
     }
 
+    /* tested */
     public void addActivity(Activite activite, long personId) {
 
         Personne p = personneDAO.findById(personId);
@@ -152,7 +176,7 @@ public class PersonneManager {
 
     }
 
-
+    /* tested */
     public Personne removeActivity(long id, long userId) {
 
         Personne p = personneDAO.findById(userId);
@@ -177,17 +201,9 @@ public class PersonneManager {
         return p;
     }
 
-    public Map<String, List<Object>> search(String query){
 
-
-
-
-        return null;
-    }
-
+    /* tested */
     public void activateAccount(String email){
-
-        System.out.println("activate account for : "+email);
 
         Personne p = personneDAO.findByEmail(email);
 
@@ -203,6 +219,7 @@ public class PersonneManager {
 
     }
 
+    /* tested */
     public void changePassword(String email, String newOne) {
 
         try {
@@ -232,14 +249,17 @@ public class PersonneManager {
         }
     }
 
+    /* will not be tested */
     public Personne findById(long id){
         return personneDAO.findById(id);
     }
 
+    /* will not be tested */
     public Personne findByEmail(String email){
         return personneDAO.findByEmail(email);
     }
 
+    /* tested */
     public Personne changeCVInfo(String newTitle, String newDescription, String email) {
 
         Personne p = personneDAO.findByEmail(email);
@@ -252,6 +272,7 @@ public class PersonneManager {
 
     }
 
+    /* tested */
     public Personne updateActivity(String title, String description, int year, String type, long id, long personId) {
 
         Personne p = personneDAO.findById(personId);
@@ -271,7 +292,24 @@ public class PersonneManager {
 
     }
 
+     public class TemporaryLogs{
 
+         private String temporaryPassword;
+         private Personne account;
+
+         public TemporaryLogs(String temporaryPassword, Personne account) {
+             this.temporaryPassword = temporaryPassword;
+             this.account = account;
+         }
+
+         public String getTemporaryPassword() {
+             return temporaryPassword;
+         }
+
+         public Personne getAccount() {
+             return account;
+         }
+     }
 
 }
 

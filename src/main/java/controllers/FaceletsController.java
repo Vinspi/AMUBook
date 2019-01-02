@@ -149,7 +149,7 @@ public class FaceletsController {
         map.put("prenom", this.surname);
         map.put("birthdate", this.day+"/"+this.month+"/"+this.year);
 
-        this.temporaryPass = personneManager.registerWithTemporaryLog(map);
+        this.temporaryPass = personneManager.registerWithTemporaryLog(map).getTemporaryPassword();
 
         System.out.println("temporary password is : "+this.temporaryPass);
 
