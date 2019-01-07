@@ -27,6 +27,10 @@ public class Personne implements Serializable {
 
     public Personne() {}
 
+    public String castId(){
+        return ""+id;
+    }
+
     public long getId() {
         return id;
     }

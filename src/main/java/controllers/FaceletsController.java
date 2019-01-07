@@ -36,6 +36,7 @@ public class FaceletsController {
     private String activityDescription;
     private String activityTitle;
     private int activityDate;
+    private String userId;
 
     private boolean sr_perfectmatching;
 
@@ -212,6 +213,14 @@ public class FaceletsController {
         System.out.println("size : "+personne.getCv().getActivites().size());
     }
 
+    public String seeProfile(){
+
+        personne = personneManager.findById(Long.parseLong(userId));
+
+        return "userPage";
+
+    }
+
     /* only for testing purpose */
     public String testUserPage() {
 
@@ -222,6 +231,8 @@ public class FaceletsController {
 
         return "userPage";
     }
+
+
 
 
 
@@ -391,5 +402,13 @@ public class FaceletsController {
 
     public void setSr_perfectmatching(boolean sr_perfectmatching) {
         this.sr_perfectmatching = sr_perfectmatching;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

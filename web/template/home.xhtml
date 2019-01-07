@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <ui:composition>
+        <div class="d-flex bandeau" style="width: 100%;">
+            <div class="cv-image">
+                <div id="cv-picture">
+                    <i class="fas fa-user fa-3x user-shape"></i>
+                </div>
+                <div id="cv-title-1"></div>
+                <div id="cv-title-2"></div>
+
+                <div class="cv-line-container">
+
+                    <div class="cv-line"></div>
+                    <div class="cv-line"></div>
+                    <div class="cv-line"></div>
+                    <div class="cv-line"></div>
+                    <div class="cv-line"></div>
+
+                </div>
+
+            </div>
+            <div class="text-bandeau">
+                <h2>Amubook est une application de gestion de CVs,</h2>
+                <h3>elle permet de :</h3>
+                <ul class="bandeau-list">
+                    <li>Ajouter des CVs</li>
+                    <li class="margin-1">Rechercher des CVs</li>
+                    <li class="margin-2">Consulter des CVs</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="d-flex flex-row" style="width: 100%;">
+            <div class="card card-index" style="width: 70%;">
+                <div class="card-body">
+                    <div class="container">
+
+                        <h5 class="index-title">AmuBook est un logiciel développé dans le cadre de l'UE <strong>"Architecture des applications"</strong> sous la direction de <br/><a href="http://jean-luc.massat.perso.luminy.univ-amu.fr/ens/">Mr Massat Jean-Luc.</a> <br/></h5>
+                        <h6>Les spécifications fonctionnelles sont les suivantes :</h6><br/>
+                        gérer à l'aide de la technologie JEE une liste de CVs. Plus précisément,
+                        <ul>
+                            <li>Chaque personne est représentée par un ensemble d'informations : nom, prénom, adresse électronique, site WEB, date de naissance et mot de passe.</li>
+                            <li>Chaque personne peut renseigner un curriculum vitae. Pour notre application, un CV est une liste d'activités. Chaque activité est décrite par</li>
+                            <ul>
+                                <li>une année (obligatoire)</li>
+                                <li>une nature (expérience professionnelle, formation, projets, autre) (obligatoire)</li>
+                                <li>un titre (obligatoire)</li>
+                                <li>un texte descriptif (facultatif)</li>
+                                <li>une adresse WEB (facultatif)</li>
+                            </ul>
+                            <li>Chaque personne peut créer de nouvelles personnes (cooptation)</li>
+                            <li>La liste des personnes et les CV sont librement consultables. La modification implique une phase d'authentification</li>
+                            <li>Le logiciel doit être capable de gérer environ 100,000 personnes</li>
+                        </ul>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div style="width: 30%; height: auto;" class="right-particle">
+                <div id="particles-js" style="height: 100%;"></div>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-row" style="width: 100%;">
+            <div style="width: 30%; height: auto;" class="left-particle">
+                <div id="particles-js-left" style="height: 100%;"></div>
+            </div>
+            <div class="card card-index" style="width: 70%;">
+                <div class="card-body">
+                    <div class="container">
+
+                        <h5 class="index-title">Cette application a été réalisée par une équipe de trois étudiant en Master II ILD</h5>
+                        <ul class="bandeau-list dev-list">
+                            <li><a href="https://www.linkedin.com/in/lucas-loignon-0b7432134/">Lucas LOIGNON</a></li>
+                            <li class="margin-1"><a href="https://www.linkedin.com/in/pierre-vincent-a2087a12b/">Pierre VINCENT</a></li>
+                            <li class="margin-2"><a href="https://www.linkedin.com/in/r%C3%A9mi-deutsch-804079171/">Rémi DEUTSCH</a></li>
+                        </ul>
+
+                        <p>
+                            Cette application à été créé avec le Framework Hibernate pour l'implémentation de la spécification JPA ainsi que le framework JSF/Bootstrap pour la couche de présentation.<br/>
+                            Une contrainte a cependant été ajouté:<br/>
+                            <ul>
+                                <li>Utilisation d'AJAX pour les phases de modification des CVs et des informations personnelles.</li>
+                                <li>Utilisation de pages multiples pour le parcours de la liste des CVs.</li>
+                            </ul>
+
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</f:view>
+</html>
