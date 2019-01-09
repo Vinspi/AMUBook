@@ -1,6 +1,6 @@
 package unit;
 
-import dao.PersonneDAO;
+import dao.impl.PersonneDAOImpl;
 import models.Activite;
 import models.CV;
 import models.Personne;
@@ -27,7 +27,7 @@ public class UnitTestPersonneManager {
     static EJBContainer ejbContainer;
 
     @Mock
-    PersonneDAO personneDAO;
+    PersonneDAOImpl personneDAOImpl;
 
     @InjectMocks
     PersonneManager pm;
@@ -51,7 +51,7 @@ public class UnitTestPersonneManager {
     public void register() {
 
 
-        Mockito.when(personneDAO.findByEmail("vinspi13@gmail.com")).thenReturn(new Personne());
+        Mockito.when(personneDAOImpl.findByEmail("vinspi13@gmail.com")).thenReturn(new Personne());
 
         /* register */
 
@@ -97,7 +97,7 @@ public class UnitTestPersonneManager {
         p.setEmail("vinspi13@gmail.com");
         p.setPrenom("Pierre");
 
-        Mockito.when(personneDAO.findByEmail("vinspi13@gmail.com")).thenReturn(p);
+        Mockito.when(personneDAOImpl.findByEmail("vinspi13@gmail.com")).thenReturn(p);
 
         Personne p2 = pm.login("vinspi13@gmail.com", "pantoufle");
 
@@ -120,12 +120,12 @@ public class UnitTestPersonneManager {
         CV cv = new CV();
         cv.setActivites(new LinkedList<>());
         p.setCv(cv);
-        Mockito.when(personneDAO.findById(5)).thenReturn(p);
+        Mockito.when(personneDAOImpl.findById(5)).thenReturn(p);
 
         pm.addActivity(new Activite(), 5);
 
 
-        Mockito.verify(personneDAO).update(p);
+        Mockito.verify(personneDAOImpl).update(p);
 
     }
 
@@ -138,7 +138,7 @@ public class UnitTestPersonneManager {
         p.setSalt("salt".getBytes());
         p.setPassword("password".getBytes());
 
-        Mockito.when(personneDAO.findByEmail("test")).thenReturn(p);
+        Mockito.when(personneDAOImpl.findByEmail("test")).thenReturn(p);
 
         pm.changePassword("test", "newOne");
 
@@ -155,13 +155,13 @@ public class UnitTestPersonneManager {
 
         Personne fake = this.fakePerson();
 
-        Mockito.when(personneDAO.findByEmail("mark.johnson@yahoo.fr")).thenReturn(fake);
+        Mockito.when(personneDAOImpl.findByEmail("mark.johnson@yahoo.fr")).thenReturn(fake);
 
         pm.changePassword("mark.johnson@yahoo.fr", "newOne");
 
         Assert.assertFalse(Arrays.equals(fake.getSalt(), "fake".getBytes()));
         Assert.assertTrue(Arrays.equals(fake.getPassword(), hashPassword(fake.getSalt(), "newOne".getBytes())));
-        Mockito.verify(personneDAO).update(fake);
+        Mockito.verify(personneDAOImpl).update(fake);
 
 
     }
@@ -190,7 +190,7 @@ public class UnitTestPersonneManager {
 
         fake.setCv(fakeCV);
 
-        Mockito.when(personneDAO.findById(1)).thenReturn(fake);
+        Mockito.when(personneDAOImpl.findById(1)).thenReturn(fake);
 
         pm.removeActivity(idToRemove, 1);
 
@@ -200,7 +200,7 @@ public class UnitTestPersonneManager {
             Assert.assertFalse(fake.getCv().getActivites().get(i).getId() == idToRemove);
         }
 
-        Mockito.verify(personneDAO).update(fake);
+        Mockito.verify(personneDAOImpl).update(fake);
 
     }
 
@@ -214,14 +214,14 @@ public class UnitTestPersonneManager {
         fakeCV.setDescription("Description");
         fake.setCv(fakeCV);
 
-        Mockito.when(personneDAO.findByEmail("fake")).thenReturn(fake);
+        Mockito.when(personneDAOImpl.findByEmail("fake")).thenReturn(fake);
 
         pm.changeCVInfo("Lorem", "Lorem Ipsum", "fake");
 
         Assert.assertTrue(fake.getCv().getDescription().equals("Lorem Ipsum"));
         Assert.assertTrue(fake.getCv().getTitre().equals("Lorem"));
 
-        Mockito.verify(personneDAO).update(fake);
+        Mockito.verify(personneDAOImpl).update(fake);
 
 
 
@@ -234,7 +234,7 @@ public class UnitTestPersonneManager {
 
         long activityId = 3;
 
-        Mockito.when(personneDAO.findById(1)).thenReturn(fake);
+        Mockito.when(personneDAOImpl.findById(1)).thenReturn(fake);
         Activite act;
         List<Activite> activities = new ArrayList<>();
 
@@ -265,7 +265,7 @@ public class UnitTestPersonneManager {
             }
         }
 
-        Mockito.verify(personneDAO).update(fake);
+        Mockito.verify(personneDAOImpl).update(fake);
 
     }
 

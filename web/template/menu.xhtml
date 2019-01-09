@@ -35,6 +35,13 @@
                 </c:if>
                 <c:if test="#{not empty sessionUser.email}">
                     <li class="nav-item">
+                        <h:form>
+                            <h:commandLink styleClass="nav-link" action="#{controller.accountInfo}">Mon compte</h:commandLink>
+                        </h:form>
+                    </li>
+                </c:if>
+                <c:if test="#{not empty sessionUser.email}">
+                    <li class="nav-item">
                         <h:link styleClass="nav-link" outcome="registerPage">Créer</h:link>
                     </li>
                 </c:if>

@@ -1,17 +1,15 @@
 package unit;
 
-import dao.PersonneDAO;
+import dao.impl.PersonneDAOImpl;
 import models.Personne;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Spy;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.NamingException;
 import javax.transaction.Transactional;
-import javax.ws.rs.core.Context;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class UnitTestPersonneDAO {
 
     static EJBContainer ejbContainer;
 
-    static PersonneDAO personneDAO;
+    static PersonneDAOImpl personneDAOImpl;
     static int numberOfEntity;
 
 
@@ -32,8 +30,8 @@ public class UnitTestPersonneDAO {
     @BeforeClass
     public static void init() throws NamingException{
         ejbContainer = EJBContainer.createEJBContainer();
-        personneDAO = (PersonneDAO) ejbContainer.getContext().lookup("java:global/AMUBook/PersonneDAO");
-        numberOfEntity = personneDAO.findAll().size();
+        personneDAOImpl = (PersonneDAOImpl) ejbContainer.getContext().lookup("java:global/AMUBook/PersonneDAOImpl");
+        numberOfEntity = personneDAOImpl.findAll().size();
 
     }
 
@@ -50,7 +48,7 @@ public class UnitTestPersonneDAO {
 
         /* sélection vide */
 
-        Personne personne = personneDAO.findByEmail("VINCENT");
+        Personne personne = personneDAOImpl.findByEmail("VINCENT");
         Assert.assertNull(personne);
 
         /* insertions */
@@ -63,45 +61,45 @@ public class UnitTestPersonneDAO {
             p.setSalt("salt".getBytes());
             p.setWebsite("www.google.com");
             p.setEmail("norton"+i+"@gmail.com");
-            personneDAO.addPersonne(p);
+            personneDAOImpl.add(p);
 
         }
 
         /* récupération */
 
-        List<Personne> personnes = personneDAO.findAll();
+        List<Personne> personnes = personneDAOImpl.findAll();
         System.out.println(personnes.size());
         Assert.assertTrue(personnes.size() == 100 + numberOfEntity);
 
         /* sélection */
 
-        List<Personne> personnes2 = personneDAO.findByName("Edward");
+        List<Personne> personnes2 = personneDAOImpl.findByName("Edward");
         Assert.assertTrue(personnes2.size() == 100);
 
-        List<Personne> personnes3 = personneDAO.findBySurname("Norton");
+        List<Personne> personnes3 = personneDAOImpl.findBySurname("Norton");
         Assert.assertTrue(personnes3.size() == 100);
 
         /* ciblage par id */
 
-        Personne p2 = personneDAO.findById(numberOfEntity + 5);
+        Personne p2 = personneDAOImpl.findById(numberOfEntity + 5);
         Assert.assertTrue(p2.getId() == numberOfEntity + 5);
 
         /* ciblage par email */
 
-        Personne personne2 = personneDAO.findByEmail("norton12@gmail.com");
+        Personne personne2 = personneDAOImpl.findByEmail("norton12@gmail.com");
         Assert.assertNotNull(personne2);
 
         /* update */
 
         p2.setPrenom("michel");
-        Personne p3 = personneDAO.update(p2);
+        Personne p3 = personneDAOImpl.update(p2);
         Assert.assertTrue(p3.getPrenom() == "michel");
 
         /* suppression */
 
         long idToSuppress = p3.getId();
-        personneDAO.removePersonne(idToSuppress);
-        Assert.assertNull(personneDAO.findById(idToSuppress));
+        personneDAOImpl.remove(idToSuppress);
+        Assert.assertNull(personneDAOImpl.findById(idToSuppress));
 
     }
 }

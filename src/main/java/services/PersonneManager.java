@@ -1,8 +1,9 @@
 package services;
 
-import beans.SessionUser;
 import dao.ActiviteDAO;
 import dao.PersonneDAO;
+import dao.impl.ActiviteDAOImpl;
+import dao.impl.PersonneDAOImpl;
 import models.Activite;
 import models.CV;
 import models.Personne;
@@ -10,7 +11,6 @@ import models.Personne;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -20,15 +20,15 @@ import java.util.*;
 @Stateless
 public class PersonneManager {
 
-    private PersonneDAO personneDAO;
-    private ActiviteDAO activiteDAO;
+    private PersonneDAO personneDAOImpl;
+    private ActiviteDAO activiteDAOImpl;
 
 
 
     @Inject
-    public PersonneManager(PersonneDAO personneDAO, ActiviteDAO activiteDAO) {
-        this.personneDAO = personneDAO;
-        this.activiteDAO = activiteDAO;
+    public PersonneManager(PersonneDAO personneDAOImpl, ActiviteDAO activiteDAOImpl) {
+        this.personneDAOImpl = personneDAOImpl;
+        this.activiteDAOImpl = activiteDAOImpl;
     }
 
 
@@ -39,7 +39,7 @@ public class PersonneManager {
         try {
             /* get the Personne if it exist */
 
-            Personne p = personneDAO.findByEmail(email);
+            Personne p = personneDAOImpl.findByEmail(email);
 
             if (p == null){
                 return null;
@@ -111,7 +111,7 @@ public class PersonneManager {
             /* verify if a personne already exists in db */
 
 
-            if(personneDAO.findByEmail(personData.get("email")) != null){
+            if(personneDAOImpl.findByEmail(personData.get("email")) != null){
                 return null;
             }
 
@@ -145,7 +145,7 @@ public class PersonneManager {
             p.setCv(cv);
             p.setValide(Boolean.parseBoolean(personData.get("valid")));
 
-            personneDAO.addPersonne(p);
+            personneDAOImpl.add(p);
 
 
 
@@ -161,7 +161,7 @@ public class PersonneManager {
     /* tested */
     public void addActivity(Activite activite, long personId) {
 
-        Personne p = personneDAO.findById(personId);
+        Personne p = personneDAOImpl.findById(personId);
 
 
         if(p == null){
@@ -172,14 +172,14 @@ public class PersonneManager {
         p.getCv().getActivites().add(activite);
 
 
-        personneDAO.update(p);
+        personneDAOImpl.update(p);
 
     }
 
     /* tested */
     public Personne removeActivity(long id, long userId) {
 
-        Personne p = personneDAO.findById(userId);
+        Personne p = personneDAOImpl.findById(userId);
 
         List<Activite> activites = p.getCv().getActivites();
 
@@ -195,7 +195,7 @@ public class PersonneManager {
         if(idToRemove > -1)
             p.getCv().getActivites().remove(idToRemove);
 
-        personneDAO.update(p);
+        personneDAOImpl.update(p);
 
 
         return p;
@@ -205,7 +205,7 @@ public class PersonneManager {
     /* tested */
     public void activateAccount(String email){
 
-        Personne p = personneDAO.findByEmail(email);
+        Personne p = personneDAOImpl.findByEmail(email);
 
         System.out.println(p);
 
@@ -215,7 +215,7 @@ public class PersonneManager {
 
         p.setValide(true);
 
-        personneDAO.update(p);
+        personneDAOImpl.update(p);
 
     }
 
@@ -224,7 +224,7 @@ public class PersonneManager {
 
         try {
 
-            Personne p = personneDAO.findByEmail(email);
+            Personne p = personneDAOImpl.findByEmail(email);
 
             if (p == null) {
                 return;
@@ -242,7 +242,7 @@ public class PersonneManager {
             p.setSalt(salt);
             p.setPassword(passHash);
 
-            personneDAO.update(p);
+            personneDAOImpl.update(p);
 
         }catch (NoSuchAlgorithmException e){
             e.printStackTrace();
@@ -251,22 +251,22 @@ public class PersonneManager {
 
     /* will not be tested */
     public Personne findById(long id){
-        return personneDAO.findById(id);
+        return personneDAOImpl.findById(id);
     }
 
     /* will not be tested */
     public Personne findByEmail(String email){
-        return personneDAO.findByEmail(email);
+        return personneDAOImpl.findByEmail(email);
     }
 
     /* tested */
     public Personne changeCVInfo(String newTitle, String newDescription, String email) {
 
-        Personne p = personneDAO.findByEmail(email);
+        Personne p = personneDAOImpl.findByEmail(email);
         p.getCv().setTitre(newTitle);
         p.getCv().setDescription(newDescription);
 
-        personneDAO.update(p);
+        personneDAOImpl.update(p);
 
         return p;
 
@@ -275,7 +275,7 @@ public class PersonneManager {
     /* tested */
     public Personne updateActivity(String title, String description, int year, String type, long id, long personId) {
 
-        Personne p = personneDAO.findById(personId);
+        Personne p = personneDAOImpl.findById(personId);
 
         for(Activite activite: p.getCv().getActivites()){
             if (activite.getId() == id){
@@ -286,13 +286,14 @@ public class PersonneManager {
             }
         }
 
-        personneDAO.update(p);
+        personneDAOImpl.update(p);
 
         return p;
 
     }
 
-     public class TemporaryLogs{
+    /* wrapper class for temporary logs */
+     public class TemporaryLogs {
 
          private String temporaryPassword;
          private Personne account;

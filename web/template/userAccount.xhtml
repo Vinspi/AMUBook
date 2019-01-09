@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<f:view>
+    <ui:composition>
+        <h:panelGroup id="refresh-user-account">
+            <!-- Modal edit title -->
+            <div class="modal fade" id="modal-change-password" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modifier votre mot de passe</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <h:form>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <h:outputLabel for="input-new-password">Nouveau mot de passe</h:outputLabel>
+                                    <h:inputSecret value="#{controller.password}" type="text" id="input-new-password" styleClass="form-control"/>
+                                    <c:if test="#{controller.error}">
+                                        <small id="emailHelp" class="form-text" style="color: red;">erreur : les mots de passes de correspondent pas.</small>
+                                    </c:if>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel for="input-confirm-password">Confirmer mot de passe</h:outputLabel>
+                                    <h:inputSecret value="#{controller.passwordConfirm}" id="input-confirm-password" styleClass="form-control"/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandLink p:type="button" styleClass="btn btn-dark" p:data-dismiss="modal" action="#{controller.changePasswordAjax}">
+                                    <f:ajax execute="input-new-password input-confirm-password" render=":refresh-user-account"></f:ajax>
+                                    Valider
+                                </h:commandLink>
+                            </div>
+                        </h:form>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--body-->
+            <div class="container">
+                <div class="connection-form">
+                    <div class="center">
+                        <h2>Mes informations</h2>
+                    </div>
+
+                        <div class="form-group">
+                            <h:outputLabel for="email">Email</h:outputLabel>
+                            <h:inputText value="#{controller.personne.email}" p:type="email" styleClass="form-control" id="email" p:placeholder="Email" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="nom">Nom</h:outputLabel>
+                            <h:inputText value="#{controller.personne.nom}" styleClass="form-control" id="nom" p:placeholder="Email" readonly="true"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="prenom">Prenom</h:outputLabel>
+                            <h:inputText value="#{controller.personne.prenom}" styleClass="form-control" id="prenom" p:placeholder="Email" readonly="true"/>
+                        </div>
+
+                        <div class="button-container">
+                            <button class="btn my-2 my-sm-0 btn-dark" onclick="popupChangePassword()">Changer mon mot de passe</button>
+                        </div>
+
+                </div>
+            </div>
+            <c:if test="#{controller.error}">
+                <script type="text/javascript">
+                    $('#modal-change-password').modal('toggle');
+                </script>
+            </c:if>
+        </h:panelGroup>
+    </ui:composition>
+</f:view>
+</html>

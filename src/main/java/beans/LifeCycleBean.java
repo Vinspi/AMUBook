@@ -12,6 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/*
+    Singleton bean to initialize some info in database
+ */
+
+
 @Singleton
 @Startup
 public class LifeCycleBean {

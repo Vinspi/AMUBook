@@ -1,7 +1,7 @@
 package unit;
 
-import dao.ActiviteDAO;
-import dao.PersonneDAO;
+import dao.impl.ActiviteDAOImpl;
+import dao.impl.PersonneDAOImpl;
 import models.Personne;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,10 +19,10 @@ import java.util.Date;
 public class UnitTestSearchService {
 
     @Mock
-    private PersonneDAO personneDAO;
+    private PersonneDAOImpl personneDAOImpl;
 
     @Mock
-    private ActiviteDAO activiteDAO;
+    private ActiviteDAOImpl activiteDAOImpl;
 
     @InjectMocks
     private SearchService searchService;
@@ -43,8 +43,8 @@ public class UnitTestSearchService {
             fakes.add(fakePerson());
         }
 
-        Mockito.when(personneDAO.findByNameStrict("Bernard")).thenReturn(fakes);
-        Mockito.when(personneDAO.findByName("Bernard")).thenReturn(fakes);
+        Mockito.when(personneDAOImpl.findByNameStrict("Bernard")).thenReturn(fakes);
+        Mockito.when(personneDAOImpl.findByName("Bernard")).thenReturn(fakes);
 
 
 

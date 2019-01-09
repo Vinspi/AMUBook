@@ -2,30 +2,28 @@ package services;
 
 import dao.ActiviteDAO;
 import dao.PersonneDAO;
+import dao.impl.ActiviteDAOImpl;
+import dao.impl.PersonneDAOImpl;
 import models.Activite;
-import models.CV;
 import models.Personne;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.*;
 
 @Transactional
 @Stateless
 public class SearchService {
 
-    private PersonneDAO personneDAO;
-    private ActiviteDAO activiteDAO;
+    private PersonneDAO personneDAOImpl;
+    private ActiviteDAO activiteDAOImpl;
 
 
     @Inject
-    public SearchService(PersonneDAO personneDAO, ActiviteDAO activiteDAO) {
-        this.personneDAO = personneDAO;
-        this.activiteDAO = activiteDAO;
+    public SearchService(PersonneDAO personneDAOImpl, ActiviteDAO activiteDAOImpl) {
+        this.personneDAOImpl = personneDAOImpl;
+        this.activiteDAOImpl = activiteDAOImpl;
     }
 
     private String[] parsebySpace(String toBeParsed){return toBeParsed.split(" ");}
@@ -36,9 +34,9 @@ public class SearchService {
         String[] words = parsebySpace(query);
         for(String n : words) {
             if (exact)
-                resultsP.addAll(new ArrayList<>(personneDAO.findByNameStrict(n)));
+                resultsP.addAll(new ArrayList<>(personneDAOImpl.findByNameStrict(n)));
             else
-                resultsP.addAll(new ArrayList<>(personneDAO.findByName(n)));
+                resultsP.addAll(new ArrayList<>(personneDAOImpl.findByName(n)));
         }
 
         Activite a = new Activite();
@@ -60,9 +58,9 @@ public class SearchService {
         String[] words = parsebySpace(query);
         for(String n : words) {
             if (exact)
-                resultsP.addAll(new ArrayList<>(personneDAO.findBySurnameStrict(n)));
+                resultsP.addAll(new ArrayList<>(personneDAOImpl.findBySurnameStrict(n)));
             else
-                resultsP.addAll(new ArrayList<>(personneDAO.findBySurname(n)));
+                resultsP.addAll(new ArrayList<>(personneDAOImpl.findBySurname(n)));
         }
 
         Activite a = new Activite();
@@ -84,13 +82,13 @@ public class SearchService {
         String[] words = parsebySpace(activite);
         for(String n : words) {
             if (exact)
-                results_tmp.addAll(new ArrayList<>(activiteDAO.findByTitleStrict(n)));
+                results_tmp.addAll(new ArrayList<>(activiteDAOImpl.findByTitleStrict(n)));
             else
-                results_tmp.addAll(new ArrayList<>(activiteDAO.findByTitle(n)));
+                results_tmp.addAll(new ArrayList<>(activiteDAOImpl.findByTitle(n)));
         }
 
         if(exact)
-            results_tmp.addAll(new ArrayList<>(activiteDAO.findByTitleStrict(activite)));
+            results_tmp.addAll(new ArrayList<>(activiteDAOImpl.findByTitleStrict(activite)));
 
         for(Activite a : results_tmp)
             results.put(a.getCv().getPersonne(), a);

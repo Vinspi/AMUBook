@@ -14,6 +14,10 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import java.util.*;
 
+/*
+    Main controller of the app
+ */
+
 @ManagedBean(name = "controller")
 @RequestScoped
 public class FaceletsController {
@@ -37,9 +41,11 @@ public class FaceletsController {
     private String activityTitle;
     private int activityDate;
     private String userId;
+    private String newPassword;
+    private boolean error;
+
 
     private boolean sr_perfectmatching;
-
 
 
     @ManagedProperty(value = "#{sessionUser}")
@@ -59,7 +65,25 @@ public class FaceletsController {
         this.month = "01";
         this.day = "1";
         this.year = "1990";
+        this.error = false;
 
+    }
+
+    public void changePasswordAjax() {
+
+        if(password.equals(passwordConfirm)){
+
+            personneManager.changePassword(sessionUser.getEmail(), this.password);
+            personneManager.activateAccount(sessionUser.getEmail());
+
+            error = false;
+        }
+        else {
+            error = true;
+        }
+        personne = personneManager.findByEmail(sessionUser.getEmail());
+        this.password = null;
+        this.passwordConfirm = null;
 
     }
 
@@ -219,6 +243,12 @@ public class FaceletsController {
 
         return "userPage";
 
+    }
+
+    public String accountInfo(){
+        personne = personneManager.findByEmail(sessionUser.getEmail());
+
+        return "accountPage";
     }
 
     /* only for testing purpose */
@@ -410,5 +440,21 @@ public class FaceletsController {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
     }
 }
