@@ -20,12 +20,6 @@
                     <!--<a class="nav-link active" href="#">Active</a>-->
                     <h:link styleClass="nav-link" outcome="searchPage">Rechercher</h:link>
                 </li>
-                <li class="nav-item">
-                    <!--<h:link styleClass="nav-link" outcome="userPage">Consulter</h:link>-->
-                    <h:form>
-                        <h:commandLink action="#{controller.testUserPage}" styleClass="nav-link">Consulter</h:commandLink>
-                    </h:form>
-                </li>
                 <c:if test="#{not empty sessionUser.email}">
                     <li class="nav-item">
                         <h:form>

@@ -415,6 +415,10 @@ body {
 
 /* Useful general classes */
 
+.bg-light-grey {
+  background-color: rgba(191,191,191,0.8) !important;
+}
+
 .mgTop2{
   margin-top: 2vh;
 }

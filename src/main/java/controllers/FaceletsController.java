@@ -71,7 +71,7 @@ public class FaceletsController {
 
     public void changePasswordAjax() {
 
-        if(password.equals(passwordConfirm)){
+        if(password.length() != 0 && password.equals(passwordConfirm)){
 
             personneManager.changePassword(sessionUser.getEmail(), this.password);
             personneManager.activateAccount(sessionUser.getEmail());
@@ -90,7 +90,7 @@ public class FaceletsController {
 
     public String changePassword() {
 
-        if(password.equals(passwordConfirm)){
+        if(password.length() != 0 && password.equals(passwordConfirm)){
 
             personneManager.changePassword(sessionUser.getEmail(), this.password);
             personneManager.activateAccount(sessionUser.getEmail());

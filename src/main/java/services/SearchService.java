@@ -28,6 +28,7 @@ public class SearchService {
 
     private String[] parsebySpace(String toBeParsed){return toBeParsed.split(" ");}
 
+    /* tested */
     public HashMap<Personne, Activite> findByLastname(String query, boolean exact){
         HashMap<Personne, Activite> results = new HashMap<>();
         ArrayList<Personne> resultsP = new ArrayList<>();
@@ -52,6 +53,7 @@ public class SearchService {
         return results;
     }
 
+    /* tested */
     public HashMap<Personne, Activite> findByFirstname(String query, boolean exact){
         HashMap<Personne, Activite> results = new HashMap<>();
         ArrayList<Personne> resultsP = new ArrayList<>();
@@ -76,6 +78,7 @@ public class SearchService {
         return results;
     }
 
+    /* tested */
     public HashMap<Personne, Activite> findByActivity(String activite, boolean exact){
         HashMap<Personne, Activite> results = new HashMap<>();
         ArrayList<Activite> results_tmp = new ArrayList<>();
