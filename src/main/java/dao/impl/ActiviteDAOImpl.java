@@ -34,8 +34,9 @@ public class ActiviteDAOImpl implements ActiviteDAO {
         }
     }
 
-    public List<Activite> findByTitle(String title){  try {
-        Query q = em.createQuery("SELECT a FROM Activite a WHERE lower(a.titre) LIKE lower(:title)").setParameter("title", "%"+title+"%");
+    public List<Activite> findByTitle(String title){
+        try {
+            Query q = em.createQuery("SELECT a FROM Activite a WHERE lower(a.titre) LIKE lower(:title)").setParameter("title", "%"+title+"%");
             return q.getResultList();
         }catch (NoResultException e){
             return null;
@@ -59,6 +60,9 @@ public class ActiviteDAOImpl implements ActiviteDAO {
 
     public void add(Activite activite){
         /* no need for the moment */
+
+        em.persist(activite);
+
     }
 
     public List<Activite> findAll() {
