@@ -19,7 +19,24 @@ Les effets de la page d'accueil ont été réalisé avec la librairie javascript
 
 ## Architecture
 
-L'architecture adopté est la suivante :
+L'architecture adopté est la suivante : ![](https://github.com/Vinspi/AMUBook/blob/master/screenshots/capture_archi.PNG)
+Celle-ci n'est pas définitive et est susceptible de changer.
+
+| Package          |                                             Fonction                                            |
+|------------------|:-----------------------------------------------------------------------------------------------:|
+| Beans            | Contient les "BackBeans", qui sont les beans intermédiaires entre les pages JSF et le back-end. |
+| Services         | Contient les services de l'application.                                                         |
+| controllers      | Contient le controller JSF principal de l'application.                                          |
+| dao              | Contient les interfaces des DAO ainsi que leurs implémentations sour le package "impl".         |
+| models           | Contient les modèles de données destiné à être persisté en base de données grâce à JPA.         |
+| test.unit        | Contient les tests unitaires pour les principaux modules.                                       |
+| test.integration | Contient les tests d'intégrations des modules.                                                  |
+
+## Tests et validations
+
+Les tests unitaires sont réalisé avec les frameworks JUnit et Mockito qui permettent respectivement les tests et les mocks des classes principales.
+
+La validation des spécifications sera réalisé grâce aux tests "End2End" et n'est pas encore disponible.
 
 ## Développeurs
 
