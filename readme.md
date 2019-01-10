@@ -14,7 +14,7 @@ L'application doit permettre:
 
 ## Technologies
 
-La technologie utilisé est JAVA/JEE, nous utilisons la spécification JPA pour la gestion des données (implémentation fournie par Hibernate). La couche de présentation à été conçu avec le framework JSF couplé à la librairie css Bootstrap.
+La technologie utilisée est JAVA/JEE, nous utilisons la spécification JPA pour la gestion des données (implémentation fournie par Hibernate). La couche de présentation à été conçu avec le framework JSF couplé à la librairie css Bootstrap.
 Les effets de la page d'accueil ont été réalisé avec la librairie javascript Particle.
 
 ## Architecture
