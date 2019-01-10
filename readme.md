@@ -20,6 +20,7 @@ Les effets de la page d'accueil ont été réalisé avec la librairie javascript
 ## Architecture
 
 L'architecture adopté est la suivante : 
+
 ![](https://github.com/Vinspi/AMUBook/blob/master/screenshots/capture_archi.PNG)
 
 Celle-ci n'est pas définitive et est susceptible de changer.
