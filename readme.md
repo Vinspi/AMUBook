@@ -62,6 +62,8 @@ La création d'un compte se fait de manière cooptative, c'est à dire qu'un com
 
 Voici un diagramme montrant le fonctionnement de la cration d'un compte : 
 
+![](https://github.com/Vinspi/AMUBook/blob/master/screenshots/user_flow_diagram_create_account.png)
+
 ```mermaid
 graph TD
 
