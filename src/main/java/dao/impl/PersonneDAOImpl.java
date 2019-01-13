@@ -30,6 +30,7 @@ public class PersonneDAOImpl implements PersonneDAO {
     public Personne findByEmail(String email){
         try {
 
+            System.out.println("em : "+em);
             Query q = em.createQuery("SELECT p FROM Personne p WHERE p.email LIKE :email").setParameter("email", email);
             return (Personne) q.getSingleResult();
 

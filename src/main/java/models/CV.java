@@ -2,12 +2,13 @@ package models;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.*;
 
 
 
 @Entity()
-public class CV {
+public class CV implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

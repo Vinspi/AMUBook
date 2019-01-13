@@ -40,6 +40,17 @@ public class LifeCycleBean {
 
         personne = new HashMap<>();
 
+        personne.put("nom", "Archer");
+        personne.put("prenom", "Sterling");
+        personne.put("website", "www.google.com");
+        personne.put("password", "guest");
+        personne.put("email", "test@test.com");
+        personne.put("valid", "true");
+
+        personneManager.register(personne);
+
+        personne = new HashMap<>();
+
         personne.put("nom", "LOIGNON");
         personne.put("prenom", "Lucas");
         personne.put("website", "www.google.com");
@@ -99,17 +110,11 @@ public class LifeCycleBean {
                     break;
             }
 
-            activite.setTitre("Developpeur web ("+i+") chez Sopra Steria");
-            if(i==6)
-                activite.setTitre("Graphiste chez Sopra Steria");
+            activite.setTitre("Espion international");
 
             activite.setWebsite("website");
 
-            personneManager.addActivity(activite, 1);
-
-            Activite actb = new Activite();
-            actb.setTitre("Graphiste chez Freelance");
-            personneManager.addActivity(actb, 2);
+            personneManager.addActivity(activite, 2);
 
         }
 

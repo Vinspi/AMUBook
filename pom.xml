@@ -46,11 +46,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.webjars</groupId>-->
-            <!--<artifactId>bootstrap</artifactId>-->
-            <!--<version>3.3.7</version>-->
-        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.25</version>
+        </dependency>
+
+
 
     </dependencies>
 </project>

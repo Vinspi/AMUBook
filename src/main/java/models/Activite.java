@@ -1,9 +1,10 @@
 package models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Activite {
+public class Activite implements Serializable {
 
     public enum Nature {
         EXPERIENCE_PRO, FORMATION, PROJETS, AUTRE
