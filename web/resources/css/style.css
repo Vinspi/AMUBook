@@ -357,6 +357,23 @@ body {
 }
 /* my-CV */
 
+#cv-website {
+  font-size: 10pt;
+
+}
+
+#cv-website a {
+  color: rgb(62, 94, 167) !important;
+}
+
+.activity-website {
+  font-size: 10pt;
+}
+
+.activity-website a {
+  color: rgb(62, 94, 167) !important;
+}
+
 .icon-hover:hover {
   color: red;
   cursor: pointer;

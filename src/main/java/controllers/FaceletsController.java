@@ -35,10 +35,12 @@ public class FaceletsController {
     private Personne personne;
     private String newCVTitle;
     private String newDescription;
+    private String newWebsite;
     private String activityType;
     private String activityId;
     private String activityDescription;
     private String activityTitle;
+    private String activityWebsite;
     private int activityDate;
     private String userId;
     private String newPassword;
@@ -191,7 +193,7 @@ public class FaceletsController {
 
     public void changeCVInfo() {
 
-        personne = personneManager.changeCVInfo(newCVTitle, newDescription,this.sessionUser.getEmail());
+        personne = personneManager.changeCVInfo(newCVTitle, newDescription,newWebsite,this.sessionUser.getEmail());
 
     }
 
@@ -208,16 +210,17 @@ public class FaceletsController {
             activite.setAnnee(activityDate);
             activite.setDescritption(activityDescription);
             activite.setTitre(activityTitle);
+            activite.setWebsite(activityWebsite);
 
 
             personneManager.addActivity(activite, sessionUser.getId());
 
         }
         else {
-            System.out.println("update");
+            System.out.println("update : "+activityWebsite);
             String[] parts = activityId.split("-");
             long id = Long.parseLong(parts[parts.length-1]);
-            personneManager.updateActivity(activityTitle, activityDescription, activityDate, activityType, id, sessionUser.getId());
+            personneManager.updateActivity(activityTitle, activityDescription, activityDate, activityType, activityWebsite, id, sessionUser.getId());
 
         }
 
@@ -456,5 +459,21 @@ public class FaceletsController {
 
     public void setError(boolean error) {
         this.error = error;
+    }
+
+    public String getNewWebsite() {
+        return newWebsite;
+    }
+
+    public void setNewWebsite(String newWebsite) {
+        this.newWebsite = newWebsite;
+    }
+
+    public String getActivityWebsite() {
+        return activityWebsite;
+    }
+
+    public void setActivityWebsite(String activityWebsite) {
+        this.activityWebsite = activityWebsite;
     }
 }

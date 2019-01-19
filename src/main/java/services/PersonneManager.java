@@ -272,6 +272,20 @@ public class PersonneManager {
 
     }
 
+
+    public Personne changeCVInfo(String newTitle, String newDescription,String newWebsite, String email) {
+
+        Personne p = personneDAOImpl.findByEmail(email);
+        p.getCv().setTitre(newTitle);
+        p.getCv().setDescription(newDescription);
+        p.setWebsite(newWebsite);
+
+        personneDAOImpl.update(p);
+
+        return p;
+
+    }
+
     /* tested */
     public Personne updateActivity(String title, String description, int year, String type, long id, long personId) {
 
@@ -283,6 +297,26 @@ public class PersonneManager {
                 activite.setDescritption(description);
                 activite.setAnnee(year);
                 activite.setNature(type);
+            }
+        }
+
+        personneDAOImpl.update(p);
+
+        return p;
+
+    }
+
+    public Personne updateActivity(String title, String description, int year, String type, String website, long id, long personId) {
+
+        Personne p = personneDAOImpl.findById(personId);
+
+        for(Activite activite: p.getCv().getActivites()){
+            if (activite.getId() == id){
+                activite.setTitre(title);
+                activite.setDescritption(description);
+                activite.setAnnee(year);
+                activite.setNature(type);
+                activite.setWebsite(website);
             }
         }
 

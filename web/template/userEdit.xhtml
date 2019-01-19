@@ -32,10 +32,15 @@
                                             <h:inputTextarea value="#{controller.newDescription}" id="input-description-cv" p:id="input-description-cv" styleClass="form-control" p:aria-describedby="input-description-cv-small"></h:inputTextarea>
                                             <small id="input-description-cv-small" class="form-text text-muted">Cette description apparîtra sur votre page perso, en dessous de votre titre.</small>
                                         </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-website-cv">Site web</h:outputLabel>
+                                            <h:inputText value="#{controller.newWebsite}" id="input-website-cv" p:id="input-website-cv" styleClass="form-control" p:aria-describedby="input-website-cv-small"></h:inputText>
+                                            <small id="input-website-cv-small" class="form-text text-muted">Si aucun site web n'est spécifié, cette information n'apparaîtra pas.</small>
+                                        </div>
                                 </div>
                                 <div class="modal-footer">
                                         <h:commandLink p:type="button" styleClass="btn btn-dark" p:data-dismiss="modal" action="#{controller.changeCVInfo}">
-                                            <f:ajax execute="input-title-cv input-description-cv" render=":user-info-block"></f:ajax>
+                                            <f:ajax execute="input-title-cv input-description-cv input-website-cv" render=":user-info-block"></f:ajax>
                                             Sauvegarder
                                         </h:commandLink>
 
@@ -81,10 +86,14 @@
                                             <h:outputLabel for="input-description-activity">Description</h:outputLabel>
                                             <h:inputTextarea value="#{controller.activityDescription}" id="input-description-activity" p:id="input-description-activity" class="form-control"></h:inputTextarea>
                                         </div>
+                                        <div class="form-group">
+                                            <h:outputLabel for="input-website-activity">Website</h:outputLabel>
+                                            <h:inputText value="#{controller.activityWebsite}" type="text" id="input-website-activity" p:id="input-website-activity" class="form-control"/>
+                                        </div>
                                 </div>
                                 <div class="modal-footer">
                                     <h:commandLink action="#{controller.updateActivityList}" styleClass="btn btn-dark" p:data-dismiss="modal" p:type="button">
-                                        <f:ajax execute="input-id-activity input-date-activity input-title-activity input-description-activity input-type-activity" render=":activity-block"/>
+                                        <f:ajax execute="input-id-activity input-date-activity input-title-activity input-description-activity input-type-activity input-website-activity" render=":activity-block"/>
                                         Sauvegarder
                                     </h:commandLink>
                                 </div>
@@ -136,6 +145,10 @@
                                         <h1><h:outputText value="#{controller.personne.prenom} #{controller.personne.nom}"/></h1>
                                         <h2 id="cv-title"><h:outputText id="title-cv" value="#{controller.personne.cv.titre}"/></h2>
                                         <p id="cv-description">#{controller.personne.cv.description}</p>
+                                        <c:if test="#{controller.personne.website.length() > 0}">
+                                            <div class="separator"></div>
+                                            <p id="cv-website"><a href="http://#{controller.personne.website}">#{controller.personne.website}</a></p>
+                                        </c:if>
                                     </div>
                                     <div onclick="popupTitle()">
                                         <i class="fas fa-edit fa-3x edit-profile icon-hover"></i>
@@ -180,6 +193,12 @@
                                                 <div class="">
                                                     <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
                                                 </div>
+                                                <c:if test="#{activite.website.length() > 0}">
+                                                    <div class="separator"></div>
+                                                    <p class="activity-website">
+                                                        <a href="http://#{activite.website}">#{activite.website}</a>
+                                                    </p>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
@@ -208,6 +227,12 @@
                                                 <div class="">
                                                     <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
                                                 </div>
+                                                <c:if test="#{activite.website.length() > 0}">
+                                                    <div class="separator"></div>
+                                                    <p class="activity-website">
+                                                        <a href="http://#{activite.website}">#{activite.website}</a>
+                                                    </p>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
@@ -236,6 +261,12 @@
                                                 <div class="">
                                                     <p class="activity-description" id="description-activity-#{activite.id}">#{activite.descritption}</p>
                                                 </div>
+                                                <c:if test="#{activite.website.length() > 0}">
+                                                    <div class="separator"></div>
+                                                    <p class="activity-website">
+                                                        <a href="http://#{activite.website}">#{activite.website}</a>
+                                                    </p>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>

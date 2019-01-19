@@ -22,6 +22,10 @@
                         <h1>#{controller.personne.prenom} #{controller.personne.nom}</h1>
                         <h2>#{controller.personne.cv.titre}</h2>
                         <p>#{controller.personne.cv.description}</p>
+                        <c:if test="#{controller.personne.website.length() > 0}">
+                            <div class="separator"></div>
+                            <p id="cv-website"><a href="http://#{controller.personne.website}">#{controller.personne.website}</a></p>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -48,6 +52,12 @@
                                                 #{activite.descritption}
                                             </p>
                                         </div>
+                                        <c:if test="#{activite.website.length() > 0}">
+                                            <div class="separator"></div>
+                                            <p class="activity-website">
+                                                <a href="http://#{activite.website}">#{activite.website}</a>
+                                            </p>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +81,12 @@
                                                 #{activite.descritption}
                                             </p>
                                         </div>
+                                        <c:if test="#{activite.website.length() > 0}">
+                                            <div class="separator"></div>
+                                            <p class="activity-website">
+                                                <a href="http://#{activite.website}">#{activite.website}</a>
+                                            </p>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -95,6 +111,12 @@
                                                 #{activite.descritption}
                                             </p>
                                         </div>
+                                        <c:if test="#{activite.website.length() > 0}">
+                                            <div class="separator"></div>
+                                            <p class="activity-website">
+                                                <a href="http://#{activite.website}">#{activite.website}</a>
+                                            </p>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
