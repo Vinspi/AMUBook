@@ -57,6 +57,8 @@
             function popupTitle() {
                 $('#input-description-cv').val($('#cv-description').text());
                 $('#input-title-cv').val($('#cv-title').text());
+                if($('#input-website-cv') != null)
+                    $('#input-website-cv').val($('#cv-website').text());
                 $('#modal-edit-title').modal('toggle');
             }
 
@@ -67,7 +69,10 @@
                 $('#input-date-activity').val($('#year-'+id).text());
                 $('#input-description-activity').val($('#description-'+id).text());
                 $('#input-title-activity').val($('#title-'+id).text());
+                if($('#input-website-activity') != null)
+                    $('#input-website-activity').val($('#website-'+id).text());
                 $('#input-id-activity').val(id);
+
                 $('#modal-edit-activity').modal('toggle');
             }
 
@@ -75,6 +80,7 @@
                 $('#input-date-activity').val('');
                 $('#input-description-activity').val('');
                 $('#input-title-activity').val('');
+                $('#input-website-activity').val('');
                 $('#input-id-activity').val('new');
                 $('#modal-edit-activity').modal('toggle');
             }
