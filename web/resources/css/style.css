@@ -239,6 +239,18 @@ body {
 
 }
 
+.timeline-other-icon {
+  color: #6d4c41;
+  background-color: white;
+  border-radius: 100%;
+  padding: 7px;
+  border: 1px solid #6d4c41;
+  padding-bottom: 9px;
+  padding-top: 9px;
+  font-size: 21pt;
+
+}
+
 /* #8171a0 */
 
 .timeline {
@@ -247,11 +259,22 @@ body {
   left: 18px;
 }
 
+.timeline-element-other::before {
+  content: '';
+  height: 100%;
+  width: 0px;
+  border-left: 4px solid black;
+  position: absolute;
+  top: 0px;
+  left: 40px;
+  border-color: #6d4c41;
+}
+
 .timeline-element-school::before {
   content: '';
   height: 100%;
   width: 0px;
-  border: 2px solid black;
+  border-left: 4px solid black;
   position: absolute;
   top: 0px;
   left: 40px;
@@ -262,7 +285,7 @@ body {
   content: '';
   height: 100%;
   width: 0px;
-  border: 2px solid black;
+  border-left: 4px solid black;
   position: absolute;
   top: 0px;
   left: 40px;
@@ -273,13 +296,22 @@ body {
   content: '';
   height: 100%;
   width: 0px;
-  border: 2px solid black;
+  border-left: 4px solid black;
   position: absolute;
   top: 0px;
   left: 40px;
   border-color: #8171a0;
 }
 
+.year-other {
+  background-color: #6d4c41;
+  color: white;
+  position: absolute;
+  top: 70px;
+  left: 21px;
+  padding: 3px;
+  border-radius: 3px;
+}
 
 .year-school {
   background-color: #ff7043;

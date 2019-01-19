@@ -161,8 +161,11 @@ public class PersonneManager {
     /* tested */
     public void addActivity(Activite activite, long personId) {
 
+
         Personne p = personneDAOImpl.findById(personId);
 
+        if(!verifyActivity(activite))
+            return;
 
         if(p == null){
             return;
@@ -263,6 +266,10 @@ public class PersonneManager {
     public Personne changeCVInfo(String newTitle, String newDescription, String email) {
 
         Personne p = personneDAOImpl.findByEmail(email);
+
+        if(newTitle == null)
+            return p;
+
         p.getCv().setTitre(newTitle);
         p.getCv().setDescription(newDescription);
 
@@ -276,6 +283,10 @@ public class PersonneManager {
     public Personne changeCVInfo(String newTitle, String newDescription,String newWebsite, String email) {
 
         Personne p = personneDAOImpl.findByEmail(email);
+
+        if(newTitle == null)
+            return p;
+
         p.getCv().setTitre(newTitle);
         p.getCv().setDescription(newDescription);
         p.setWebsite(newWebsite);
@@ -289,7 +300,14 @@ public class PersonneManager {
     /* tested */
     public Personne updateActivity(String title, String description, int year, String type, long id, long personId) {
 
+
         Personne p = personneDAOImpl.findById(personId);
+
+        System.out.println("nouveau titre : "+title);
+
+        if (title.length() < 0 || year < 1900)
+            return p;
+
 
         for(Activite activite: p.getCv().getActivites()){
             if (activite.getId() == id){
@@ -310,6 +328,11 @@ public class PersonneManager {
 
         Personne p = personneDAOImpl.findById(personId);
 
+        System.out.println("nouveau titre : "+title);
+
+        if (title.length() < 1 || year < 1900)
+            return p;
+
         for(Activite activite: p.getCv().getActivites()){
             if (activite.getId() == id){
                 activite.setTitre(title);
@@ -324,6 +347,11 @@ public class PersonneManager {
 
         return p;
 
+    }
+
+    private boolean verifyActivity(Activite a){
+        if(a.getAnnee() < 1900 || a.getTitre() == null) return false;
+        return true;
     }
 
     /* wrapper class for temporary logs */
@@ -345,6 +373,8 @@ public class PersonneManager {
              return account;
          }
      }
+
+
 
 }
 
