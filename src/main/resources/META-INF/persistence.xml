@@ -3,43 +3,36 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
           http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
-    <persistence-unit name="AMUBookdbUnit">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <!--<jta-data-source>AMUBooKdb</jta-data-source>-->
-        <properties>
-            <!--<property name="hibernate.show_sql" value="true" />-->
-            <!--<property name="hibernate.format_sql" value="true" />-->
-
-
-            <property name="hibernate.archive.autodetection" value="class" />
-            <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
-            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
-            <property name="hibernate.connection.url" value="jdbc:hsqldb:file:db/amubookdb;shutdown=true" />
-            <property name="hibernate.connection.user" value="sa" />
-
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-
-        </properties>
-    </persistence-unit>
-
-    <!--<persistence-unit name="mysqlDB" transaction-type="JTA">-->
+    <!--<persistence-unit name="AMUBookdbUnit" transaction-type="JTA">-->
         <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
-        <!--<class>models.Personne</class>-->
-        <!--<class>models.CV</class>-->
-        <!--<class>models.Activite</class>-->
-
+        <!--<jta-data-source>AMUBooKdb</jta-data-source>-->
         <!--<properties>-->
-            <!--<property name="hibernate.show_sql" value="true" />-->
-            <!--<property name="hibernate.format_sql" value="true" />-->
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />-->
-            <!--<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />-->
-            <!--<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/amubook" />-->
-            <!--<property name="hibernate.connection.username" value="amu" />-->
-            <!--<property name="hibernate.connection.password" value="amu" />-->
-            <!--&lt;!&ndash; <property name="hibernate.show_sql" value="true"/> &ndash;&gt;-->
-            <!--<property name="hibernate.flushMode" value="FLUSH_AUTO" />-->
+            <!--&lt;!&ndash;<property name="hibernate.show_sql" value="true" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="hibernate.format_sql" value="true" />&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;<property name="hibernate.archive.autodetection" value="class" />&ndash;&gt;-->
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />-->
+            <!--&lt;!&ndash;<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="hibernate.connection.url" value="jdbc:hsqldb:file:db/amubookdb;shutdown=true" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="hibernate.connection.user" value="sa" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<property name="hibernate.connection.password" value=""/>&ndash;&gt;-->
             <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+
         <!--</properties>-->
     <!--</persistence-unit>-->
+
+    <persistence-unit name="mysqlDB" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>mysqlDS</jta-data-source>
+
+        <properties>
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.flushMode" value="COMMIT" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+        </properties>
+    </persistence-unit>
 
 </persistence>

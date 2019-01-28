@@ -2,11 +2,19 @@
 <!DOCTYPE openejb>
 <openejb>
     <!-- pour les tests JPA -->
-    <Resource id="AMUBookdb" type="DataSource">
-        JdbcDriver org.hsqldb.jdbcDriver
-        JdbcUrl jdbc:hsqldb:mem:inMemoryDatabase
-        UserName sa
-        Password
+    <!--<Resource id="AMUBookdb" type="DataSource">-->
+        <!--JdbcDriver org.hsqldb.jdbcDriver-->
+        <!--JdbcUrl jdbc:hsqldb:file:amubook;shutdown=true-->
+        <!--UserName sa-->
+        <!--Password-->
+        <!--JtaManaged true-->
+    <!--</Resource>-->
+
+    <Resource id="mysqlDS" type="javax.sql.DataSource">
+        JdbcDriver com.mysql.jdbc.Driver
+        JdbcUrl jdbc:mysql://localhost:3306/amubook
+        UserName amu
+        Password amu
         JtaManaged true
     </Resource>
 </openejb>

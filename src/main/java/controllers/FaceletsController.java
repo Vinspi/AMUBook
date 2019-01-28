@@ -161,10 +161,15 @@ public class FaceletsController {
     }
 
     public String register() {
+        
         /* the caller must be logged in */
-
         if (sessionUser.getEmail() == null){
             return "loginPage";
+        }
+
+        /* if user try to bypass ... */
+        if(email.length() < 1 || name.length() < 1 || surname.length() < 1){
+            return "registerPage";
         }
 
         if(Integer.parseInt(this.day) < 10) this.day = "0"+this.day;

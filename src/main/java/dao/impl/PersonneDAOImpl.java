@@ -8,13 +8,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
+//@Transactional
 @Stateless
 public class PersonneDAOImpl implements PersonneDAO {
 
 
-    @PersistenceContext(unitName = "AMUBookdbUnit")
+//    @PersistenceContext(unitName = "AMUBookdbUnit")
+    @PersistenceContext(unitName = "mysqlDB")
     private EntityManager em;
 
     public Personne update(Personne p){
@@ -24,6 +27,7 @@ public class PersonneDAOImpl implements PersonneDAO {
     /* tested */
     public void add(Personne p){
         em.persist(p);
+        em.flush();
     }
 
     /* tested */

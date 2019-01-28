@@ -8,13 +8,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
-
+//@Transactional
 @Stateless
 public class ActiviteDAOImpl implements ActiviteDAO {
 
-    @PersistenceContext(unitName = "AMUBookdbUnit")
+//    @PersistenceContext(unitName = "AMUBookdbUnit")
+    @PersistenceContext(unitName = "mysqlDB")
     private EntityManager em;
 
     public Activite findById(long id) {
@@ -44,6 +46,7 @@ public class ActiviteDAOImpl implements ActiviteDAO {
     }
 
     public Activite update(Activite activite){
+
         return em.merge(activite);
     }
 
