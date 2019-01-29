@@ -10,7 +10,7 @@
 
 <f:view>
     <ui:composition>
-        <c:if test="#{not empty controller.temporaryPass}">
+        <c:if test="#{not empty registerPage.temporaryPass}">
             <div class="container ">
                 <div class="account-created">
                     <h1>Le compte suivant à bien été créé :</h1>
@@ -19,22 +19,22 @@
                             <div class="row">
                                 <div class="col-sm">
                                     <label for="nameC">Nom</label>
-                                    <h:inputText id="nameC" name="name" class="form-control" p:placeholder="#{controller.name}" readonly="true"/>
+                                    <h:inputText id="nameC" name="name" class="form-control" p:placeholder="#{registerPage.name}" readonly="true"/>
                                 </div>
                                 <div class="col-sm">
                                     <label for="surnameC">Prénom</label>
-                                    <h:inputText id="surnameC" name="surname" class="form-control" p:placeholder="#{controller.surname}" readonly="true"/>
+                                    <h:inputText id="surnameC" name="surname" class="form-control" p:placeholder="#{registerPage.surname}" readonly="true"/>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="emailC">Email</label>
-                            <h:inputText id="emailC" class="form-control" p:placeholder="#{controller.email}" readonly="true"/>
+                            <h:inputText id="emailC" class="form-control" p:placeholder="#{registerPage.email}" readonly="true"/>
                         </div>
                         <div class="form-group">
                             <label for="temp">Utiliser ce mot de passe temporaire pour votre première connexion : </label>
                             <div class="input-group">
-                                <h:inputText readonly="true" id="temp" p:id="temp" styleClass="form-control" value="#{controller.temporaryPass}" p:aria-describedby="button-addon1"/>
+                                <h:inputText readonly="true" id="temp" p:id="temp" styleClass="form-control" value="#{registerPage.temporaryPass}" p:aria-describedby="button-addon1"/>
                                 <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary" type="button" id="button-addon1">
                                         <i class="fas fa-copy"></i>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </c:if>
-        <c:if test="#{empty controller.temporaryPass}">
+        <c:if test="#{empty registerPage.temporaryPass}">
             <div class="container">
                 <div class="connection-form">
                     <div class="center">
@@ -55,15 +55,15 @@
                     <h:form>
                         <div class="form-group">
                             <h:outputLabel for="email">Email</h:outputLabel>
-                            <h:inputText value="#{controller.email}" p:type="email" styleClass="form-control" id="email" p:placeholder="Email"/>
+                            <h:inputText value="#{registerPage.email}" p:type="email" styleClass="form-control" id="email" p:placeholder="Email"/>
                         </div>
                         <div class="form-group">
                             <h:outputLabel for="name">Nom</h:outputLabel>
-                            <h:inputText value="#{controller.name}" p:type="text" styleClass="form-control" id="name" p:placeholder="Nom"/>
+                            <h:inputText value="#{registerPage.name}" p:type="text" styleClass="form-control" id="name" p:placeholder="Nom"/>
                         </div>
                         <div class="form-group">
                             <h:outputLabel for="surname">Prénom</h:outputLabel>
-                            <h:inputText value="#{controller.surname}" p:type="text" styleClass="form-control" id="surname" p:placeholder="Prénom"/>
+                            <h:inputText value="#{registerPage.surname}" p:type="text" styleClass="form-control" id="surname" p:placeholder="Prénom"/>
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="col-sm">
                                     <h:outputLabel for="day">Jour</h:outputLabel>
-                                    <h:selectOneMenu value="#{controller.day}" class="custom-select" id="day">
+                                    <h:selectOneMenu value="#{registerPage.day}" class="custom-select" id="day">
                                         <c:forEach begin="1" end="31" step="1" var="day">
                                             <f:selectItem itemValue="#{day}" itemLabel="#{day}"/>
                                         </c:forEach>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-sm">
                                     <h:outputLabel for="month">Mois</h:outputLabel>
-                                    <h:selectOneMenu value="#{controller.month}" class="custom-select" id="month">
+                                    <h:selectOneMenu value="#{registerPage.month}" class="custom-select" id="month">
                                         <f:selectItem itemLabel="Janvier" itemValue="01"/>
                                         <f:selectItem itemLabel="Février" itemValue="02"/>
                                         <f:selectItem itemLabel="Mars" itemValue="03"/>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="col-sm">
                                     <h:outputLabel for="year">Année</h:outputLabel>
-                                    <h:selectOneMenu value="#{controller.year}" class="custom-select" id="year">
+                                    <h:selectOneMenu value="#{registerPage.year}" class="custom-select" id="year">
                                         <c:forEach begin="1" end="100" step="1" var="year">
                                             <f:selectItem itemValue="#{year+1918}" itemLabel="#{year+1918}"/>
                                         </c:forEach>

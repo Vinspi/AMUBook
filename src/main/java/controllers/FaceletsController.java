@@ -1,7 +1,6 @@
 package controllers;
 
-import beans.SearchResults;
-import beans.SessionUser;
+import beans.*;
 import models.Activite;
 import models.Personne;
 import services.PersonneManager;
@@ -26,12 +25,7 @@ public class FaceletsController {
     private String email;
     private String password;
     private String name;
-    private String surname;
-    private String month;
-    private String day;
-    private String year;
-    private String temporaryPass;
-    private String passwordConfirm;
+
     private Personne personne;
     private String newCVTitle;
     private String newDescription;
@@ -43,12 +37,26 @@ public class FaceletsController {
     private String activityWebsite;
     private int activityDate;
     private String userId;
-    private String newPassword;
+
     private boolean error;
 
 
     private boolean sr_perfectmatching;
 
+    /* backing beans for web component */
+    @ManagedProperty(value = "#{loginPage}")
+    private LoginPageBean loginPage;
+
+    @ManagedProperty(value = "#{registerPage}")
+    private RegisterPageBean registerPage;
+
+    @ManagedProperty(value = "#{accountPage}")
+    private AccountPageBean accountPage;
+
+    @ManagedProperty(value = "#{validationPage}")
+    private AccountValidationPage validationPage;
+
+    /***********************************/
 
     @ManagedProperty(value = "#{sessionUser}")
     private SessionUser sessionUser;
@@ -64,44 +72,46 @@ public class FaceletsController {
 
     @PostConstruct
     public void init(){
-        this.month = "01";
-        this.day = "1";
-        this.year = "1990";
-        this.error = false;
+
+        registerPage.setDay("1");
+        registerPage.setMonth("01");
+        registerPage.setYear("1990");
+        accountPage.setError(false);
 
     }
 
     public void changePasswordAjax() {
 
-        if(password.length() != 0 && password.equals(passwordConfirm)){
+        if(accountPage.getPassword().length() != 0 && accountPage.getPassword().equals(accountPage.getPasswordConfirm())){
 
-            personneManager.changePassword(sessionUser.getEmail(), this.password);
+            personneManager.changePassword(sessionUser.getEmail(), accountPage.getPassword());
             personneManager.activateAccount(sessionUser.getEmail());
 
-            error = false;
+            accountPage.setError(false);
         }
         else {
-            error = true;
+            accountPage.setError(true);
         }
         personne = personneManager.findByEmail(sessionUser.getEmail());
-        this.password = null;
-        this.passwordConfirm = null;
+
+        accountPage.setPassword(null);
+        accountPage.setPasswordConfirm(null);
 
     }
 
 
     public String changePassword() {
 
-        if(password.length() != 0 && password.equals(passwordConfirm)){
+        if(validationPage.getPassword().length() != 0 && validationPage.getPassword().equals(validationPage.getPasswordConfirm())){
 
-            personneManager.changePassword(sessionUser.getEmail(), this.password);
+            personneManager.changePassword(sessionUser.getEmail(), validationPage.getPassword());
             personneManager.activateAccount(sessionUser.getEmail());
 
             return "index";
         }
 
-        this.password = null;
-        this.passwordConfirm = null;
+        validationPage.setPassword(null);
+        validationPage.setPasswordConfirm(null);
 
         return "accountValidationPage";
     }
@@ -134,11 +144,12 @@ public class FaceletsController {
 
     public String login() {
 
-        Personne p = personneManager.login(email, password);
+        System.out.println("email : "+loginPage.getEmail());
+        Personne p = personneManager.login(loginPage.getEmail(), loginPage.getPassword());
 
         if(p != null){
 
-            sessionUser.setEmail(email);
+            sessionUser.setEmail(loginPage.getEmail());
             sessionUser.setName(p.getNom());
             sessionUser.setSurname(p.getPrenom());
             sessionUser.setValidAccount(p.getValide());
@@ -168,22 +179,22 @@ public class FaceletsController {
         }
 
         /* if user try to bypass ... */
-        if(email.length() < 1 || name.length() < 1 || surname.length() < 1){
+        if(registerPage.getEmail().length() < 1 || registerPage.getName().length() < 1 || registerPage.getSurname().length() < 1){
             return "registerPage";
         }
 
-        if(Integer.parseInt(this.day) < 10) this.day = "0"+this.day;
+        if(Integer.parseInt(registerPage.getDay()) < 10) registerPage.setDay("0"+registerPage.getDay());
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("email", this.email);
-        map.put("nom", this.name);
-        map.put("prenom", this.surname);
-        map.put("birthdate", this.day+"/"+this.month+"/"+this.year);
+        map.put("email", registerPage.getEmail());
+        map.put("nom", registerPage.getName());
+        map.put("prenom", registerPage.getSurname());
+        map.put("birthdate", registerPage.getDay()+"/"+registerPage.getMonth()+"/"+registerPage.getYear());
 
-        this.temporaryPass = personneManager.registerWithTemporaryLog(map).getTemporaryPassword();
+        registerPage.setTemporaryPass(personneManager.registerWithTemporaryLog(map).getTemporaryPassword());
 
-        System.out.println("temporary password is : "+this.temporaryPass);
+        System.out.println("temporary password is : "+registerPage.getTemporaryPass());
 
         return "registerPage";
     }
@@ -254,25 +265,11 @@ public class FaceletsController {
     }
 
     public String accountInfo(){
-        personne = personneManager.findByEmail(sessionUser.getEmail());
+
+        accountPage.setPersonne(personneManager.findByEmail(sessionUser.getEmail()));
 
         return "accountPage";
     }
-
-    /* only for testing purpose */
-    public String testUserPage() {
-
-        personne = personneManager.findById(1);
-
-
-        System.out.println("Activity : "+personne.getCv().getActivites());
-
-        return "userPage";
-    }
-
-
-
-
 
     public String getEmail() {
         return email;
@@ -298,75 +295,12 @@ public class FaceletsController {
         this.query = query;
     }
 
-    public SessionUser getSessionUser() {
-        return sessionUser;
-    }
-
-    public void setSessionUser(SessionUser sessionUser) {
-        this.sessionUser = sessionUser;
-    }
-
-    public SearchResults getSearchResults() { return searchResults; }
-
-    public void setSearchResults(SearchResults searchResults) {
-        this.searchResults = searchResults;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getTemporaryPass() {
-        return temporaryPass;
-    }
-
-    public void setTemporaryPass(String temporaryPass) {
-        this.temporaryPass = temporaryPass;
-    }
-
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
     }
 
     public Personne getPersonne() {
@@ -450,13 +384,7 @@ public class FaceletsController {
         this.userId = userId;
     }
 
-    public String getNewPassword() {
-        return newPassword;
-    }
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
 
     public boolean isError() {
         return error;
@@ -480,5 +408,53 @@ public class FaceletsController {
 
     public void setActivityWebsite(String activityWebsite) {
         this.activityWebsite = activityWebsite;
+    }
+
+    public LoginPageBean getLoginPage() {
+        return loginPage;
+    }
+
+    public void setLoginPage(LoginPageBean loginPage) {
+        this.loginPage = loginPage;
+    }
+
+    public RegisterPageBean getRegisterPage() {
+        return registerPage;
+    }
+
+    public void setRegisterPage(RegisterPageBean registerPage) {
+        this.registerPage = registerPage;
+    }
+
+    public AccountPageBean getAccountPage() {
+        return accountPage;
+    }
+
+    public void setAccountPage(AccountPageBean accountPage) {
+        this.accountPage = accountPage;
+    }
+
+    public AccountValidationPage getValidationPage() {
+        return validationPage;
+    }
+
+    public void setValidationPage(AccountValidationPage validationPage) {
+        this.validationPage = validationPage;
+    }
+
+    public SessionUser getSessionUser() {
+        return sessionUser;
+    }
+
+    public void setSessionUser(SessionUser sessionUser) {
+        this.sessionUser = sessionUser;
+    }
+
+    public SearchResults getSearchResults() {
+        return searchResults;
+    }
+
+    public void setSearchResults(SearchResults searchResults) {
+        this.searchResults = searchResults;
     }
 }

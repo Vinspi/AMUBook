@@ -17,11 +17,11 @@
                 <h:form>
                     <div class="form-group">
                         <h:outputLabel for="email">Email</h:outputLabel>
-                        <h:inputText value="#{controller.email}" p:type="email" id="email" styleClass="form-control" p:placeholder="Email"/>
+                        <h:inputText value="#{loginPage.email}" p:type="email" id="email" styleClass="form-control" p:placeholder="Email"/>
                     </div>
                     <div class="form-group">
                         <h:outputLabel for="password">Password</h:outputLabel>
-                        <h:inputSecret value="#{controller.password}" p:type="password" id="password" styleClass="form-control" p:placeholder="Mot de passe"/>
+                        <h:inputSecret value="#{loginPage.password}" p:type="password" id="password" styleClass="form-control" p:placeholder="Mot de passe"/>
                     </div>
                     <div class="button-container">
                         <h:commandLink styleClass="btn btn-dark" action="#{controller.login}">Connexion</h:commandLink>

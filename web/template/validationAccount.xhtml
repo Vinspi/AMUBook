@@ -15,12 +15,12 @@
                 <h:form>
                     <div class="form-group">
                         <h:outputLabel for="mdp">Mot de passe</h:outputLabel>
-                        <h:inputSecret value="#{controller.password}" styleClass="form-control" id="mdp" p:aria-describedby="emailHelp" p:placeholder="Mot de passe"/>
+                        <h:inputSecret value="#{validationPage.password}" styleClass="form-control" id="mdp" p:aria-describedby="emailHelp" p:placeholder="Mot de passe"/>
                         <small id="emailHelp" class="form-text text-muted">Pour des raisons de sécurité, ne communiquer jamais votre mot de passe</small>
                     </div>
                     <div class="form-group">
                         <h:outputLabel for="mdpconfirm">Confirmation</h:outputLabel>
-                        <h:inputSecret value="#{controller.passwordConfirm}" type="password" class="form-control" id="mdpconfirm" p:placeholder="Confirmation"/>
+                        <h:inputSecret value="#{validationPage.passwordConfirm}" type="password" class="form-control" id="mdpconfirm" p:placeholder="Confirmation"/>
                     </div>
                     <div class="button-container">
                         <h:commandLink action="#{controller.changePassword}" styleClass="btn btn-dark">Valider</h:commandLink>
