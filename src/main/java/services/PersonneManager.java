@@ -33,6 +33,15 @@ public class PersonneManager {
 
 
     /* tested */
+    /**
+    * @param email
+     * @param password
+     *
+     * log in the user if right email and password is provided.
+     *
+     * @return Personne logged in or null if wrong login / password.
+     *
+    */
     public Personne login(String email, String password){
 
 
@@ -68,6 +77,15 @@ public class PersonneManager {
     }
 
     /* tested */
+
+    /**
+     *
+     * @param personData
+     *
+     * register the user with a temporary password, this password is going to be changed when the first login attempt will occur.
+     *
+     * @return TemporaryLogs created.
+     */
         public TemporaryLogs registerWithTemporaryLog(Map<String, String> personData){
 
         /* generate random password */
@@ -104,6 +122,15 @@ public class PersonneManager {
     }
 
     /* tested */
+
+    /**
+     *
+     * @param personData
+     *
+     * register an account to the database based on the informations in the Map param.
+     *
+     * @return Personne registered.
+     */
     public Personne register(Map<String, String> personData){
 
         try {
@@ -159,6 +186,14 @@ public class PersonneManager {
     }
 
     /* tested */
+
+    /**
+     *
+     * @param activite
+     * @param personId
+     *
+     * add the activity to the CV of the user identified by the personId parameter.
+     */
     public void addActivity(Activite activite, long personId) {
 
 
@@ -180,6 +215,16 @@ public class PersonneManager {
     }
 
     /* tested */
+
+    /**
+     *
+     * @param id
+     * @param userId
+     *
+     * remove the activity identified by id in the CV of the user identified by userId.
+     *
+     * @return Personne object on which the action is performed.
+     */
     public Personne removeActivity(long id, long userId) {
 
         Personne p = personneDAOImpl.findById(userId);
@@ -206,6 +251,13 @@ public class PersonneManager {
 
 
     /* tested */
+
+    /**
+     *
+     * @param email
+     *
+     * validate the account identified by the email provided by the email parameter.
+     */
     public void activateAccount(String email){
 
         Personne p = personneDAOImpl.findByEmail(email);
@@ -223,6 +275,14 @@ public class PersonneManager {
     }
 
     /* tested */
+
+    /**
+     *
+     * @param email
+     * @param newOne
+     *
+     * Replace the current password of the user identified by the param email by the newOne.
+     */
     public void changePassword(String email, String newOne) {
 
         try {
@@ -253,16 +313,40 @@ public class PersonneManager {
     }
 
     /* will not be tested */
+
+    /**
+     *
+     * @param id
+     * Find user identified by id.
+     * @return Personne matching the id.
+     */
     public Personne findById(long id){
         return personneDAOImpl.findById(id);
     }
 
     /* will not be tested */
+    /**
+     *
+     * @param email
+     * Find user identified by email.
+     * @return Personne matching th email.
+     */
     public Personne findByEmail(String email){
         return personneDAOImpl.findByEmail(email);
     }
 
     /* tested */
+
+    /**
+     *
+     * @param newTitle
+     * @param newDescription
+     * @param email
+     *
+     * Replace all the info provided (title and description) in the CV identified by email.
+     *
+     * @return Personne on which the action is performed.
+     */
     public Personne changeCVInfo(String newTitle, String newDescription, String email) {
 
         Personne p = personneDAOImpl.findByEmail(email);
@@ -279,7 +363,16 @@ public class PersonneManager {
 
     }
 
-
+    /**
+     *
+     * @param newTitle
+     * @param newDescription
+     * @param email
+     *
+     * Replace all the info provided (title, description and website) in the CV identified by email.
+     *
+     * @return Personne on which the action is performed.
+     */
     public Personne changeCVInfo(String newTitle, String newDescription,String newWebsite, String email) {
 
         Personne p = personneDAOImpl.findByEmail(email);
@@ -298,6 +391,20 @@ public class PersonneManager {
     }
 
     /* tested */
+
+    /**
+     *
+     * @param title
+     * @param description
+     * @param year
+     * @param type
+     * @param id
+     * @param personId
+     *
+     * replace all the info provided (title, description, year and type) in the activity n°id for the user identified by personId.
+     *
+     * @return Personne on which the action is performed.
+     */
     public Personne updateActivity(String title, String description, int year, String type, long id, long personId) {
 
 
@@ -323,7 +430,19 @@ public class PersonneManager {
         return p;
 
     }
-
+    /**
+     *
+     * @param title
+     * @param description
+     * @param year
+     * @param type
+     * @param id
+     * @param personId
+     *
+     * replace all the info provided (title, description, year, type and website) in the activity n°id for the user identified by personId.
+     *
+     * @return on which the action is performed.
+     */
     public Personne updateActivity(String title, String description, int year, String type, String website, long id, long personId) {
 
         Personne p = personneDAOImpl.findById(personId);
