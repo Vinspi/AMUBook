@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Transactional
@@ -131,7 +133,7 @@ public class PersonneManager {
      *
      * @return Personne registered.
      */
-    public Personne register(Map<String, String> personData){
+    public Personne register(Map<String, String> personData) {
 
         try {
 
@@ -166,7 +168,12 @@ public class PersonneManager {
 
             p.setNom(personData.get("nom"));
             p.setPrenom(personData.get("prenom"));
-            p.setBirthdate(new Date());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date birthDate = new Date();
+            try {
+                birthDate = sdf.parse(personData.get("birthdate"));
+            }catch(ParseException ignore){}
+            p.setBirthdate(birthDate);
             p.setWebsite(personData.get("website"));
             p.setEmail(personData.get("email"));
             p.setCv(cv);

@@ -35,6 +35,7 @@ public class LifeCycleBean {
         personne.put("password", "pantoufle");
         personne.put("email", "vinspi13@gmail.com");
         personne.put("valid", "true");
+        personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
 
@@ -46,6 +47,7 @@ public class LifeCycleBean {
         personne.put("password", "guest");
         personne.put("email", "test@test.com");
         personne.put("valid", "true");
+        personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
 
@@ -57,6 +59,7 @@ public class LifeCycleBean {
         personne.put("password", "pantoufle");
         personne.put("email", "lucasl@gmail.com");
         personne.put("valid", "true");
+        personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
 
@@ -68,6 +71,7 @@ public class LifeCycleBean {
         personne.put("password", "pantoufle");
         personne.put("email", "lucasl@gmail.com");
         personne.put("valid", "true");
+        personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
 
@@ -80,6 +84,7 @@ public class LifeCycleBean {
         personne.put("password", "pantoufle");
         personne.put("email", "jpnoname@gmail.com");
         personne.put("valid", "true");
+        personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
 

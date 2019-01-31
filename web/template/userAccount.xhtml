@@ -66,6 +66,10 @@
                             <h:outputLabel for="prenom">Prenom</h:outputLabel>
                             <h:inputText value="#{accountPage.personne.prenom}" styleClass="form-control bg-light-grey" id="prenom" p:placeholder="Email" readonly="true"/>
                         </div>
+                        <div class="form-group">
+                            <h:outputLabel for="birthdate">Date de naissance</h:outputLabel>
+                            <h:inputText value="#{accountPage.personne.birthdate}" styleClass="form-control bg-light-grey" id="birthdate" p:placeholder="Email" readonly="true"/>
+                        </div>
 
                         <div class="button-container">
                             <button class="btn my-2 my-sm-0 btn-dark" onclick="popupChangePassword()">Changer mon mot de passe</button>
