@@ -68,7 +68,7 @@ public class PersonneManager {
     }
 
     /* tested */
-    public TemporaryLogs registerWithTemporaryLog(Map<String, String> personData){
+        public TemporaryLogs registerWithTemporaryLog(Map<String, String> personData){
 
         /* generate random password */
 
