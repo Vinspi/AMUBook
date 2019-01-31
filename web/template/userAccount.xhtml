@@ -47,6 +47,31 @@
                 </div>
             </div>
 
+            <!--modal valid deletion-->
+            <div class="modal fade" id="modal-valid-deletion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modifier votre mot de passe</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <h:form>
+                            <div class="modal-body">
+                                <p><strong>Attention :</strong> après validation ce compte sera supprimé</p>
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandLink p:type="button" styleClass="btn btn-red" p:data-dismiss="modal" action="#{controller.deleteAccount}">
+                                    Valider
+                                </h:commandLink>
+                            </div>
+                        </h:form>
+                    </div>
+
+                </div>
+            </div>
+
             <!--body-->
             <div class="container">
                 <div class="connection-form">
@@ -71,8 +96,15 @@
                             <h:inputText value="#{accountPage.personne.birthdate}" styleClass="form-control bg-light-grey" id="birthdate" p:placeholder="Email" readonly="true"/>
                         </div>
 
-                        <div class="button-container">
-                            <button class="btn my-2 my-sm-0 btn-dark" onclick="popupChangePassword()">Changer mon mot de passe</button>
+                        <div class="d-flex flex-row justify-content-around" style="width: 100%; padding: 10%;">
+                            <div class="button-container">
+                                <button class="btn my-2 my-sm-0 btn-dark" onclick="popupChangePassword()">Changer mon mot de passe</button>
+                            </div>
+                            <div class="button-container">
+                                <h:form action="">
+                                    <button class="btn btn-red" type="button" onclick="popupModalValidDelete()">Supprimer mon compte</button>
+                                </h:form>
+                            </div>
                         </div>
 
                 </div>

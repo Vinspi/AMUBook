@@ -144,6 +144,17 @@ body {
   border: 1px solid #424242;
 }
 
+.btn-red {
+  color: white !important;
+  background-color: #c13434 !important;
+  border: 1px solid #c13434;
+}
+
+.btn-red:hover {
+  color: #c13434 !important;
+  background-color: white !important;
+}
+
 .btn-dark:hover {
   color: #424242 !important;
   background-color: white !important;

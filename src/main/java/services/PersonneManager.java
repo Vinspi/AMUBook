@@ -475,6 +475,14 @@ public class PersonneManager {
 
     }
 
+    /**
+     * remove the account identified by id
+     * @param id
+     */
+    public void removeAccount(long id) {
+        personneDAOImpl.remove(id);
+    }
+
     private boolean verifyActivity(Activite a){
         if(a.getAnnee() < 1900 || a.getTitre() == null) return false;
         return true;

@@ -245,6 +245,21 @@ public class FaceletsController {
 
     }
 
+    public String deleteAccount() {
+
+        /* remove the account */
+        personneManager.removeAccount(sessionUser.getId());
+
+        /* log out the user */
+        sessionUser.setName(null);
+        sessionUser.setEmail(null);
+        sessionUser.setSurname(null);
+
+        /* then redirect to front page */
+
+        return "index";
+    }
+
     public void removeActivity(){
 
 

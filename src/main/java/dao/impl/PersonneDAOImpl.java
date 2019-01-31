@@ -60,8 +60,14 @@ public class PersonneDAOImpl implements PersonneDAO {
      * @param id
      */
     public void remove(long id){
-        Personne p1 = em.find(Personne.class, id);
-        em.remove(p1);
+        Personne p1;
+        try {
+            p1 = em.find(Personne.class, id);
+            if(p1 != null)
+                em.remove(p1);
+        } catch (NoResultException e){
+            /* id is not in database, we don't remove anything */
+        }
 
     }
 

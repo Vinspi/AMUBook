@@ -39,6 +39,7 @@ public class LifeCycleBean {
 
         personneManager.register(personne);
 
+
         personne = new HashMap<>();
 
         personne.put("nom", "Archer");
@@ -51,17 +52,7 @@ public class LifeCycleBean {
 
         personneManager.register(personne);
 
-        personne = new HashMap<>();
-
-        personne.put("nom", "LOIGNON");
-        personne.put("prenom", "Lucas");
-        personne.put("website", "www.google.com");
-        personne.put("password", "pantoufle");
-        personne.put("email", "lucasl@gmail.com");
-        personne.put("valid", "true");
-        personne.put("birthdate", "8/01/1995");
-
-        personneManager.register(personne);
+        personneManager.removeAccount(0);
 
         personne = new HashMap<>();
 
@@ -74,6 +65,20 @@ public class LifeCycleBean {
         personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
+
+        personne = new HashMap<>();
+
+        personne.put("nom", "LOIGNON");
+        personne.put("prenom", "Lucas");
+        personne.put("website", "www.google.com");
+        personne.put("password", "pantoufle");
+        personne.put("email", "lucasl@gmail.com");
+        personne.put("valid", "true");
+        personne.put("birthdate", "8/01/1995");
+
+        personneManager.register(personne);
+
+
 
         personne = new HashMap<>();
 
