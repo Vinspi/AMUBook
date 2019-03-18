@@ -24,12 +24,16 @@
 
                                         <div class="form-group">
                                             <h:outputLabel for="input-title-cv">Titre</h:outputLabel>
-                                            <h:inputText value="#{controller.newCVTitle}" type="text" id="input-title-cv" p:id="input-title-cv" styleClass="form-control" p:aria-describedby="input-title-cv-small"/>
+                                            <h:inputText value="#{controller.newCVTitle}" type="text" id="input-title-cv" p:id="input-title-cv" styleClass="form-control" p:aria-describedby="input-title-cv-small">
+                                                <f:validator validatorId="TitleValidator"></f:validator>
+                                            </h:inputText>
                                             <small id="input-title-cv-small" class="form-text text-muted">Ce titre sera celui qui apparaîtra sur votre page perso.</small>
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-description-cv">Description</h:outputLabel>
-                                            <h:inputTextarea value="#{controller.newDescription}" id="input-description-cv" p:id="input-description-cv" styleClass="form-control" p:aria-describedby="input-description-cv-small"></h:inputTextarea>
+                                            <h:inputTextarea value="#{controller.newDescription}" id="input-description-cv" p:id="input-description-cv" styleClass="form-control" p:aria-describedby="input-description-cv-small">
+                                                <f:validator validatorId="DescriptionValidator"></f:validator>
+                                            </h:inputTextarea>
                                             <small id="input-description-cv-small" class="form-text text-muted">Cette description apparîtra sur votre page perso, en dessous de votre titre.</small>
                                         </div>
                                         <div class="form-group">
@@ -67,7 +71,10 @@
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-date-activity">Date</h:outputLabel>
-                                            <h:inputText value="#{controller.activityDate}" type="text" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" id="input-date-activity" p:id="input-date-activity" styleClass="form-control"/>
+                                            <h:inputText value="#{controller.activityDate}" type="text" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" id="input-date-activity" p:id="input-date-activity" styleClass="form-control">
+                                                <f:validator validatorId="YearValidator"></f:validator>
+                                            </h:inputText>
+                                            <h:message for="input-date-activity" style="color:red" />
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-type-activity">Type</h:outputLabel>
@@ -80,15 +87,22 @@
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-title-activity">Titre</h:outputLabel>
-                                            <h:inputText value="#{controller.activityTitle}" type="text" id="input-title-activity" p:id="input-title-activity" class="form-control"/>
+                                            <h:inputText value="#{controller.activityTitle}" type="text" id="input-title-activity" p:id="input-title-activity" class="form-control">
+                                                <f:validator validatorId="TitleValidator"></f:validator>
+                                            </h:inputText>
+                                            <h:message for="input-title-activity" style="color:red" />
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-description-activity">Description</h:outputLabel>
-                                            <h:inputTextarea value="#{controller.activityDescription}" id="input-description-activity" p:id="input-description-activity" class="form-control"></h:inputTextarea>
+                                            <h:inputTextarea value="#{controller.activityDescription}" id="input-description-activity" p:id="input-description-activity" class="form-control">
+                                                <f:validator validatorId="DescriptionValidator"></f:validator>
+                                            </h:inputTextarea>
+                                            <h:message for="input-description-activity" style="color:red" />
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-website-activity">Website</h:outputLabel>
-                                            <h:inputText value="#{controller.activityWebsite}" type="text" id="input-website-activity" p:id="input-website-activity" class="form-control"/>
+                                            <h:inputText value="#{controller.activityWebsite}" type="text" id="input-website-activity" p:id="input-website-activity" class="form-control">
+                                            </h:inputText>
                                         </div>
                                 </div>
                                 <div class="modal-footer">

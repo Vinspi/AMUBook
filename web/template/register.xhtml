@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="emailC">Email</label>
-                            <h:inputText id="emailC" class="form-control" p:placeholder="#{registerPage.email}" readonly="true"/>
+                            <h:inputText id="emailC" class="form-control" p:placeholder="#{registerPage.email}" readonly="true"></h:inputText>
                         </div>
                         <div class="form-group">
                             <label for="temp">Utiliser ce mot de passe temporaire pour votre première connexion : </label>
@@ -55,15 +55,24 @@
                     <h:form>
                         <div class="form-group">
                             <h:outputLabel for="email">Email</h:outputLabel>
-                            <h:inputText value="#{registerPage.email}" p:type="email" styleClass="form-control" id="email" p:placeholder="Email"/>
+                            <h:inputText value="#{registerPage.email}" p:type="email" styleClass="form-control" id="email" p:placeholder="Email">
+                                <f:validator validatorId="EmailValidator" />
+                            </h:inputText>
+                            <h:message for="email" style="color:red" />
                         </div>
                         <div class="form-group">
                             <h:outputLabel for="name">Nom</h:outputLabel>
-                            <h:inputText value="#{registerPage.name}" p:type="text" styleClass="form-control" id="name" p:placeholder="Nom"/>
+                            <h:inputText value="#{registerPage.name}" p:type="text" styleClass="form-control" id="name" p:placeholder="Nom">
+                                <f:validator validatorId="NameValidator" />
+                            </h:inputText>
+                            <h:message for="name" style="color:red" />
                         </div>
                         <div class="form-group">
                             <h:outputLabel for="surname">Prénom</h:outputLabel>
-                            <h:inputText value="#{registerPage.surname}" p:type="text" styleClass="form-control" id="surname" p:placeholder="Prénom"/>
+                            <h:inputText value="#{registerPage.surname}" p:type="text" styleClass="form-control" id="surname" p:placeholder="Prénom">
+                                <f:validator validatorId="NameValidator" />
+                            </h:inputText>
+                            <h:message for="surname" style="color:red" />
                         </div>
                         <div class="form-group">
                             <div class="row">
