@@ -18,6 +18,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * PersonneManager
+ * Purpose : methods to create, find, connect and update/modify a person and his CV
+ */
 @Transactional
 @Stateless
 public class PersonneManager {

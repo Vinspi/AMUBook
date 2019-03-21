@@ -25,18 +25,24 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <h:outputLabel for="input-new-password">Nouveau mot de passe</h:outputLabel>
-                                    <h:inputSecret value="#{accountPage.password}" type="text" id="input-new-password" styleClass="form-control"/>
+                                    <h:inputSecret value="#{accountPage.password}" type="text" id="input-new-password" p:id="input-new-password" styleClass="form-control"/>
+                                    <div class="invalid-feedback">
+                                        Ce champ ne peut être vide.
+                                    </div>
                                     <c:if test="#{accountPage.error}">
                                         <small id="emailHelp" class="form-text" style="color: red;">erreur : les mots de passes de correspondent pas.</small>
                                     </c:if>
                                 </div>
                                 <div class="form-group">
                                     <h:outputLabel for="input-confirm-password">Confirmer mot de passe</h:outputLabel>
-                                    <h:inputSecret value="#{accountPage.passwordConfirm}" id="input-confirm-password" styleClass="form-control"/>
+                                    <h:inputSecret value="#{accountPage.passwordConfirm}" id="input-confirm-password" p:id="input-confirm-password" styleClass="form-control"/>
+                                    <div class="invalid-feedback">
+                                        Ce champ ne peut être vide et doit correspondre au champ précédent.
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <h:commandLink p:type="button" styleClass="btn btn-dark" p:data-dismiss="modal" action="#{controller.changePasswordAjax}">
+                                <h:commandLink onclick="return catchSubmit(event);" p:type="button" styleClass="btn btn-dark" p:data-dismiss="modal" action="#{controller.changePasswordAjax}">
                                     <f:ajax execute="input-new-password input-confirm-password" render=":refresh-user-account"></f:ajax>
                                     Valider
                                 </h:commandLink>
@@ -117,4 +123,52 @@
         </h:panelGroup>
     </ui:composition>
 </f:view>
+<h:outputScript>
+
+    'use strict';
+
+    /*
+        id="input-title-cv
+    */
+
+    function catchSubmit(event){
+        var result = true;
+
+        if (document.getElementById("input-new-password").value.length == 0) {
+            document.getElementById("input-new-password").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("input-new-password").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+        if (document.getElementById("input-confirm-password").value.length == 0 ) {
+            document.getElementById("input-confirm-password").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("input-confirm-password").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+        if (document.getElementById("input-new-password").value != document.getElementById("input-confirm-password").value) {
+            document.getElementById("input-confirm-password").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("input-confirm-password").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+
+        if(result == false){
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        console.log("je vais retourner : " + result);
+        return result;
+    }
+
+</h:outputScript>
 </html>

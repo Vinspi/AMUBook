@@ -12,6 +12,10 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.*;
 
+/**
+ * SearchService
+ * Purpose : methods to get persons from differents types of filters
+ */
 @Transactional
 @Stateless
 public class SearchService {
@@ -29,6 +33,11 @@ public class SearchService {
     private String[] parsebySpace(String toBeParsed){return toBeParsed.split(" ");}
 
     /* tested */
+    /**
+     * @param query
+     * @param exact
+     * @return List of persons and their current activity matched by : last name of the person
+     */
     public HashMap<Personne, Activite> findByLastname(String query, boolean exact){
         HashMap<Personne, Activite> results = new HashMap<>();
         ArrayList<Personne> resultsP = new ArrayList<>();
@@ -54,6 +63,11 @@ public class SearchService {
     }
 
     /* tested */
+    /**
+     * @param query
+     * @param exact
+     * @return List of persons and their current activity matched by : first name of the person
+     */
     public HashMap<Personne, Activite> findByFirstname(String query, boolean exact){
         HashMap<Personne, Activite> results = new HashMap<>();
         ArrayList<Personne> resultsP = new ArrayList<>();
@@ -79,6 +93,11 @@ public class SearchService {
     }
 
     /* tested */
+    /**
+     * @param activite
+     * @param exact
+     * @return List of persons and their current activity matched by : activity in the CV of a person
+     */
     public HashMap<Personne, Activite> findByActivity(String activite, boolean exact){
         HashMap<Personne, Activite> results = new HashMap<>();
         ArrayList<Activite> results_tmp = new ArrayList<>();

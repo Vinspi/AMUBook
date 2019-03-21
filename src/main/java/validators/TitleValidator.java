@@ -18,7 +18,7 @@ public class TitleValidator implements Validator {
 
     Pattern pattern = Pattern.compile(pat);
 
-    if (!pattern.matcher(o.toString()).matches() || o.toString().length() > 150) {
+    if (!pattern.matcher(o.toString()).matches() || o.toString().length() > 255) {
       System.out.println("titre invalide");
       FacesMessage msg =
           new FacesMessage("Title validation failed.",

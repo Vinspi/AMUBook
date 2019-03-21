@@ -17,18 +17,64 @@
                 <h:form>
                     <div class="form-group">
                         <h:outputLabel for="email">Email</h:outputLabel>
-                        <h:inputText value="#{loginPage.email}" p:type="email" id="email" styleClass="form-control" p:placeholder="Email"/>
+                        <h:inputText value="#{loginPage.email}" p:type="email" id="email" p:id="email" styleClass="form-control" p:placeholder="Email"/>
+                        <div class="invalid-feedback">
+                            L'email de connexion ne peut pas être vide et doit contenir au maximum 255 caracteres.
+                        </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel for="password">Password</h:outputLabel>
-                        <h:inputSecret value="#{loginPage.password}" p:type="password" id="password" styleClass="form-control" p:placeholder="Mot de passe"/>
+                        <h:inputSecret value="#{loginPage.password}" p:type="password" id="password" p:id="password" styleClass="form-control" p:placeholder="Mot de passe"/>
+                        <div class="invalid-feedback">
+                            Le mot de passe de connexion ne peut pas être vide.
+                        </div>
                     </div>
                     <div class="button-container">
-                        <h:commandLink styleClass="btn btn-dark" action="#{controller.login}">Connexion</h:commandLink>
+                        <h:commandLink onclick="return catchSubmit(event);" styleClass="btn btn-dark" action="#{controller.login}">Connexion</h:commandLink>
                     </div>
                 </h:form>
             </div>
         </div>
     </ui:composition>
 </f:view>
+<h:outputScript>
+
+    'use strict';
+
+    /*
+        id="input-title-cv
+    */
+
+    function catchSubmit(event){
+        var result = true;
+
+        if (document.getElementById("email").value.length == 0 | document.getElementById("email").value.length > 255) {
+            document.getElementById("email").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("email").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+        if (document.getElementById("password").value.length == 0 ) {
+            document.getElementById("password").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("password").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+
+
+        if(result == false){
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        console.log("je vais retourner : " + result);
+        return result;
+    }
+
+</h:outputScript>
 </html>

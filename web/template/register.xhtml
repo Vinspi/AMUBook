@@ -55,23 +55,32 @@
                     <h:form>
                         <div class="form-group">
                             <h:outputLabel for="email">Email</h:outputLabel>
-                            <h:inputText value="#{registerPage.email}" p:type="email" styleClass="form-control" id="email" p:placeholder="Email">
+                            <h:inputText value="#{registerPage.email}" p:type="email" styleClass="form-control" id="email" p:id="email" p:placeholder="Email">
                                 <f:validator validatorId="EmailValidator" />
                             </h:inputText>
+                            <div class="invalid-feedback">
+                                L'email ne peut pas être vide et doit contenir au maximum 255 caracteres.
+                            </div>
                             <h:message for="email" style="color:red" />
                         </div>
                         <div class="form-group">
                             <h:outputLabel for="name">Nom</h:outputLabel>
-                            <h:inputText value="#{registerPage.name}" p:type="text" styleClass="form-control" id="name" p:placeholder="Nom">
+                            <h:inputText value="#{registerPage.name}" p:type="text" styleClass="form-control" id="name" p:id="name" p:placeholder="Nom">
                                 <f:validator validatorId="NameValidator" />
                             </h:inputText>
+                            <div class="invalid-feedback">
+                                Le nom ne peut pas être vide et doit contenir au maximum 255 caracteres.
+                            </div>
                             <h:message for="name" style="color:red" />
                         </div>
                         <div class="form-group">
                             <h:outputLabel for="surname">Prénom</h:outputLabel>
-                            <h:inputText value="#{registerPage.surname}" p:type="text" styleClass="form-control" id="surname" p:placeholder="Prénom">
+                            <h:inputText value="#{registerPage.surname}" p:type="text" styleClass="form-control" id="surname" p:id="surname" p:placeholder="Prénom">
                                 <f:validator validatorId="NameValidator" />
                             </h:inputText>
+                            <div class="invalid-feedback">
+                                Le prénom ne peut pas être vide et doit contenir au maximum 255 caracteres.
+                            </div>
                             <h:message for="surname" style="color:red" />
                         </div>
                         <div class="form-group">
@@ -116,7 +125,7 @@
 
                         </div>
                         <div class="button-container">
-                            <h:commandLink action="#{controller.register}" styleClass="btn my-2 my-sm-0 btn-dark">Créer</h:commandLink>
+                            <h:commandLink  onclick="return catchSubmit(event);" action="#{controller.register}" styleClass="btn my-2 my-sm-0 btn-dark">Créer</h:commandLink>
                         </div>
                     </h:form>
                 </div>
@@ -124,4 +133,48 @@
         </c:if>
     </ui:composition>
 </f:view>
+<h:outputScript>
+
+    'use strict';
+
+    function catchSubmit(event){
+        var result = true;
+
+        if (document.getElementById("email").value.length == 0 | document.getElementById("email").value.length > 255) {
+            document.getElementById("email").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("email").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+        if (document.getElementById("name").value.length == 0 | document.getElementById("name").value.length > 255) {
+            document.getElementById("name").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("name").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+        if (document.getElementById("surname").value.length == 0 | document.getElementById("surname").value.length > 255) {
+            document.getElementById("surname").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("surname").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+
+
+
+        if(result == false){
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        console.log("je vais retourner : " + result);
+        return result;
+    }
+
+</h:outputScript>
 </html>
