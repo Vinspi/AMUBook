@@ -39,21 +39,18 @@ public class LifeCycleBean {
 
         personneManager.register(personne);
 
-
         personne = new HashMap<>();
 
-        personne.put("nom", "Archer");
-        personne.put("prenom", "Sterling");
-        personne.put("website", "www.google.com");
-        personne.put("password", "guest");
+        personne.put("nom", "Test");
+        personne.put("prenom", "Test");
+        personne.put("website", "www.test.com");
+        personne.put("password", "test");
         personne.put("email", "test@test.com");
         personne.put("valid", "true");
         personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
 
-        personneManager.removeAccount(0);
-
         personne = new HashMap<>();
 
         personne.put("nom", "LOIGNON");
@@ -68,17 +65,15 @@ public class LifeCycleBean {
 
         personne = new HashMap<>();
 
-        personne.put("nom", "LOIGNON");
-        personne.put("prenom", "Lucas");
+        personne.put("nom", "DEUTSCH");
+        personne.put("prenom", "Rémi");
         personne.put("website", "www.google.com");
         personne.put("password", "pantoufle");
-        personne.put("email", "lucasl@gmail.com");
+        personne.put("email", "dremi@gmail.com");
         personne.put("valid", "true");
         personne.put("birthdate", "8/01/1995");
 
         personneManager.register(personne);
-
-
 
         personne = new HashMap<>();
 
@@ -120,7 +115,7 @@ public class LifeCycleBean {
                     break;
             }
 
-            activite.setTitre("Espion international");
+            activite.setTitre("Testeur d'AMUBook");
 
             activite.setWebsite("website");
 

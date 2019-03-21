@@ -98,7 +98,6 @@ public class UnitTestActiviteDAO {
     }
 
     @Test
-
     public void remove(){
 
         Activite activite = new Activite();

@@ -69,6 +69,14 @@ public class SearchResults implements Serializable {
         this.foundAll = foundAll;
     }
 
+
+    /**
+     * @param source
+     *
+     * This method use the three lists (foundByLastName, foundByFirstName, foundByActivity)
+     * to update the foundAll list.
+     * The foundAll list is a union of the three list with unique values.
+     */
     private void updateFoundByAllUnique(sr_updatedSource source){
         if(this.foundAll == null) this.foundAll = new HashMap<>();
         if(this.idkeeper == null) this.idkeeper = new HashSet<>();
