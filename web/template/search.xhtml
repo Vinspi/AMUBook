@@ -13,7 +13,7 @@
             <div class="search-form">
                 <p>
                     <i class="fas fa-search"></i>
-                    Recherchez un nom, un prénom ou un CV
+                    Recherchez un nom, un prénom ou un CV (entre 3 et 200 caracteres, plusieurs mots autorisés)
                 </p>
                 <h:form>
                     <div class="input-group mb-3">
@@ -23,14 +23,54 @@
                                 <h:selectBooleanCheckbox value="#{controller.sr_perfectmatching}" styleClass="perfectmatching"/>
                             </div>
                         </div>
-                        <h:inputText p:type="text" styleClass="form-control" p:placeholder="nom, prénom ou poste " value="#{controller.query}"/>
+                        <h:inputText p:type="text" styleClass="form-control" p:placeholder="nom, prénom ou poste " id="searchValue" p:id="searchValue" value="#{controller.query}"/>
                         <div class="input-group-append">
-                            <h:commandLink styleClass="btn btn-dark" p:type="button" action="#{controller.search}" >Rechercher</h:commandLink>
+                            <h:commandLink onclick="return catchSubmit(event);" styleClass="btn btn-dark" p:type="button" action="#{controller.search}" >Rechercher</h:commandLink>
                         </div>
                     </div>
+
                 </h:form>
             </div>
         </div>
     </ui:composition>
 </f:view>
+<h:outputScript>
+
+    'use strict';
+
+    function catchSubmit(event){
+        var result = true;
+
+        if (document.getElementById("searchValue").value.length &lt; 3 | document.getElementById("searchValue").value.length > 200) {
+            document.getElementById("searchValue").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            var checkwords = true;
+            document.getElementById("searchValue").value.split(" ").forEach(function(item){
+                if(item.length &lt; 3){
+                    document.getElementById("searchValue").classList.add("is-invalid");
+                    checkwords = false;
+                    return;
+                }
+            });
+            console.log("Checkwords " + checkwords);
+            if(checkwords == true){
+                document.getElementById("searchValue").classList.remove("is-invalid");
+                result = result &amp;&amp; true;
+            }
+            else{
+                result = result &amp;&amp; false;
+            }
+        }
+
+        if(result == false){
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        console.log("je vais retourner : " + result);
+        return result;
+    }
+
+</h:outputScript>
 </html>

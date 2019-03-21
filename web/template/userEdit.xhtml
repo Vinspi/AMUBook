@@ -27,6 +27,9 @@
                                             <h:inputText value="#{controller.newCVTitle}" type="text" id="input-title-cv" p:id="input-title-cv" styleClass="form-control" p:aria-describedby="input-title-cv-small">
                                                 <f:validator validatorId="TitleValidator"></f:validator>
                                             </h:inputText>
+                                            <div class="invalid-feedback">
+                                                Le titre ne peut pas être vide et doit contenir au maximum 255 caracteres.
+                                            </div>
                                             <small id="input-title-cv-small" class="form-text text-muted">Ce titre sera celui qui apparaîtra sur votre page perso.</small>
                                         </div>
                                         <div class="form-group">
@@ -34,6 +37,9 @@
                                             <h:inputTextarea value="#{controller.newDescription}" id="input-description-cv" p:id="input-description-cv" styleClass="form-control" p:aria-describedby="input-description-cv-small">
                                                 <f:validator validatorId="DescriptionValidator"></f:validator>
                                             </h:inputTextarea>
+                                            <div class="invalid-feedback">
+                                                La description ne peut pas être vide et doit contenir au maximum 255 caracteres.
+                                            </div>
                                             <small id="input-description-cv-small" class="form-text text-muted">Cette description apparîtra sur votre page perso, en dessous de votre titre.</small>
                                         </div>
                                         <div class="form-group">
@@ -43,7 +49,7 @@
                                         </div>
                                 </div>
                                 <div class="modal-footer">
-                                        <h:commandLink p:type="button" styleClass="btn btn-dark" p:data-dismiss="modal" action="#{controller.changeCVInfo}">
+                                        <h:commandLink onclick="return catchSubmitCV(event);" p:type="button" styleClass="btn btn-dark" p:data-dismiss="modal" action="#{controller.changeCVInfo}">
                                             <f:ajax execute="input-title-cv input-description-cv input-website-cv" render=":user-info-block"></f:ajax>
                                             Sauvegarder
                                         </h:commandLink>
@@ -73,16 +79,13 @@
                                             <h:outputLabel for="input-date-activity">Date</h:outputLabel>
                                             <h:inputText value="#{controller.activityDate}" type="text" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" id="input-date-activity" p:id="input-date-activity" styleClass="form-control toBeVerified" >
                                                 <f:validateLength minimum="4" maximum="4" />
-                                                <!-- <f:validator validatorId="YearValidator"></f:validator> -->
+                                                <f:validator validatorId="YearValidator"></f:validator>
                                             </h:inputText>
-                                            <!-- <h:message for="input-date-activity" style="color:red" /> -->
+                                            <h:message for="input-date-activity" style="color:red" />
 
                                             <div class="invalid-feedback">
                                                 La date doit être composée d'exactement 4 chiffres
                                             </div>
-                                            <h:inputText value="#{controller.activityDate}" type="text" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" id="input-date-activity" p:id="input-date-activity" styleClass="form-control">
-                                                <f:validator validatorId="YearValidator"></f:validator>
-                                            </h:inputText>
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-type-activity">Type</h:outputLabel>
@@ -110,21 +113,21 @@
                                             </h:inputTextarea>
                                             <h:message for="input-description-activity" style="color:red" />
                                             <div class="invalid-feedback">
-                                                La description ne peut pas être vide.
+                                                La description ne peut pas être vide et doit contenir au maximum 1000 caracteres.
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <h:outputLabel for="input-website-activity">Website</h:outputLabel>
                                             <h:inputText value="#{controller.activityWebsite}" type="text" id="input-website-activity" p:id="input-website-activity" class="form-control"/>
                                             <div class="invalid-feedback">
-                                                Le site ne peut pas être vide et doit contenir au maximum 255 caracteres.
+                                                Le site doit contenir au maximum 255 caracteres.
                                             </div>
                                         </div>
                            
                          
                                 </div>
                                 <div class="modal-footer" id="modal-save">
-                                    <h:commandLink onclick="alert('cliked');console.log('onclick : ' +catchSubmit(event));" p:id="modal-save-btn" action="#{controller.updateActivityList}" styleClass="btn btn-dark" p:data-dismiss="modal" p:type="button">
+                                    <h:commandLink onclick="return catchSubmit(event);" p:id="modal-save-btn" action="#{controller.updateActivityList}" styleClass="btn btn-dark" p:data-dismiss="modal" p:type="button">
                                         <f:ajax execute="input-id-activity input-date-activity input-title-activity input-description-activity input-type-activity input-website-activity" render=":activity-block"/>
                                         Sauvegarder
                                     </h:commandLink>
@@ -353,17 +356,46 @@
 
     'use strict';
 
+    function catchSubmitCV(event){
+        var result = true;
+
+        if (document.getElementById("input-title-cv").value.length == 0 | document.getElementById("input-title-cv").value.length > 255) {
+            document.getElementById("input-title-cv").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("input-title-cv").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+        if (document.getElementById("input-description-cv").value.length == 0  | document.getElementById("input-description-cv").value.length > 255 ) {
+            document.getElementById("input-description-cv").classList.add("is-invalid");
+            result = result &amp;&amp; false;
+        }
+        else {
+            document.getElementById("input-description-cv").classList.remove("is-invalid");
+            result = result &amp;&amp; true;
+        }
+
+
+
+        if(result == false){
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        console.log("je vais retourner : " + result);
+        return result;
+    }
 
     function catchSubmit(event) {
 
         var result = true;
+/*
 
         Array.prototype.forEach.call(document.getElementsByClassName("toBeVerified"), function (el) {
             el.required = true;
         });
-
-        event.preventDefault();
-        event.stopPropagation();
+*/
 
         if (document.getElementById("input-date-activity").value.length != 4) {
             document.getElementById("input-date-activity").classList.add("is-invalid");
@@ -382,7 +414,7 @@
             document.getElementById("input-title-activity").classList.remove("is-invalid");
             result = result &amp;&amp; true;
         }
-        if (document.getElementById("input-description-activity").value.length == 0) {
+        if (document.getElementById("input-description-activity").value.length == 0 | document.getElementById("input-description-activity").value.length > 1000) {
             document.getElementById("input-description-activity").classList.add("is-invalid");
             result = result &amp;&amp; false;
         }
@@ -390,7 +422,7 @@
             document.getElementById("input-description-activity").classList.remove("is-invalid");
             result = result &amp;&amp; true;
         }
-        if (document.getElementById("input-website-activity").value.length == 0 | document.getElementById("input-website-activity").value.length > 255) {
+        if (document.getElementById("input-website-activity").value.length > 255) {
             document.getElementById("input-website-activity").classList.add("is-invalid");
             result = result &amp;&amp; false;
         }

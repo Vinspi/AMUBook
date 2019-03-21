@@ -17,7 +17,7 @@ public class YearValidator implements Validator {
 
     int year;
 
-    System.out.println("coucou je valide la date");
+    System.out.println("[VALIDATOR] : checking date");
 
     try {
       year = (int) o;
