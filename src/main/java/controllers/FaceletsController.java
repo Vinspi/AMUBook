@@ -212,14 +212,20 @@ public class FaceletsController {
 
     public void changeCVInfo() {
 
+        System.out.println("change cv info");
+
         personne = personneManager.changeCVInfo(newCVTitle, newDescription,newWebsite,this.sessionUser.getEmail());
 
+    }
+
+    public void foo() {
+        System.out.println("i'm foo");
     }
 
     public void updateActivityList() {
 
 
-        System.out.println("coucou"+activityId);
+        System.out.println("coucou "+activityId);
 
 
 
