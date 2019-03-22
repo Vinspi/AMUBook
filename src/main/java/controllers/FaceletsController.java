@@ -93,6 +93,7 @@ public class FaceletsController {
             accountPage.setError(true);
         }
         personne = personneManager.findByEmail(sessionUser.getEmail());
+        accountPage.setPersonne(personneManager.findByEmail(sessionUser.getEmail()));
 
         accountPage.setPassword(null);
         accountPage.setPasswordConfirm(null);
@@ -166,8 +167,10 @@ public class FaceletsController {
 
             return "index";
         }
-
-        else return  "loginPage";
+        else {
+            loginPage.setError(true);
+            return  "loginPage";
+        }
 
     }
 
@@ -215,7 +218,8 @@ public class FaceletsController {
 
     public void updateActivityList() {
 
-        System.out.println(activityId);
+
+        System.out.println("coucou"+activityId);
 
 
 

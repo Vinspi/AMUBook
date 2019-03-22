@@ -10,6 +10,11 @@ public class LoginPageBean implements Serializable {
 
     private String email;
     private String password;
+    private boolean error;
+
+    public LoginPageBean() {
+        this.error = false;
+    }
 
     public String getEmail() {
         return email;
@@ -25,5 +30,13 @@ public class LoginPageBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
     }
 }
