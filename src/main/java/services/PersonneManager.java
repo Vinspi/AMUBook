@@ -92,7 +92,7 @@ public class PersonneManager {
      *
      * @return TemporaryLogs created.
      */
-        public TemporaryLogs registerWithTemporaryLog(Map<String, String> personData){
+      public TemporaryLogs registerWithTemporaryLog(Map<String, String> personData){
 
         /* generate random password */
 
@@ -152,7 +152,8 @@ public class PersonneManager {
 
             /* password and salt */
             MessageDigest md = MessageDigest.getInstance("SHA-512");
-            byte[] salt = SecureRandom.getSeed(128);
+            byte[] salt = new byte[128];
+            new Random().nextBytes(salt);
 
             p.setSalt(salt);
 
